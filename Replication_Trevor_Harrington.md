@@ -8,16 +8,9 @@ execute:
   code-fold: TRUE
 ---
 
-```{r setup, include = FALSE}
-#Load in any packages you need
-library(tidyverse)
-library(kableExtra)
-library(tidyr)
-library(knitr)
 
-#Read in any data
 
-```
+
 
 # Week 1 -- From Statistical Analysis to Bioinformatics
 
@@ -29,7 +22,10 @@ The goal of this notebook is to complete a series of challenges that will lay th
 
 ### Challenge 1: Generate a Random List of DNA Nucleotides
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # create a new dataframe with two columns
 nt_abr <- c("A", "T", "G", "C")
 
@@ -40,14 +36,24 @@ set.seed(215) # for reproducibility, using the same seed each time means the "ra
 nt_sample <- sample(nt_abr, size = nt_num, replace = TRUE)
 
 paste(nt_sample, collapse = "")
-
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] "CGGAACTCCCAACGCCTTGATTCCCGAGTTCTAAGCCGGATCATTGTGGTTTTTGATTGAGAGTCAATCTCAAACGACGTAAGTAGTGTGCGTTGAGCTCTCGCGGATAGGACTATACCGGACGCGAGTTAAGACTCTGAGACGAAAAATAAGCAGGCCTCTCACTGTCGGTCTTAACTACCCCCACTTCCCGTCGTACATCCACGGTTTCTTAATTCCGTGAACCGTGGTACCATGCCTCACGTATGAAAGAGGTATGAGACGCACACTATCTCCTAGTCACTCGATATAGGCAGGTACCGGACGCTAGTGCATGATTGGGGCAGGTAATTTTCCTCGCCGTTTTGTCGGTTGGACGTTAAGGCGCCCCATACTGGCACCCCAAAGACGCGAATCCAAGCAATTCATCCAGTCGATGGGAAGGCGTATACGCACGCGCGATCTCATATTAAGACGTATCCAGGTACTAACAAAAGCCGTTGGCCCGCAACTTCCGATAGCAACTGAGACAACCATCCGTGGGTATACAATTCATCTGGCCTGCTTTTTCCAGTGCATGGGGGGGCGGGGAATTACTAGTGCCTGCACGCCAGCTTCTTGGTACCCCCGGCTATGGTTTCTTACGAAACATACATCAGTGCGTTACCTTGGCTAAACGGTTTCGTGAAGGACGTGGCGTGGCAAGTGCGCGGGTTACATCCGGGTAGACCGAGCCACAAGAAATAGGTAAACCGGGAATCAGCGTGGTATACGCATAGTCTGTATCCTTCGGGGGGTGATCATTGAACCTTCAGCACGCTCGAGCAGTGCATTGGGTTAGTCCCGGGCTTCTCCATTCCGCAACGGGACTGGTTCCACGGGACGTTACGATGATATCGTGGGAGGCCAACAAGCGCTTGTGACAAAGTTCTGCGGCTGAAACTCGCCATGCGTCTCCTCGCTACCCGTTACACCGGCAAAGCCTAAGAGTTATTTCACTCACCGATCTTCAGACTCTTTAAACGCACTTCTTAATAGCATCCTATTCGGACGGCAATTTTATTCTAACTATTATCCAGGCTCTTAGCATCCCCGAGTTGTTCATGTGTCTCTGAAACAAGTCAAGTCAGTCATGGCTTGCGCCAGGTGAAAAACGAACTTTCCCTTAGTGTCATTAAGCGCAGCTGGACGTGGCCGATCCACGTTCGTTTGGCGAGTAGAACCCAAACTGTCGCATTAACTAGTATCATTATAAGGTGAATGGGGTAGTTATGATCGGTGTTATAAGTACGGAAGGAGCGCTGGGTGAAACTAGGGTTGTACCAAGTTGCCCCACTATGGGCAAAGAGGCTATACGCGTATAGAGTTAGACAGCTGGTAGCGAAGGGTATAATGTCCCCCTGGTAGGAAGATTTCCGTATTCCCACTATATTGTGGGCTACTATTGGTTAAAGTAGCTGGTGGCTAATGCCAAAACCACCGTACGCTCAGGCAAAGTAGGATTAGAGAGATGCTGAAACT"
+```
+:::
+:::
+
 
 ------------------------------------------------------------------------
 
 ### Challenge 2: Generate random nucleotides sequences 15 characters long
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # create a new dataframe with two columns
 nt_abr <- c("A", "C", "G", "T")
 
@@ -55,14 +61,24 @@ set.seed(777) # for reproducibility
 rnd_genome <- sample(nt_sample, size = 15, replace = TRUE)
 
 paste(rnd_genome, collapse = "")
-
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] "CGCGGAGACATGGTG"
+```
+:::
+:::
+
 
 ------------------------------------------------------------------------
 
 ### Challenge 3: generating a randomized 1500 nucleotide-long dataset
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # create a new dataframe with two columns
 nt_abr <- c("A", "T", "G", "C")
 
@@ -75,28 +91,50 @@ nt_sample <- sample(nt_abr, size = nt_num, replace = TRUE)
 paste(nt_sample, collapse = "")
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+[1] "CGGAACTCCCAACGCCTTGATTCCCGAGTTCTAAGCCGGATCATTGTGGTTTTTGATTGAGAGTCAATCTCAAACGACGTAAGTAGTGTGCGTTGAGCTCTCGCGGATAGGACTATACCGGACGCGAGTTAAGACTCTGAGACGAAAAATAAGCAGGCCTCTCACTGTCGGTCTTAACTACCCCCACTTCCCGTCGTACATCCACGGTTTCTTAATTCCGTGAACCGTGGTACCATGCCTCACGTATGAAAGAGGTATGAGACGCACACTATCTCCTAGTCACTCGATATAGGCAGGTACCGGACGCTAGTGCATGATTGGGGCAGGTAATTTTCCTCGCCGTTTTGTCGGTTGGACGTTAAGGCGCCCCATACTGGCACCCCAAAGACGCGAATCCAAGCAATTCATCCAGTCGATGGGAAGGCGTATACGCACGCGCGATCTCATATTAAGACGTATCCAGGTACTAACAAAAGCCGTTGGCCCGCAACTTCCGATAGCAACTGAGACAACCATCCGTGGGTATACAATTCATCTGGCCTGCTTTTTCCAGTGCATGGGGGGGCGGGGAATTACTAGTGCCTGCACGCCAGCTTCTTGGTACCCCCGGCTATGGTTTCTTACGAAACATACATCAGTGCGTTACCTTGGCTAAACGGTTTCGTGAAGGACGTGGCGTGGCAAGTGCGCGGGTTACATCCGGGTAGACCGAGCCACAAGAAATAGGTAAACCGGGAATCAGCGTGGTATACGCATAGTCTGTATCCTTCGGGGGGTGATCATTGAACCTTCAGCACGCTCGAGCAGTGCATTGGGTTAGTCCCGGGCTTCTCCATTCCGCAACGGGACTGGTTCCACGGGACGTTACGATGATATCGTGGGAGGCCAACAAGCGCTTGTGACAAAGTTCTGCGGCTGAAACTCGCCATGCGTCTCCTCGCTACCCGTTACACCGGCAAAGCCTAAGAGTTATTTCACTCACCGATCTTCAGACTCTTTAAACGCACTTCTTAATAGCATCCTATTCGGACGGCAATTTTATTCTAACTATTATCCAGGCTCTTAGCATCCCCGAGTTGTTCATGTGTCTCTGAAACAAGTCAAGTCAGTCATGGCTTGCGCCAGGTGAAAAACGAACTTTCCCTTAGTGTCATTAAGCGCAGCTGGACGTGGCCGATCCACGTTCGTTTGGCGAGTAGAACCCAAACTGTCGCATTAACTAGTATCATTATAAGGTGAATGGGGTAGTTATGATCGGTGTTATAAGTACGGAAGGAGCGCTGGGTGAAACTAGGGTTGTACCAAGTTGCCCCACTATGGGCAAAGAGGCTATACGCGTATAGAGTTAGACAGCTGGTAGCGAAGGGTATAATGTCCCCCTGGTAGGAAGATTTCCGTATTCCCACTATATTGTGGGCTACTATTGGTTAAAGTAGCTGGTGGCTAATGCCAAAACCACCGTACGCTCAGGCAAAGTAGGATTAGAGAGATGCTGAAACT"
+```
+:::
+:::
+
+
 ------------------------------------------------------------------------
 
 ### Challenge 4: Counting each DNA Nucleotide in a Randomized Dataset and using Loop()
 
 #### Generating a 100-nucleotide strand and counting each frequency
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # create a new dataframe with two columns
 nt_abr <- c("A", "C", "G", "T")
 
 set.seed(777) # for reproducibility
 rnd_genome <- sample(nt_sample, size = 100, replace = TRUE)
 table(rnd_genome)
-
-  
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+rnd_genome
+ A  C  G  T 
+20 33 30 17 
+```
+:::
+:::
+
 
 -   This distribution heavily favors C va
 
 #### Using Loop() function to repeat an operation
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 rnd_sum <- 0
 
 for(i in 1:10){
@@ -105,11 +143,31 @@ for(i in 1:10){
 }
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1
+[1] 3
+[1] 6
+[1] 10
+[1] 15
+[1] 21
+[1] 28
+[1] 36
+[1] 45
+[1] 55
+```
+:::
+:::
+
+
 ------------------------------------------------------------------------
 
 ### Challenge 5: Using loop() functions with while/for staements to generate a
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #initialize a new dataframe with a value of 1
 myProduct <- 1
 
@@ -121,6 +179,28 @@ for(j in 1:15) {
 }
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1
+[1] 2
+[1] 6
+[1] 24
+[1] 120
+[1] 720
+[1] 5040
+[1] 40320
+[1] 362880
+[1] 3628800
+[1] 39916800
+[1] 479001600
+[1] 6227020800
+[1] 87178291200
+[1] 1.307674e+12
+```
+:::
+:::
+
+
 ------------------------------------------------------------------------
 
 ### Challenge 6: Combining sample(), paste() and loop() functions to produce a set of individual nucleotides
@@ -129,7 +209,10 @@ for(j in 1:15) {
 
 Generating Random Genomic Data in a collapsed string
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 nt <- c("A", "C", "G", "T")
 genomeLength <- 10
 
@@ -140,9 +223,20 @@ rnd_genome <- paste(
 print(rnd_genome)
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+[1] "TGGAATCTTT"
+```
+:::
+:::
+
+
 #### Counting Adenine using loop() function with If/else statements
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # "For loop" is used to perform iterations 1:n where n (nchar) refers to the number of characters (variables, nucleotides) in the rnd_genome dataset
 for(i in 1:nchar(rnd_genome)){
   # String subset is checked for each iteration, start = i and end = i means this substring will only extract a single character, i, for each iteration
@@ -153,9 +247,21 @@ for(i in 1:nchar(rnd_genome)){
 }
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+[1] "A"
+[1] "A"
+```
+:::
+:::
+
+
 #### Modifying Output to sum the Variables Extracted from for Loop() function
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 sum_A <- 0  # Create a new variable to store sum of "A" characters extracted from the loop
 
 for(i in 1:nchar(rnd_genome)) {
@@ -165,9 +271,19 @@ for(i in 1:nchar(rnd_genome)) {
 }
 
 cat("Total number of Adenisine Nucleotides: ", sum_A)  # Print the final value of sum_A using cat() "concatenate and print" function to merge the output of sum_A
-## Without cat(), print() produces two lines (1) and (2)
-
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+Total number of Adenisine Nucleotides:  2
+```
+:::
+
+```{.r .cell-code}
+## Without cat(), print() produces two lines (1) and (2)
+```
+:::
+
 
 ### Challenge 7: 
 
