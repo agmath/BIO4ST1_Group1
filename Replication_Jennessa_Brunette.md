@@ -6,22 +6,28 @@ execute:
   keep-md: true
 ---
 
+
+
 # Challenge 1: listing the 4 nucleotides
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 nucleotides <- c("Adenine", "Cytosine", "Guanine", "Thymine")
 
 nucleotides
-
 ```
 
-```{r setup, include = FALSE}
-#Load in any packages you need
-library(tidyverse)
-
-#Read in any data
-
+::: {.cell-output .cell-output-stdout}
 ```
+[1] "Adenine"  "Cytosine" "Guanine"  "Thymine" 
+```
+:::
+:::
+
+
+
 
 ## Getting Started
 
