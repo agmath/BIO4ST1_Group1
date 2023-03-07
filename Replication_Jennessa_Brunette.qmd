@@ -15,6 +15,43 @@ nucleotides
 
 ```
 
+# Challenge 2: Generating random string of 15 nucleotides
+
+```{r}
+# create a new dataframe with two columns
+nt_abr <- c("A", "T", "G", "C")
+nt_num <- 15
+nt_sample <- sample(nt_abr, size = nt_num, replace = TRUE)
+
+paste(nt_sample, collapse = "")
+
+```
+
+# Challenge 3: Generating random 1500 nucleotide string
+
+```{r}
+# create a new dataframe with two columns
+nt_abr <- c("A", "T", "G", "C")
+
+# generate a new value representing the number of nucleotides being randomly created for this dataset
+nt_num <- 1500
+
+set.seed(215) # for reproducibility, using the same seed each time means the "randomness" can be recreated.
+nt_sample <- sample(nt_abr, size = nt_num, replace = TRUE)
+paste(nt_sample, collapse = "")
+```
+
+Comparison Code
+
+```{r}
+set.seed(215)
+genomeLength <- 1500
+
+randGenome <- sample(nucleotides, size = genomeLength, replace = TRUE)
+
+randGenome <- paste(randGenome, collapse = "")
+```
+
 ```{r setup, include = FALSE}
 #Load in any packages you need
 library(tidyverse)
@@ -23,10 +60,118 @@ library(tidyverse)
 
 ```
 
-## Getting Started
+# Challenge 4: Generating random genome & counting A
 
-You've used Quarto Notebooks a few times already, so you're starting to get the hang of this. Start by editing the Notebook `title:` and make sure you credit yourself as the `author:`. As a reminder, R-code appears in grey chunks throughout your notebook. Anything within these grey blocks must be executable R code. When you are outside of an R chunk, in a section of the notebook with a white background, you can type freely as if you were in a typical Word document.
+```{r}
+# create a new dataframe with two columns
+nt_abr <- c("A", "C", "G", "T")
 
-You'll quickly see the value of including text to explain your code chunks, and motivate your analysis. Trying to get help from a notebook that doesn't effectively use these discussions will be quite difficult. Additionally, future *you* will be very thankful to present-day *you* if you document your analyses well, and will be quick to curse present-day *you* when you do not.
+set.seed(777) # for reproducibility
+rnd_genome <- sample(nt_sample, size = 100, replace = TRUE)
+table(rnd_genome)
+```
 
-Now, remove this *Getting Started* text and you'll be ready to start sciencing.
+# Looping with "for" loops
+
+```{r}
+mySum <- 0
+
+for(i in 1:10){
+  mySum <- mySum + i
+  print(mySum)
+}
+```
+
+# Challenge 5: Using "myproduct" & creating loop
+
+```{r}
+myProduct <- 1
+for(j in 1:15) {
+  myProduct <- myProduct * j  
+  print(myProduct)            
+}
+```
+
+# Challenge 6: Generate random genome of 10 nucleotides & using loop
+
+```{r}
+nt <- c("A", "C", "G", "T")
+genomeLength <- 10
+
+set.seed(215)
+rnd_genome <- paste(
+  sample(nt, size = genomeLength, replace = TRUE),
+                   collapse = "")
+print(rnd_genome)
+```
+
+# Challenge 7: Using Loop to Adapt \# of Occurences of Adenine
+
+Adding one to old value
+
+```{r}
+randGenome
+randGenome <- paste(randGenome, collapse = (""))
+                    
+Adenine_count <- 0
+  
+  #nchar: number of characters
+
+for(i in 1:nchar(randGenome)){
+  if(str_sub(randGenome, start =i, end =i) =="A"){
+    Adenine_count <- Adenine_count + 1
+  }
+}
+print(Adenine_count)
+                     
+                   
+                   
+```
+
+Here the loop detected 1 Adenine and we can see there is only 1 Adenine in the sequence so we know this is correct.
+
+# Challenge 8: Using loop to count other nucleotides
+
+```{r}
+randGenome
+randGenome <- paste(randGenome, collapse = (""))
+Thymine_count <- 0
+for(i in 1:nchar(randGenome)){
+  if(str_sub(randGenome, start =i, end =i) =="T"){
+    Thymine_count <- Thymine_count + 1
+  }
+}
+print(Thymine_count)
+```
+
+The loop worked for Thymine as well, we can tell there is 1 Thymine in the nucleotide sequence.
+
+```{r}
+randGenome
+randGenome <- paste(randGenome, collapse = (""))
+Cytosine_count <- 0
+for(i in 1:nchar(randGenome)){
+  if(str_sub(randGenome, start =i, end =i) =="C"){
+    Cytosine_count <- Cytosine_count + 1
+  }
+}
+print(Cytosine_count)
+```
+
+There are 9 Cytosine found in the loop which correlates to the 9 cytosine shown in the sequence.
+
+```{r}
+randGenome
+randGenome <- paste(randGenome, collapse = (""))
+Guanine_count <- 0
+for(i in 1:nchar(randGenome)){
+  if(str_sub(randGenome, start =i, end =i) =="G"){
+    Guanine_count <- Guanine_count + 1
+  }
+}
+print(Guanine_count)
+```
+
+There are 4 Guanine found in the loop which correlates to the 4 Guanine shown in the sequence.
+
+# Challenge 9:
