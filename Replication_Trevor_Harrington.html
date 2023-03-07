@@ -143,7 +143,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Build functions to process and analyze genetic data.</p></li>
 <li><p>Create a list of nucleotides</p></li>
 <li><p>Use set.seed() to set a seed for a random number generator to make your results reproducible over time and across different machines (and different researchers too).</p></li>
-<li><p>Use R's sample() function to create a random "genome" for the purpose of testing functions.</p></li>
+<li><p>Use R’s sample() function to create a random “genome” for the purpose of testing functions.</p></li>
 <li><p>Use paste() with the parameter setting collapse = “” to collapse your random genome into a single long string of nucleotides.</p></li>
 <li><p>Learn about <code>for loops</code> and implement them when necessary.</p></li>
 <li><p>Read in a real bacterial genome from a text file.</p></li>
@@ -317,16 +317,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4 class="anchored" data-anchor-id="counting-adenine-using-loop-function-with-ifelse-statements">Counting Adenine using loop() function with If/else statements</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># "For loop" is used to perform iterations 1:n where n (nchar) refers to the number of characters (variables, nucleotides) in the rnd_genome dataset</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nchar</span>(rnd_genome)){</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># String subset is checked for each iteration, start = i and end = i means this substring will only extract a single character, i, for each iteration</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## == "A" checks each substring, and only extracts A for each nucleotide in the datafrom</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(rnd_genome, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"A"</span>){</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">str_sub</span>(rnd_genome, <span class="at">start =</span> i, <span class="at">end =</span> i))</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nchar</span>(rnd_genome))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">str_sub</span>(rnd_genome, <span class="at">start =</span> i, <span class="at">end =</span> i))</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "A"
-[1] "A"</code></pre>
+<pre><code>[1] "T"
+[1] "G"
+[1] "G"
+[1] "A"
+[1] "A"
+[1] "T"
+[1] "C"
+[1] "T"
+[1] "T"
+[1] "T"</code></pre>
 </div>
 </div>
 </section>
@@ -339,110 +344,115 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use a for loop to iterate over each character in the `rnd_genome` variable</span></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nchar</span>(rnd_genome)) {</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check if the current character is an "A"</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">str_sub</span>(rnd_genome, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"A"</span>) {</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If it is, add 1 to the `sum_A` variable</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    sum_A <span class="ot">&lt;-</span> sum_A <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a named vector called `result` with one element, the number of adenine bases found</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Adenine:"</span> <span class="ot">=</span> sum_A)</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the `print` function to output the `result` vector to the console</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Adenine: 
-       2 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a named vector called `result` with one element, the number of adenine bases found</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Adenine:"</span> <span class="ot">=</span> sum_A)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the `print` function to output the `result` vector to the console</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># # String subset is checked for each iteration, start = i and end = i means this substring will only extract a single character, i, for each iteration</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">## == "A" checks each substring, and only extracts A for each nucleotide in the datafrom</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">str_sub</span>(rnd_genome, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"A"</span>) {</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If it is, add 1 to the `sum_A` variable</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    sum_A <span class="ot">&lt;-</span> sum_A <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a named vector called `result` with one element, the number of adenine bases found</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Adenine:"</span> <span class="ot">=</span> sum_A)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the `print` function to output the `result` vector to the console</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Adenine: 
        2 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sum_A <span class="ot">&lt;-</span> <span class="dv">0</span>  <span class="co"># Create a new variable to store sum of "A" characters extracted from the loop</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nchar</span>(rnd_genome)) {</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(rnd_genome, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"A"</span>) {</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    sum_A <span class="ot">&lt;-</span> sum_A <span class="sc">+</span> <span class="dv">1</span>   <span class="co"># Adds 1 to sum_A variable when a iterations passes the if "A" statement</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Total number of Adenisine Nucleotides: "</span>, sum_A)  <span class="co"># Print the final value of sum_A using cat() "concatenate and print" function to merge the output of sum_A</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sum_A <span class="ot">&lt;-</span> <span class="dv">0</span>  <span class="co"># Create a new variable to store sum of "A" characters extracted from the loop</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nchar</span>(rnd_genome)) {</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(rnd_genome, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"A"</span>) {</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    sum_A <span class="ot">&lt;-</span> sum_A <span class="sc">+</span> <span class="dv">1</span>   <span class="co"># Adds 1 to sum_A variable when a iterations passes the if "A" statement</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Total number of Adenisine Nucleotides: "</span>, sum_A)  <span class="co"># Print the final value of sum_A using cat() "concatenate and print" function to merge the output of sum_A</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Total number of Adenisine Nucleotides:  2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Without cat(), print() produces two lines</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Without cat(), print() produces two lines</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="challenge-8-adding-the-remaining-nucleotides-to-the-count" class="level3">
 <h3 class="anchored" data-anchor-id="challenge-8-adding-the-remaining-nucleotides-to-the-count">Challenge 8: Adding the remaining nucleotides to the count</h3>
-<p>```{# Initialize count variables for each nucleotide to 0} sum_A &lt;- 0 sum_C &lt;- 0 sum_G &lt;- 0 sum_T &lt;- 0</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize count variables for each nucleotide to 0</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sum_A <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>sum_C <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>sum_G <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>sum_T <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each character in the random genome sequence</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nchar</span>(rnd_genome)) {</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check if the character is "A", "C", "G", or "T", and increment the corresponding count variable if it is</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="do">##'str_sub' substring function allows each vector in the variable to be checked and summed independent of the other vectors in the string</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="do">##'start = i' and 'end = i' is starting at position i and ending at position i for each iteration extracting the "i-th" character of the string, which is then compared to the nucleotide letters A, C, G, and T and added to the count.</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(rnd_genome, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"A"</span>) {</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    sum_A <span class="ot">&lt;-</span> sum_A <span class="sc">+</span> <span class="dv">1</span>}</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(rnd_genome, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"C"</span>) {</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    sum_C <span class="ot">&lt;-</span> sum_C <span class="sc">+</span> <span class="dv">1</span>}</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(rnd_genome, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"G"</span>) {</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    sum_G <span class="ot">&lt;-</span> sum_G <span class="sc">+</span> <span class="dv">1</span>}</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(rnd_genome, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"T"</span>) {</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    sum_T <span class="ot">&lt;-</span> sum_T <span class="sc">+</span> <span class="dv">1</span>}</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a named vector of the counts for each nucleotide</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Adenine:"</span> <span class="ot">=</span> sum_A, <span class="st">"Cytosine:"</span> <span class="ot">=</span> sum_C, <span class="st">"Guanine:"</span> <span class="ot">=</span> sum_G, <span class="st">"Thymine:"</span> <span class="ot">=</span> sum_T)</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the results</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Adenine: Cytosine:  Guanine:  Thymine: 
+        2         1         2         5 </code></pre>
+</div>
+</div>
 </section>
 </section>
 </section>
-<section id="loop-through-each-character-in-the-random-genome-sequence" class="level1">
-<h1>Loop through each character in the random genome sequence</h1>
-<p>for(i in 1:nchar(rnd_genome)) { # Check if the character is “A”, “C”, “G”, or “T”, and increment the corresponding count variable if it is ##‘str_sub’ substring function allows each vector in the variable to be checked and summed independent of the other vectors in the string ##‘start = i’ and ‘end = i’ is starting at position i and ending at position i for each iteration extracting the “i-th” character of the string, which is then compared to the nucleotide letters A, C, G, and T and added to the count. if(str_sub(rnd_genome, start = i, end = i) == “A”) { sum_A &lt;- sum_A + 1} if(str_sub(rnd_genome, start = i, end = i) == “C”) { sum_C &lt;- sum_C + 1} if(str_sub(rnd_genome, start = i, end = i) == “G”) { sum_G &lt;- sum_G + 1} if(str_sub(rnd_genome, start = i, end = i) == “T”) { sum_T &lt;- sum_T + 1} }</p>
-</section>
-<section id="create-a-named-vector-of-the-counts-for-each-nucleotide" class="level1">
-<h1>Create a named vector of the counts for each nucleotide</h1>
-<p>result &lt;- c(“Adenine:” = sum_A, “Cytosine:” = sum_C, “Guanine:” = sum_G, “Thymine:” = sum_T)</p>
-</section>
-<section id="print-the-results" class="level1">
-<h1>Print the results</h1>
-<p>print(result)</p>
-<pre><code>
-# Understanding the biology -- DNA Replication Lecture
-
-## Useful Terminology
-
--   Scales of genetic data; genome -\&gt; Chromosome -\&gt; Gene -\&gt; Nucleotide
-
-    -   Humans have 23 pairs of chromosomes
-
-    -   Bacteria have a single looping strand containing all of their genetic data
-
-        -   Bacteria also contain small, circular DNA molecules called **Plasmids**, used for storing additional data and conjugation/cloning
-
--   **Complementary base pairing:** A &amp; T + C &amp; G
-
-    -   antiparellel strands: DNA always read from **5' -\&gt; 3'**
-
-    -   DNA strand = phosphate group + hydroxyl (sugar) group + base group (A,C,G,T)
-
-        -   Sugar-Phosphate backbone: creates the 5' -\&gt; 3' rule (placement of carbon in sugar)
-
-        -   base pairs held together by matching **Hydrogen bonds.**
-
--   **DNA Polymerase:** Along with a number of other enzymes used to read and create a RNA copy of the DNA.
-
-    ## **Origins of Replication**
-
-    shorts sequences of genes that can be read to initiate the reading of a gene.
-
--   Many origins of replication in the human genome, where genes are constantly being replicated
-
--   Bacteria (tend to) only have a single origin of replication that travels in both directions
-
-    -   **DnaA Boxes:** specific bacterial marker that identifies the origin for enzymes to begin replication
-
-        -   specific sequence used to initiate a DnaA box
-
-------------------------------------------------------------------------
-
-
-::: {.cell}
-
-```{.r .cell-code}
-vib_c &lt;- scan("C:/School/23SPDAY/Biostatistics/Group_Project/Genomes/VibrioCholerae.txt", what = "character", sep = NULL)</code></pre>
-<p>:::</p>
+<section id="understanding-the-biology-dna-replication-lecture" class="level1">
+<h1>Understanding the biology – DNA Replication Lecture</h1>
+<section id="useful-terminology" class="level2">
+<h2 class="anchored" data-anchor-id="useful-terminology">Useful Terminology</h2>
+<ul>
+<li><p>Scales of genetic data; genome -&gt; Chromosome -&gt; Gene -&gt; Nucleotide</p>
+<ul>
+<li><p>Humans have 23 pairs of chromosomes</p></li>
+<li><p>Bacteria have a single looping strand containing all of their genetic data</p>
+<ul>
+<li>Bacteria also contain small, circular DNA molecules called <strong>Plasmids</strong>, used for storing additional data and conjugation/cloning</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Complementary base pairing:</strong> A &amp; T + C &amp; G</p>
+<ul>
+<li><p>antiparellel strands: DNA always read from <strong>5’ -&gt; 3’</strong></p></li>
+<li><p>DNA strand = phosphate group + hydroxyl (sugar) group + base group (A,C,G,T)</p>
+<ul>
+<li><p>Sugar-Phosphate backbone: creates the 5’ -&gt; 3’ rule (placement of carbon in sugar)</p></li>
+<li><p>base pairs held together by matching <strong>Hydrogen bonds.</strong></p></li>
+</ul></li>
+</ul></li>
+<li><p><strong>DNA Polymerase:</strong> Along with a number of other enzymes used to read and create a RNA copy of the DNA.</p>
+<h2 id="origins-of-replication" class="anchored"><strong>Origins of Replication</strong></h2>
+<p>shorts sequences of genes that can be read to initiate the reading of a gene.</p></li>
+<li><p>Many origins of replication in the human genome, where genes are constantly being replicated</p></li>
+<li><p>Bacteria (tend to) only have a single origin of replication that travels in both directions</p>
+<ul>
+<li><p><strong>DnaA Boxes:</strong> specific bacterial marker that identifies the origin for enzymes to begin replication</p>
+<ul>
+<li>specific sequence used to initiate a DnaA box</li>
+</ul></li>
+</ul></li>
+</ul>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>vib_c <span class="ot">&lt;-</span> <span class="fu">scan</span>(<span class="st">"C:/School/23SPDAY/Biostatistics/Group_Project/Genomes/VibrioCholerae.txt"</span>, <span class="at">what =</span> <span class="st">"character"</span>, <span class="at">sep =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>sum_A <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>sum_C <span class="ot">&lt;-</span> <span class="dv">0</span></span>
@@ -493,6 +503,7 @@ vib_c &lt;- scan("C:/School/23SPDAY/Biostatistics/Group_Project/Genomes/VibrioCh
 <hr>
 </section>
 </section>
+</section>
 <section id="chapter-2-bioinformatic-tools-pt.-2" class="level1">
 <h1>Chapter 2: Bioinformatic Tools pt.&nbsp;2</h1>
 <section id="introduction-improving-tools-and-efficiency" class="level2">
@@ -504,9 +515,9 @@ vib_c &lt;- scan("C:/School/23SPDAY/Biostatistics/Group_Project/Genomes/VibrioCh
 <section id="objectives-1" class="level2">
 <h2 class="anchored" data-anchor-id="objectives-1">Objectives:</h2>
 <ul>
-<li><p>Learn to eliminate "single-use code" by encapsulating code in functions which can be easily applied to different genomes.</p></li>
+<li><p>Learn to eliminate “single-use code” by encapsulating code in functions which can be easily applied to different genomes.</p></li>
 <li><p>Expand your ability to count the frequency of each individual nucleotide within a genome to an ability to count the appearance of patterns in the genome.</p></li>
-<li><p>Build and execute functions to find "hidden messages" within the genome by identifying patterns appearing much more often than they would be expected to if a genome included nucleotides at random.</p></li>
+<li><p>Build and execute functions to find “hidden messages” within the genome by identifying patterns appearing much more often than they would be expected to if a genome included nucleotides at random.</p></li>
 <li><p>Exploit transcription errors to narrow a search region for the replication origin.</p></li>
 </ul>
 <hr>
@@ -530,8 +541,99 @@ vib_c &lt;- scan("C:/School/23SPDAY/Biostatistics/Group_Project/Genomes/VibrioCh
 </div>
 <hr>
 </section>
-<section id="challenge-1" class="level3">
-<h3 class="anchored" data-anchor-id="challenge-1">Challenge 1:</h3>
+<section id="challenge-1-using-the-function-function-on-a-randomized-genome" class="level3">
+<h3 class="anchored" data-anchor-id="challenge-1-using-the-function-function-on-a-randomized-genome">Challenge 1: Using the Function Function on a Randomized Genome</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>nt_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(nt_names, <span class="at">size =</span> <span class="dv">2000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>nt_sample <span class="ot">&lt;-</span> <span class="fu">paste</span>(nt_sample, <span class="at">collapse =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nucleotide_frequency</span>(nt_sample, <span class="st">"C"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 496</code></pre>
+</div>
+</div>
+<ul>
+<li><p>23.8% of the nucleotides in this randomized dataset are cytosines</p>
+<ul>
+<li>code is random, but this character</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>nt_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(nt_names, <span class="at">size =</span> k, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>nt_sample <span class="ot">&lt;-</span> <span class="fu">paste</span>(nt_sample, <span class="at">collapse =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="from-single-vector-multiple-vector-substrings" class="level4">
+<h4 class="anchored" data-anchor-id="from-single-vector-multiple-vector-substrings">From single-vector multiple-vector Substrings</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>string_sample <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># subset strings exctract a value based on the </span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>string_sample <span class="ot">&lt;-</span> string_sample <span class="sc">%&gt;%</span> </span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">append</span>(<span class="fu">str_sub</span>(nt_sample, <span class="at">start =</span> <span class="dv">1000</span>, <span class="at">end =</span> <span class="dv">1005</span>))</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Negative vector position indicated the position to start and end from is being measured starting at the end of the dataset</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co"># When data from variables is added to a substring, they are removed and cannot be added to a new substring that overlaps it</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(nt_sample, <span class="at">start =</span> <span class="sc">-</span><span class="dv">1000</span>, <span class="at">end =</span> <span class="sc">-</span><span class="dv">995</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "AAAGAT"</code></pre>
+</div>
+</div>
+</section>
+<section id="appending-a-new-list-containing-a-substring-of-nucleotides" class="level4">
+<h4 class="anchored" data-anchor-id="appending-a-new-list-containing-a-substring-of-nucleotides">Appending a new list containing a substring of nucleotides</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 'append' is useful for generating a reusable variable containing a vector that can be called back for later tests</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>string_sample <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># subset strings exctract a value based on the </span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>string_sample <span class="ot">&lt;-</span> string_sample <span class="sc">%&gt;%</span> </span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">append</span>(<span class="fu">str_sub</span>(nt_sample, <span class="at">start =</span> <span class="dv">1000</span>, <span class="at">end =</span> <span class="dv">1005</span>))</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>string_sample</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "CAAAGA"</code></pre>
+</div>
+</div>
+</section>
+<section id="using-multiple-vector-substrings-to-generate-paired-nucleotides-in-a-dataset" class="level4">
+<h4 class="anchored" data-anchor-id="using-multiple-vector-substrings-to-generate-paired-nucleotides-in-a-dataset">Using multiple-vector substrings to generate paired nucleotides in a dataset</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>generate_codon <span class="ot">&lt;-</span> <span class="cf">function</span>(string_sample) {</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  list_codon <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">nchar</span>(string_sample) <span class="sc">-</span> <span class="dv">1</span>)){</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  list_codon <span class="ot">&lt;-</span> list_codon <span class="sc">%&gt;%</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">append</span>(<span class="fu">str_sub</span>(string_sample, <span class="at">start =</span> i, <span class="at">end =</span> i <span class="sc">+</span> <span class="dv">1</span>))</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(list_codon)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_codon</span>(string_sample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "CA" "AA" "AA" "AG" "GA"</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="using-multiple-vector-substrings-to-generate-codons-in-a-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="using-multiple-vector-substrings-to-generate-codons-in-a-dataset">Using multiple-vector substrings to generate codons in a dataset</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>generate_codon <span class="ot">&lt;-</span> <span class="cf">function</span>(string_sample) {</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  list_codon <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">nchar</span>(string_sample) <span class="sc">-</span> <span class="dv">1</span>)){</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  list_codon <span class="ot">&lt;-</span> list_codon <span class="sc">%&gt;%</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">append</span>(<span class="fu">str_sub</span>(string_sample, <span class="at">start =</span> i, <span class="at">end =</span> i <span class="sc">+</span> <span class="dv">2</span>))</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(list_codon)</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_codon</span>(string_sample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "CAA" "AAA" "AAG" "AGA" "GA" </code></pre>
+</div>
+</div>
 </section>
 </section>
 </section>

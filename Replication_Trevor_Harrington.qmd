@@ -174,13 +174,11 @@ print(rnd_genome)
 
 ```{r}
 # "For loop" is used to perform iterations 1:n where n (nchar) refers to the number of characters (variables, nucleotides) in the rnd_genome dataset
-for(i in 1:nchar(rnd_genome)){
-  # String subset is checked for each iteration, start = i and end = i means this substring will only extract a single character, i, for each iteration
-  ## == "A" checks each substring, and only extracts A for each nucleotide in the datafrom
-  if(str_sub(rnd_genome, start = i, end = i) == "A"){
+for(i in 1:nchar(rnd_genome))
+  {
     print(str_sub(rnd_genome, start = i, end = i))
   }
-}
+
 ```
 
 ### Challenge 7: Modifying Output to sum the For Loop() Results Output
@@ -191,19 +189,13 @@ sum_A <- 0
 
 # Use a for loop to iterate over each character in the `rnd_genome` variable
 for (i in 1:nchar(rnd_genome)) {
-  # Check if the current character is an "A"
+  # # String subset is checked for each iteration, start = i and end = i means this substring will only extract a single character, i, for each iteration
+  ## == "A" checks each substring, and only extracts A for each nucleotide in the datafrom
   if (str_sub(rnd_genome, start = i, end = i) == "A") {
     # If it is, add 1 to the `sum_A` variable
     sum_A <- sum_A + 1
   }
 }
-
-# Create a named vector called `result` with one element, the number of adenine bases found
-result <- c("Adenine:" = sum_A)
-
-# Use the `print` function to output the `result` vector to the console
-print(result)
-
 
 # Create a named vector called `result` with one element, the number of adenine bases found
 result <- c("Adenine:" = sum_A)
@@ -383,17 +375,86 @@ nucleotide_frequency("ACTTGCGGGTATCGAG", "G")
 
 ------------------------------------------------------------------------
 
-### Challenge 1:
+### Challenge 1: Using the Function Function on a Randomized Genome
 
 ```{r}
-
-nt_num <- 10000
-set.seed(215)
-genomeString <- sample(nt_names, size = nt_num, replace = TRUE)
-paste(genomeString, collapse = "")
+nt_sample <- sample(nt_names, size = 2000, replace = TRUE)
+nt_sample <- paste(nt_sample, collapse = "")
 ```
 
 ```{r}
 
-nucleotide_frequency(, "C")
+nucleotide_frequency(nt_sample, "C")
+```
+
+-   23.8% of the nucleotides in this randomized dataset are cytosines
+
+    -   code is random, but this character
+
+```{r}
+k <- 2000
+  
+nt_sample <- sample(nt_names, size = k, replace = TRUE)
+nt_sample <- paste(nt_sample, collapse = "")
+
+
+```
+
+#### From single-vector multiple-vector Substrings 
+
+```{r}
+
+string_sample <- c()
+# subset strings exctract a value based on the 
+string_sample <- string_sample %>% 
+  append(str_sub(nt_sample, start = 1000, end = 1005))
+
+# Negative vector position indicated the position to start and end from is being measured starting at the end of the dataset
+# When data from variables is added to a substring, they are removed and cannot be added to a new substring that overlaps it
+str_sub(nt_sample, start = -1000, end = -995)
+```
+
+#### Appending a new list containing a substring of nucleotides
+
+```{r}
+# 'append' is useful for generating a reusable variable containing a vector that can be called back for later tests
+string_sample <- c()
+# subset strings exctract a value based on the 
+string_sample <- string_sample %>% 
+  append(str_sub(nt_sample, start = 1000, end = 1005))
+
+string_sample
+
+```
+
+#### Using multiple-vector substrings to generate paired nucleotides in a dataset
+
+```{r}
+generate_codon <- function(string_sample) {
+  list_codon <- c()
+
+  for(i in 1:(nchar(string_sample) - 1)){
+  list_codon <- list_codon %>%
+  append(str_sub(string_sample, start = i, end = i + 1))
+    }
+  return(list_codon)
+}
+
+generate_codon(string_sample)
+```
+
+### Using multiple-vector substrings to generate codons in a dataset
+
+```{r}
+generate_codon <- function(string_sample) {
+  list_codon <- c()
+
+  for(i in 1:(nchar(string_sample) - 1)){
+  list_codon <- list_codon %>%
+  append(str_sub(string_sample, start = i, end = i + 2))
+    }
+  return(list_codon)
+}
+
+generate_codon(string_sample)
 ```

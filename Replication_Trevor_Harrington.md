@@ -18,7 +18,7 @@ execute:
 
 The goal of this notebook is to complete a series of challenges that will lay the foundation for using RStudio to analyze genomic data. By learning how to effectively store objects in variables, build functions to analyze genetic data, and implement "for" loops when necessary, we aim to enhance our ability to analyze and interpret genomic data more efficiently. Through analyzing genomic data with the tools and concepts covered in the course, we will gain a deeper understanding of genetic information and its crucial role in biological processes. Ultimately, our aim is to leave this course with a well-documented online environment that showcases our accomplishments in analyzing genomic data
 
-## Objectives: 
+## Objectives:
 
 -   Use the arrow (\<-) operator to store objects in variables.
 
@@ -28,7 +28,7 @@ The goal of this notebook is to complete a series of challenges that will lay th
 
 -   Use set.seed() to set a seed for a random number generator to make your results reproducible over time and across different machines (and different researchers too).
 
--   Use R\'s sample() function to create a random \"genome\" for the purpose of testing functions.
+-   Use R's sample() function to create a random "genome" for the purpose of testing functions.
 
 -   Use paste() with the parameter setting collapse = "" to collapse your random genome into a single long string of nucleotides.
 
@@ -270,19 +270,24 @@ print(rnd_genome)
 
 ```{.r .cell-code}
 # "For loop" is used to perform iterations 1:n where n (nchar) refers to the number of characters (variables, nucleotides) in the rnd_genome dataset
-for(i in 1:nchar(rnd_genome)){
-  # String subset is checked for each iteration, start = i and end = i means this substring will only extract a single character, i, for each iteration
-  ## == "A" checks each substring, and only extracts A for each nucleotide in the datafrom
-  if(str_sub(rnd_genome, start = i, end = i) == "A"){
+for(i in 1:nchar(rnd_genome))
+  {
     print(str_sub(rnd_genome, start = i, end = i))
   }
-}
 ```
 
 ::: {.cell-output .cell-output-stdout}
 ```
+[1] "T"
+[1] "G"
+[1] "G"
 [1] "A"
 [1] "A"
+[1] "T"
+[1] "C"
+[1] "T"
+[1] "T"
+[1] "T"
 ```
 :::
 :::
@@ -299,28 +304,14 @@ sum_A <- 0
 
 # Use a for loop to iterate over each character in the `rnd_genome` variable
 for (i in 1:nchar(rnd_genome)) {
-  # Check if the current character is an "A"
+  # # String subset is checked for each iteration, start = i and end = i means this substring will only extract a single character, i, for each iteration
+  ## == "A" checks each substring, and only extracts A for each nucleotide in the datafrom
   if (str_sub(rnd_genome, start = i, end = i) == "A") {
     # If it is, add 1 to the `sum_A` variable
     sum_A <- sum_A + 1
   }
 }
 
-# Create a named vector called `result` with one element, the number of adenine bases found
-result <- c("Adenine:" = sum_A)
-
-# Use the `print` function to output the `result` vector to the console
-print(result)
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-Adenine: 
-       2 
-```
-:::
-
-```{.r .cell-code}
 # Create a named vector called `result` with one element, the number of adenine bases found
 result <- c("Adenine:" = sum_A)
 
@@ -364,7 +355,11 @@ Total number of Adenisine Nucleotides:  2
 
 ### Challenge 8: Adding the remaining nucleotides to the count
 
-```{# Initialize count variables for each nucleotide to 0}
+
+::: {.cell}
+
+```{.r .cell-code}
+# Initialize count variables for each nucleotide to 0
 sum_A <- 0
 sum_C <- 0
 sum_G <- 0
@@ -390,8 +385,16 @@ result <- c("Adenine:" = sum_A, "Cytosine:" = sum_C, "Guanine:" = sum_G, "Thymin
 
 # Print the results
 print(result)
-
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+ Adenine: Cytosine:  Guanine:  Thymine: 
+        2         1         2         5 
+```
+:::
+:::
+
 
 # Understanding the biology -- DNA Replication Lecture
 
@@ -517,11 +520,11 @@ paste(sum_A,sum_C,sum_G,sum_T)
 
 ## Objectives:
 
--   Learn to eliminate \"single-use code\" by encapsulating code in functions which can be easily applied to different genomes.
+-   Learn to eliminate "single-use code" by encapsulating code in functions which can be easily applied to different genomes.
 
 -   Expand your ability to count the frequency of each individual nucleotide within a genome to an ability to count the appearance of patterns in the genome.
 
--   Build and execute functions to find \"hidden messages\" within the genome by identifying patterns appearing much more often than they would be expected to if a genome included nucleotides at random.
+-   Build and execute functions to find "hidden messages" within the genome by identifying patterns appearing much more often than they would be expected to if a genome included nucleotides at random.
 
 -   Exploit transcription errors to narrow a search region for the replication origin.
 
@@ -556,4 +559,143 @@ nucleotide_frequency("ACTTGCGGGTATCGAG", "G")
 
 ------------------------------------------------------------------------
 
-### Challenge 1: 
+### Challenge 1: Using the Function Function on a Randomized Genome
+
+
+::: {.cell}
+
+```{.r .cell-code}
+nt_sample <- sample(nt_names, size = 2000, replace = TRUE)
+nt_sample <- paste(nt_sample, collapse = "")
+```
+:::
+
+::: {.cell}
+
+```{.r .cell-code}
+nucleotide_frequency(nt_sample, "C")
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 496
+```
+:::
+:::
+
+
+-   23.8% of the nucleotides in this randomized dataset are cytosines
+
+    -   code is random, but this character
+
+
+::: {.cell}
+
+```{.r .cell-code}
+k <- 2000
+  
+nt_sample <- sample(nt_names, size = k, replace = TRUE)
+nt_sample <- paste(nt_sample, collapse = "")
+```
+:::
+
+
+#### From single-vector multiple-vector Substrings 
+
+
+::: {.cell}
+
+```{.r .cell-code}
+string_sample <- c()
+# subset strings exctract a value based on the 
+string_sample <- string_sample %>% 
+  append(str_sub(nt_sample, start = 1000, end = 1005))
+
+# Negative vector position indicated the position to start and end from is being measured starting at the end of the dataset
+# When data from variables is added to a substring, they are removed and cannot be added to a new substring that overlaps it
+str_sub(nt_sample, start = -1000, end = -995)
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] "AAAGAT"
+```
+:::
+:::
+
+
+#### Appending a new list containing a substring of nucleotides
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# 'append' is useful for generating a reusable variable containing a vector that can be called back for later tests
+string_sample <- c()
+# subset strings exctract a value based on the 
+string_sample <- string_sample %>% 
+  append(str_sub(nt_sample, start = 1000, end = 1005))
+
+string_sample
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] "CAAAGA"
+```
+:::
+:::
+
+
+#### Using multiple-vector substrings to generate paired nucleotides in a dataset
+
+
+::: {.cell}
+
+```{.r .cell-code}
+generate_codon <- function(string_sample) {
+  list_codon <- c()
+
+  for(i in 1:(nchar(string_sample) - 1)){
+  list_codon <- list_codon %>%
+  append(str_sub(string_sample, start = i, end = i + 1))
+    }
+  return(list_codon)
+}
+
+generate_codon(string_sample)
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] "CA" "AA" "AA" "AG" "GA"
+```
+:::
+:::
+
+
+### Using multiple-vector substrings to generate codons in a dataset
+
+
+::: {.cell}
+
+```{.r .cell-code}
+generate_codon <- function(string_sample) {
+  list_codon <- c()
+
+  for(i in 1:(nchar(string_sample) - 1)){
+  list_codon <- list_codon %>%
+  append(str_sub(string_sample, start = i, end = i + 2))
+    }
+  return(list_codon)
+}
+
+generate_codon(string_sample)
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] "CAA" "AAA" "AAG" "AGA" "GA" 
+```
+:::
+:::
