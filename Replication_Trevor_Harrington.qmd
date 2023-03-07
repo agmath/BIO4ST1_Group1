@@ -25,7 +25,7 @@ library(knitr)
 
 The goal of this notebook is to complete a series of challenges that will lay the foundation for using RStudio to analyze genomic data. By learning how to effectively store objects in variables, build functions to analyze genetic data, and implement "for" loops when necessary, we aim to enhance our ability to analyze and interpret genomic data more efficiently. Through analyzing genomic data with the tools and concepts covered in the course, we will gain a deeper understanding of genetic information and its crucial role in biological processes. Ultimately, our aim is to leave this course with a well-documented online environment that showcases our accomplishments in analyzing genomic data
 
-## Objectives: 
+## Objectives:
 
 -   Use the arrow (\<-) operator to store objects in variables.
 
@@ -35,7 +35,7 @@ The goal of this notebook is to complete a series of challenges that will lay th
 
 -   Use set.seed() to set a seed for a random number generator to make your results reproducible over time and across different machines (and different researchers too).
 
--   Use R\'s sample() function to create a random \"genome\" for the purpose of testing functions.
+-   Use R's sample() function to create a random "genome" for the purpose of testing functions.
 
 -   Use paste() with the parameter setting collapse = "" to collapse your random genome into a single long string of nucleotides.
 
@@ -57,6 +57,7 @@ The goal of this notebook is to complete a series of challenges that will lay th
 nt_names <- c("A", "T", "G", "C")
 
 nt_names # simply displays the vectors without organizing
+
 ```
 
 ------------------------------------------------------------------------
@@ -228,7 +229,8 @@ cat("Total number of Adenisine Nucleotides: ", sum_A)  # Print the final value o
 
 ### Challenge 8: Adding the remaining nucleotides to the count
 
-```{# Initialize count variables for each nucleotide to 0}
+```{r}
+# Initialize count variables for each nucleotide to 0
 sum_A <- 0
 sum_C <- 0
 sum_G <- 0
@@ -353,11 +355,11 @@ paste(sum_A,sum_C,sum_G,sum_T)
 
 ## Objectives:
 
--   Learn to eliminate \"single-use code\" by encapsulating code in functions which can be easily applied to different genomes.
+-   Learn to eliminate "single-use code" by encapsulating code in functions which can be easily applied to different genomes.
 
 -   Expand your ability to count the frequency of each individual nucleotide within a genome to an ability to count the appearance of patterns in the genome.
 
--   Build and execute functions to find \"hidden messages\" within the genome by identifying patterns appearing much more often than they would be expected to if a genome included nucleotides at random.
+-   Build and execute functions to find "hidden messages" within the genome by identifying patterns appearing much more often than they would be expected to if a genome included nucleotides at random.
 
 -   Exploit transcription errors to narrow a search region for the replication origin.
 
@@ -381,4 +383,17 @@ nucleotide_frequency("ACTTGCGGGTATCGAG", "G")
 
 ------------------------------------------------------------------------
 
-### Challenge 1: 
+### Challenge 1:
+
+```{r}
+
+nt_num <- 10000
+set.seed(215)
+genomeString <- sample(nt_names, size = nt_num, replace = TRUE)
+paste(genomeString, collapse = "")
+```
+
+```{r}
+
+nucleotide_frequency(, "C")
+```
