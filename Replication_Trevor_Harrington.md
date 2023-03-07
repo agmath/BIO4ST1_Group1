@@ -8,16 +8,9 @@ execute:
   code-fold: TRUE
 ---
 
-```{r setup, include = FALSE}
-#Load in any packages you need
-library(tidyverse)
-library(kableExtra)
-library(tidyr)
-library(knitr)
 
-#Read in any data
 
-```
+
 
 # Chapter 1 -- From Statistical Analysis to Bioinformatics
 
@@ -25,7 +18,7 @@ library(knitr)
 
 The goal of this notebook is to complete a series of challenges that will lay the foundation for using RStudio to analyze genomic data. By learning how to effectively store objects in variables, build functions to analyze genetic data, and implement "for" loops when necessary, we aim to enhance our ability to analyze and interpret genomic data more efficiently. Through analyzing genomic data with the tools and concepts covered in the course, we will gain a deeper understanding of genetic information and its crucial role in biological processes. Ultimately, our aim is to leave this course with a well-documented online environment that showcases our accomplishments in analyzing genomic data
 
-## Objectives:
+## Objectives: 
 
 -   Use the arrow (\<-) operator to store objects in variables.
 
@@ -35,7 +28,7 @@ The goal of this notebook is to complete a series of challenges that will lay th
 
 -   Use set.seed() to set a seed for a random number generator to make your results reproducible over time and across different machines (and different researchers too).
 
--   Use R's sample() function to create a random "genome" for the purpose of testing functions.
+-   Use R\'s sample() function to create a random \"genome\" for the purpose of testing functions.
 
 -   Use paste() with the parameter setting collapse = "" to collapse your random genome into a single long string of nucleotides.
 
@@ -51,20 +44,33 @@ The goal of this notebook is to complete a series of challenges that will lay th
 
 ### Challenge 1: Generate a Random List of DNA Nucleotides
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # create a new variable containing a vector of four characters for the four nucleotide abbreviations (Adenine, Cytosine, Guanine, Thymine) 
 ## Vector is  a one-dimensional array-like object that can contain values of the same basic type of data (numerical,character,logical)
 nt_names <- c("A", "T", "G", "C")
 
 nt_names # simply displays the vectors without organizing
-
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] "A" "T" "G" "C"
+```
+:::
+:::
+
 
 ------------------------------------------------------------------------
 
 ### Challenge 2: Generate 15 Character String of Nucleotides
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 set.seed(215)
 
 # `sample` function used to generate a random sample of nucleotides from the nucleotides (nt_name) vector. The `size` argument specifies the number of samples to generate (15)  
@@ -73,14 +79,24 @@ set.seed(215)
 rnd_genome <- sample(nt_names, size = 15, replace = TRUE)
 
 paste(rnd_genome, collapse = "")
-
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] "CGGAACTCCCAACGC"
+```
+:::
+:::
+
 
 ------------------------------------------------------------------------
 
 ### Challenge 3: Generating a Randomized 1500 Nucleotide-Long Dataset
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # create a new variable containing a vector of four characters for the four nucleotide abbreviations (Adenine, Cytosine, Guanine, Thymine) 
 ## Vector is  a one-dimensional array-like object that can contain values of the same basic type of data (numerical,character,logical)
 nt_names <- c("A", "T", "G", "C")
@@ -102,13 +118,24 @@ nt_sample <- sample(nt_names, size = nt_num, replace = TRUE)
 paste(nt_sample, collapse = "")
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+[1] "CGGAACTCCCAACGCCTTGATTCCCGAGTTCTAAGCCGGATCATTGTGGTTTTTGATTGAGAGTCAATCTCAAACGACGTAAGTAGTGTGCGTTGAGCTCTCGCGGATAGGACTATACCGGACGCGAGTTAAGACTCTGAGACGAAAAATAAGCAGGCCTCTCACTGTCGGTCTTAACTACCCCCACTTCCCGTCGTACATCCACGGTTTCTTAATTCCGTGAACCGTGGTACCATGCCTCACGTATGAAAGAGGTATGAGACGCACACTATCTCCTAGTCACTCGATATAGGCAGGTACCGGACGCTAGTGCATGATTGGGGCAGGTAATTTTCCTCGCCGTTTTGTCGGTTGGACGTTAAGGCGCCCCATACTGGCACCCCAAAGACGCGAATCCAAGCAATTCATCCAGTCGATGGGAAGGCGTATACGCACGCGCGATCTCATATTAAGACGTATCCAGGTACTAACAAAAGCCGTTGGCCCGCAACTTCCGATAGCAACTGAGACAACCATCCGTGGGTATACAATTCATCTGGCCTGCTTTTTCCAGTGCATGGGGGGGCGGGGAATTACTAGTGCCTGCACGCCAGCTTCTTGGTACCCCCGGCTATGGTTTCTTACGAAACATACATCAGTGCGTTACCTTGGCTAAACGGTTTCGTGAAGGACGTGGCGTGGCAAGTGCGCGGGTTACATCCGGGTAGACCGAGCCACAAGAAATAGGTAAACCGGGAATCAGCGTGGTATACGCATAGTCTGTATCCTTCGGGGGGTGATCATTGAACCTTCAGCACGCTCGAGCAGTGCATTGGGTTAGTCCCGGGCTTCTCCATTCCGCAACGGGACTGGTTCCACGGGACGTTACGATGATATCGTGGGAGGCCAACAAGCGCTTGTGACAAAGTTCTGCGGCTGAAACTCGCCATGCGTCTCCTCGCTACCCGTTACACCGGCAAAGCCTAAGAGTTATTTCACTCACCGATCTTCAGACTCTTTAAACGCACTTCTTAATAGCATCCTATTCGGACGGCAATTTTATTCTAACTATTATCCAGGCTCTTAGCATCCCCGAGTTGTTCATGTGTCTCTGAAACAAGTCAAGTCAGTCATGGCTTGCGCCAGGTGAAAAACGAACTTTCCCTTAGTGTCATTAAGCGCAGCTGGACGTGGCCGATCCACGTTCGTTTGGCGAGTAGAACCCAAACTGTCGCATTAACTAGTATCATTATAAGGTGAATGGGGTAGTTATGATCGGTGTTATAAGTACGGAAGGAGCGCTGGGTGAAACTAGGGTTGTACCAAGTTGCCCCACTATGGGCAAAGAGGCTATACGCGTATAGAGTTAGACAGCTGGTAGCGAAGGGTATAATGTCCCCCTGGTAGGAAGATTTCCGTATTCCCACTATATTGTGGGCTACTATTGGTTAAAGTAGCTGGTGGCTAATGCCAAAACCACCGTACGCTCAGGCAAAGTAGGATTAGAGAGATGCTGAAACT"
+```
+:::
+:::
+
+
 ------------------------------------------------------------------------
 
 ### Challenge 4: Counting each DNA Nucleotide in a Randomized Dataset and using Loop()
 
 #### Generating a 100-nucleotide strand and counting each frequency
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # Set a seed value to ensure that the random numbers generated are reproducible
 set.seed(215)
 
@@ -119,11 +146,24 @@ rnd_genome <- sample(nt_names, size = 100, replace = TRUE)
 table(rnd_genome)
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+rnd_genome
+ A  C  G  T 
+23 23 25 29 
+```
+:::
+:::
+
+
 #### Using Loop() function to repeat an operation
 
 -   `for loop` functions are widely used and incredibly versatile for repeating an operation with minimal inputs.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # Create 'loop_result' variable used to store the values being added in each iteration of the loop.
 ## loop is initialized to 0 (or whatever value entered for 'loop_result') and then incremented by the current value of i (and the function applied to the loop) in each iteration of the loop
 loop_result <- 0
@@ -137,11 +177,31 @@ for(i in 1:10){
 }
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1
+[1] 3
+[1] 6
+[1] 10
+[1] 15
+[1] 21
+[1] 28
+[1] 36
+[1] 45
+[1] 55
+```
+:::
+:::
+
+
 ------------------------------------------------------------------------
 
 ### Challenge 5: Using loop() functions
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #initialize a new dataframe with a value of 1
 myProduct <- 1
 
@@ -153,13 +213,38 @@ for(j in 1:15) {
 }
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+[1] 1
+[1] 2
+[1] 6
+[1] 24
+[1] 120
+[1] 720
+[1] 5040
+[1] 40320
+[1] 362880
+[1] 3628800
+[1] 39916800
+[1] 479001600
+[1] 6227020800
+[1] 87178291200
+[1] 1.307674e+12
+```
+:::
+:::
+
+
 ------------------------------------------------------------------------
 
 ### Challenge 6: Combining sample(), paste() and loop() functions to produce a set of individual nucleotides
 
 #### Generating Random Genomic Data in a collapsed string
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 nt <- c("A", "C", "G", "T")
 genomeLength <- 10
 
@@ -170,9 +255,20 @@ rnd_genome <- paste(
 print(rnd_genome)
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+[1] "TGGAATCTTT"
+```
+:::
+:::
+
+
 #### Counting Adenine using loop() function with If/else statements
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # "For loop" is used to perform iterations 1:n where n (nchar) refers to the number of characters (variables, nucleotides) in the rnd_genome dataset
 for(i in 1:nchar(rnd_genome)){
   # String subset is checked for each iteration, start = i and end = i means this substring will only extract a single character, i, for each iteration
@@ -183,9 +279,21 @@ for(i in 1:nchar(rnd_genome)){
 }
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+[1] "A"
+[1] "A"
+```
+:::
+:::
+
+
 ### Challenge 7: Modifying Output to sum the For Loop() Results Output
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # Set a variable called `sum_A` equal to 0
 sum_A <- 0
 
@@ -203,17 +311,34 @@ result <- c("Adenine:" = sum_A)
 
 # Use the `print` function to output the `result` vector to the console
 print(result)
+```
 
+::: {.cell-output .cell-output-stdout}
+```
+Adenine: 
+       2 
+```
+:::
 
+```{.r .cell-code}
 # Create a named vector called `result` with one element, the number of adenine bases found
 result <- c("Adenine:" = sum_A)
 
 # Use the `print` function to output the `result` vector to the console
 print(result)
-
 ```
 
-```{r}
+::: {.cell-output .cell-output-stdout}
+```
+Adenine: 
+       2 
+```
+:::
+:::
+
+::: {.cell}
+
+```{.r .cell-code}
 sum_A <- 0  # Create a new variable to store sum of "A" characters extracted from the loop
 
 for(i in 1:nchar(rnd_genome)) {
@@ -223,14 +348,23 @@ for(i in 1:nchar(rnd_genome)) {
 }
 
 cat("Total number of Adenisine Nucleotides: ", sum_A)  # Print the final value of sum_A using cat() "concatenate and print" function to merge the output of sum_A
-## Without cat(), print() produces two lines
-
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+Total number of Adenisine Nucleotides:  2
+```
+:::
+
+```{.r .cell-code}
+## Without cat(), print() produces two lines
+```
+:::
+
 
 ### Challenge 8: Adding the remaining nucleotides to the count
 
-```{r}
-# Initialize count variables for each nucleotide to 0
+```{# Initialize count variables for each nucleotide to 0}
 sum_A <- 0
 sum_C <- 0
 sum_G <- 0
@@ -297,11 +431,17 @@ print(result)
 
 ------------------------------------------------------------------------
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 vib_c <- scan("C:/School/23SPDAY/Biostatistics/Group_Project/Genomes/VibrioCholerae.txt", what = "character", sep = NULL)
 ```
+:::
 
-```{r}
+::: {.cell}
+
+```{.r .cell-code}
 sum_A <- 0
 sum_C <- 0
 sum_G <- 0
@@ -316,18 +456,32 @@ for(i in 1:nchar(vib_c)) {
 
 result <- c("Adenine:" = sum_A, "Cytosine:" = sum_C, "Guanine:" = sum_G, "Thymine:" = sum_T)
 print(result)
-
 ```
+
+::: {.cell-output .cell-output-stdout}
+```
+ Adenine: Cytosine:  Guanine:  Thymine: 
+   293942    263573    256024    294711 
+```
+:::
+:::
+
 
 ------------------------------------------------------------------------
 
 ### Rosalind Testing Data
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 rosalind_string <- "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC"
 ```
+:::
 
-```{r}
+::: {.cell}
+
+```{.r .cell-code}
 sum_A <- 0
 sum_C <- 0
 sum_G <- 0
@@ -343,6 +497,14 @@ for(i in 1:nchar(rosalind_string)) {
 paste(sum_A,sum_C,sum_G,sum_T)
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+[1] "20 12 17 21"
+```
+:::
+:::
+
+
 -   This result matches the key provided on the website, so I assume that this code is effective!
 
 ------------------------------------------------------------------------
@@ -355,11 +517,11 @@ paste(sum_A,sum_C,sum_G,sum_T)
 
 ## Objectives:
 
--   Learn to eliminate "single-use code" by encapsulating code in functions which can be easily applied to different genomes.
+-   Learn to eliminate \"single-use code\" by encapsulating code in functions which can be easily applied to different genomes.
 
 -   Expand your ability to count the frequency of each individual nucleotide within a genome to an ability to count the appearance of patterns in the genome.
 
--   Build and execute functions to find "hidden messages" within the genome by identifying patterns appearing much more often than they would be expected to if a genome included nucleotides at random.
+-   Build and execute functions to find \"hidden messages\" within the genome by identifying patterns appearing much more often than they would be expected to if a genome included nucleotides at random.
 
 -   Exploit transcription errors to narrow a search region for the replication origin.
 
@@ -367,7 +529,10 @@ paste(sum_A,sum_C,sum_G,sum_T)
 
 ### Challenge 0: Generating Functions for Functions
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 nucleotide_frequency <- function(genomeString, nucleotide = "A"){
   count <- 0
   for(i in 1:nchar(genomeString)){
@@ -381,19 +546,14 @@ nucleotide_frequency <- function(genomeString, nucleotide = "A"){
 nucleotide_frequency("ACTTGCGGGTATCGAG", "G")
 ```
 
+::: {.cell-output .cell-output-stdout}
+```
+[1] 6
+```
+:::
+:::
+
+
 ------------------------------------------------------------------------
 
-### Challenge 1:
-
-```{r}
-
-nt_num <- 10000
-set.seed(215)
-genomeString <- sample(nt_names, size = nt_num, replace = TRUE)
-paste(genomeString, collapse = "")
-```
-
-```{r}
-
-nucleotide_frequency(, "C")
-```
+### Challenge 1: 
