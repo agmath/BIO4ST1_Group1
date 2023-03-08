@@ -43,7 +43,7 @@ paste(nt_sample, collapse = "")
 
 ::: {.cell-output .cell-output-stdout}
 ```
-[1] "CCATACAGACTCATA"
+[1] "CGCCTAACTTTTGCC"
 ```
 :::
 :::
