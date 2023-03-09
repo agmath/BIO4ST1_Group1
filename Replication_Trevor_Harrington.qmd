@@ -391,16 +391,17 @@ nucleotide_frequency(nt_sample, "C")
 
     -   code is random, but this character
 
-```{r}
-k <- 2000
-  
-nt_sample <- sample(nt_names, size = k, replace = TRUE)
-nt_sample <- paste(nt_sample, collapse = "")
+### Generating a function to create randomized genome
 
+```{r}
+rnd_genome <- function(k = 1000){
+    sample(nt_names, size = k, replace = TRUE)
+}
+rnd_genome <- paste(rnd_genome, collapse = "")
 
 ```
 
-#### From single-vector multiple-vector Substrings 
+#### From single-vector multiple-vector Substrings
 
 ```{r}
 
@@ -430,7 +431,7 @@ string_sample
 #### Using multiple-vector substrings to generate paired nucleotides in a dataset
 
 ```{r}
-generate_codon <- function(string_sample) {
+generate_2_mer <- function(string_sample) {
   list_codon <- c()
 
   for(i in 1:(nchar(string_sample) - 1)){
@@ -449,7 +450,7 @@ generate_codon(string_sample)
 generate_codon <- function(string_sample) {
   list_codon <- c()
 
-  for(i in 1:(nchar(string_sample) - 1)){
+  for(i in 1:(nchar(string_sample) - 2)){
   list_codon <- list_codon %>%
   append(str_sub(string_sample, start = i, end = i + 2))
     }
@@ -457,4 +458,25 @@ generate_codon <- function(string_sample) {
 }
 
 generate_codon(string_sample)
+```
+
+```{r}
+generate_k_mer <- function(string_sample, k = 3) {
+  list_codon <- c()
+  #k is string length 
+
+  for(i in 1:(nchar(string_sample) - k)){
+  list_codon <- list_codon %>%
+  append(str_sub(string_sample, start = i, end = i + k-1))
+    }
+  return(list_codon)
+}
+
+generate_codon(string_sample, k = 1)
+```
+
+```{r}
+
+generate_k_mer(rnd_genome(k = 3),k = 3)
+
 ```
