@@ -175,3 +175,91 @@ print(Guanine_count)
 There are 4 Guanine found in the loop which correlates to the 4 Guanine shown in the sequence.
 
 # Challenge 9:
+
+# Origin of Replication: Getting Started
+
+```{r}
+nucleotide_frequency <- function(genomeString, nucleotide = "A"){
+  count <- 0
+  for(i in 1:nchar(genomeString)){
+    if(str_sub(genomeString, start = i, end = i) == nucleotide){
+      count <- count + 1
+    }
+  }
+  return(count)
+}
+
+nucleotide_frequency("ACTTGCGGGTATCGAG", "G")
+```
+
+Here we defined a function
+
+# Challenge 1: Random genome of 2000 nucleotides
+
+```{r}
+nt_sample <- sample(nt, size = 2000, replace = TRUE)
+nt_sample <- paste(nt_sample, collapse = "")
+
+nucleotide_frequency(nt_sample, "C")
+```
+
+Here this function counted the number of cytosines, we can see there were 482 cytosines counted out of the random nucleotide sequence of 2000.
+
+# Challenge 2: Using rand_genome function to generate single string
+
+```{r}
+k <- 2000
+nt_sample <- sample(nt, size = k, replace = TRUE)
+nt_sample <- paste(nt_sample, collapse = "")
+```
+
+```{r}
+rand_genome <- function(k){
+  nt_sample <- sample(nt, size = k, replace = TRUE)
+  nt_sample <- paste(nt_sample, collapse = "")
+  return(nt_sample)
+}
+rand_genome(10)
+```
+
+Generating random genome of 57 nucleotides to use
+
+```{r}
+rand_genome(57)
+```
+
+Generating single string to use for k
+
+```{r}
+myString <- c()
+string_sample <- string_sample %>% 
+  append(str_sub(nt_sample, start = 1000, end = 1005))
+str_sub(nt_sample, start = -1000, end = -995)
+```
+
+Appending new list containing a substring of nucleotides
+
+```{r}
+string_sample <- c()
+string_sample <- string_sample %>% 
+  append(str_sub(nt_sample, start = 1000, end = 1005))
+
+string_sample
+```
+
+# Using negative integers to indicate start/ end.
+
+```{r}
+#Initialize an empty vector
+myList <- c()
+
+#Append (add to the end) the first set of two characters to myList
+myList <- myList %>%
+  append(str_sub(myString, start = 1, end = 2))
+#Append the second set of two characters to myList
+myList <- myList %>%
+  append(str_sub(myString, start = -2, end = -1))
+
+#Print out the contents of myList
+myList
+```
