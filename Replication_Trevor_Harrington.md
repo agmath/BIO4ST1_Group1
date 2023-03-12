@@ -536,8 +536,14 @@ paste(sum_A,sum_C,sum_G,sum_T)
 ::: {.cell}
 
 ```{.r .cell-code}
+# Functions allow code to be ran without having to enter or copy and paste the code into a new block
+## within function(), the variables that can be altered are added (and pop up when entering in the function)
+## nucleotide = "A" means IF no nucleotide is supplied when using the function, it defaults to "A"
 nucleotide_frequency <- function(genomeString, nucleotide = "A"){
-  count <- 0
+  count <- 0 # generate a new variable for the function to write to
+  
+  ## for each iteration of i from 1 to the end of 'genomestring', if character in the string is the specificied nucleotide, count is updated by +1
+## {} are layers to the formula, which are only run in each iteration if the previous step is satisfied.
   for(i in 1:nchar(genomeString)){
     if(str_sub(genomeString, start = i, end = i) == nucleotide){
       count <- count + 1
@@ -588,26 +594,50 @@ nucleotide_frequency(nt_sample, "C")
 
     -   code is random, but this character
 
+### Generating a function to create randomized genome
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
-k <- 2000
+nt_names <- c("A", "C", "G", "T")
+
+rnd_genome <- function(k){
+  set.seed(215)
+  rnd_string <- ""
   
-nt_sample <- sample(nt_names, size = k, replace = TRUE)
-nt_sample <- paste(nt_sample, collapse = "")
+  for (i in 1:k){
+    rnd_string <- paste(rnd_string, sample(nt_names,1, replace = TRUE), sep="")
+  }
+  return(rnd_string)
+}
 ```
 :::
 
+::: {.cell}
 
-#### From single-vector multiple-vector Substrings 
+```{.r .cell-code}
+rnd_genome(9)
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] "TGGAATCTT"
+```
+:::
+:::
+
+
+#### From single-vector multiple-vector Substrings
+
+-   `str_sub` or substrings, allow the function to extract characters based on a starting and and ending point, which can be valuable for extracting vectors of a specific length, or with specific values. This function will be valuable for genomic data to identify patterns and extract vectors with specific lengths.
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
 string_sample <- c()
-# subset strings exctract a value based on the 
+# subset strings extract a value based on the 
 string_sample <- string_sample %>% 
   append(str_sub(nt_sample, start = 1000, end = 1005))
 
@@ -618,7 +648,7 @@ str_sub(nt_sample, start = -1000, end = -995)
 
 ::: {.cell-output .cell-output-stdout}
 ```
-[1] "AAAGAT"
+[1] "TTAATA"
 ```
 :::
 :::
@@ -641,7 +671,7 @@ string_sample
 
 ::: {.cell-output .cell-output-stdout}
 ```
-[1] "CAAAGA"
+[1] "CTTAAT"
 ```
 :::
 :::
@@ -653,9 +683,11 @@ string_sample
 ::: {.cell}
 
 ```{.r .cell-code}
-generate_codon <- function(string_sample) {
+generate_2_mer <- function(string_sample) {
   list_codon <- c()
 
+  
+  # this function will run from 1 to the end of the supplied genome sting (-1 prevents the function from adding a variable that does not contain 2 variables)
   for(i in 1:(nchar(string_sample) - 1)){
   list_codon <- list_codon %>%
   append(str_sub(string_sample, start = i, end = i + 1))
@@ -663,12 +695,12 @@ generate_codon <- function(string_sample) {
   return(list_codon)
 }
 
-generate_codon(string_sample)
+generate_2_mer(string_sample)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 ```
-[1] "CA" "AA" "AA" "AG" "GA"
+[1] "CT" "TT" "TA" "AA" "AT"
 ```
 :::
 :::
@@ -680,22 +712,164 @@ generate_codon(string_sample)
 ::: {.cell}
 
 ```{.r .cell-code}
-generate_codon <- function(string_sample) {
+generate_codons <- function(string_sample){
   list_codon <- c()
 
-  for(i in 1:(nchar(string_sample) - 1)){
-  list_codon <- list_codon %>%
-  append(str_sub(string_sample, start = i, end = i + 2))
-    }
+# for each iteration i in the sequance 1 through all charictars in the provided string 
+  ## -2 to prevent a partial codon
+  ## by = 3 to make the function shift 3 rather then shifting 1 and counting 3 for each iteration
+  
+  for (i in seq(1, nchar(string_sample) - 2, by = 3)) {
+    list_codon <- list_codon %>%
+      ##append adds an additional vector to the variable, without clearing what was generated previously. end = i + 2 means the function will count 3 out from the current variable being iterated, which jumps 3 each iteration. 
+      
+      append(str_sub(string_sample, start = i, end = i + 2))
+  }
+  
   return(list_codon)
 }
 
-generate_codon(string_sample)
+generate_codons(rnd_genome(200))
 ```
 
 ::: {.cell-output .cell-output-stdout}
 ```
-[1] "CAA" "AAA" "AAG" "AGA" "GA" 
+ [1] "TGG" "AAT" "CTT" "TAA" "TGT" "TCC" "GAC" "CTT" "TGA" "GCC" "TCA" "AGT"
+[13] "TGG" "ACT" "ACC" "GCG" "GCC" "CCC" "GAC" "CGA" "GAG" "CTA" "ACT" "CTA"
+[25] "AAT" "GAT" "GCA" "AGC" "AGC" "GCG" "TGC" "CGA" "GTC" "TCT" "GTG" "GAC"
+[37] "AGG" "ATC" "ACA" "TTG" "GAT" "GTG" "AGC" "CAA" "GAT" "CTC" "GAG" "ATG"
+[49] "AAA" "AAC" "AAG" "TAG" "GTT" "CTC" "TAT" "CGC" "TGG" "CTC" "CAA" "TCA"
+[61] "TTT" "TTA" "TCC" "TTT" "GCT" "GCA"
 ```
 :::
 :::
+
+::: {.cell}
+
+```{.r .cell-code}
+generate_k_mer <- function(string, k = 3) {
+  list_codon <- c()
+
+  for (i in seq(1, nchar(string) - k + 1, by = k)) {
+    list_codon <- list_codon %>%
+      append(str_sub(string, start = i, end = i + k - 1))
+  }
+  
+  return(list_codon)
+}
+
+generate_k_mer(rnd_genome(9))
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] "TGG" "AAT" "CTT"
+```
+:::
+:::
+
+
+-   This function can
+
+### Using functions to generate genome, extract strings of length k, and find the frequency of nucleotides 
+
+
+::: {.cell}
+
+```{.r .cell-code}
+generate_k_mer(rnd_genome(1000),6)
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+  [1] "TGGAAT" "CTTTAA" "TGTTCC" "GACCTT" "TGAGCC" "TCAAGT" "TGGACT" "ACCGCG"
+  [9] "GCCCCC" "GACCGA" "GAGCTA" "ACTCTA" "AATGAT" "GCAAGC" "AGCGCG" "TGCCGA"
+ [17] "GTCTCT" "GTGGAC" "AGGATC" "ACATTG" "GATGTG" "AGCCAA" "GATCTC" "GAGATG"
+ [25] "AAAAAC" "AAGTAG" "GTTCTC" "TATCGC" "TGGCTC" "CAATCA" "TTTTTA" "TCCTTT"
+ [33] "GCTGCA" "TACTTA" "TGGCCC" "TCCAAC" "CTTGCG" "AATTGC" "GGCATT" "ACGTTC"
+ [41] "TATGCA" "CGAAAG" "AGGCAC" "GAGATG" "TATATC" "ACTCTT" "CAGCTA" "TCTGAC"
+ [49] "ACAGGT" "AGGCAT" "TGGATG" "TCAGCG" "TACGAC" "CGGGGT" "AGGCAA" "CCCCTT"
+ [57] "CTGTTG" "CCCCGC" "TGGCCG" "GATGCC" "AAGGTG" "TTTTAC" "ATCGGT" "ATTTTA"
+ [65] "AAGATG" "TGAACT" "TAAGTA" "ACCTAC" "TTAGCT" "GACGGG" "AAGGTG" "CACATG"
+ [73] "TATGTG" "TGACTC" "TACACC" "AAGATG" "CACTTA" "GGCATC" "AATAAA" "AGTTGC"
+ [81] "CGGTTT" "GTAATC" "CTTGAC" "AGTAAT" "CGAGAT" "AATTAC" "TTGCGG" "GCACAT"
+ [89] "AACCTA" "CTCGGT" "TCGTCC" "CCCTTA" "GCGTAC" "GGGGGG" "GTGGGG" "AACCAT"
+ [97] "CAGCGT" "TCGTAT" "GTTAGT" "CCTCCG" "GCATTT" "TTGGTC" "ACGGCC" "CTCCAT"
+[105] "GAAATA" "CATACT" "AGCGTG" "CCATTC" "CGGTCA" "AATGGC" "CCTGCG" "AAGGAT"
+[113] "GCGGTG" "CGGTAA" "GCGTGT" "GGGCCA" "TACTTG" "GGCAGA" "TTGAGT" "TATAAG"
+[121] "AAACAG" "GCAAAT" "TGGGAA" "CTAGTG" "CGGCAC" "ATGTAC" "AGCTCG" "CACTTC"
+[129] "CTGGGG" "GGCGAC" "TACCGA" "ATTCCT" "AGTATG" "TCTGAG" "TAGCGT" "ACCGGG"
+[137] "CCAGCT" "TTGGGT" "CCTCTT" "ACCTTG" "TAATGG" "GATCGG" "CCTTAT" "GGGATG"
+[145] "CCATGA" "CGACAC" "TGCGGG" "AGGTTA" "ATAAGT" "GTCCGC" "GATAAA" "GCCTCG"
+[153] "TGGTCG" "AAATCT" "GTTACG" "TGCTCT" "TCTGTC" "ATTTGC" "CATATT" "GGTAAA"
+[161] "GTTCAA" "GAGCCA" "CCCTAT" "CTATTG" "ACTCCT" "AGATCT"
+```
+:::
+
+```{.r .cell-code}
+nucleotide_frequency(rnd_genome(1000),"G")
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 257
+```
+:::
+:::
+
+
+-   putting together everything completed in this chapter, the written code can now perform genomic analysis with pre-written functions that are proven to function as intended, and can be utilized for any genome.
+
+### Generating a function to find a specific set of nucleotides
+
+
+::: {.cell}
+
+```{.r .cell-code}
+nt_patterns <- function(string, pattern) {
+  nt_matches <- 0
+  
+  for (i in seq(1,nchar(string))){
+    if(str_sub(string, i, i + str_length(pattern)-1) == pattern){
+      nt_matches = nt_matches + 1
+  }
+  }
+  return(nt_matches)
+}
+
+nt_patterns(rnd_genome(20000), "GACCTT")
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 9
+```
+:::
+:::
+
+::: {.cell}
+
+```{.r .cell-code}
+rosalind_string <- "TTAGTCCCCAGTCCCCAGTCCCCTCCAGTCCCCGCAGTCCCCCAGTCCCCAGTCCCCCAGTCCCCAGTCCCCAGTCCCCAGCCAGTCCCCACCGGTGTGGTAGTCCCCCAAGTCCCCAAGTCCCCAGTGATAACAGTCCCCTTCTCTAAGTCCCCAGTCCCCGAGTCCCCAGTTGAGTCCCCCTAGTCCCCGCCTATAGTCCCCCCACGAGTCCCCTGAAGTCCCCTGAAAGTCCCCCTGACGCAAGTCCCCTAGTCCCCCAGTCCCCAGAAGTCCCCCAGTCCCCTAAGTCCCCTAGAGTCCCCAGTCCCCGAGAGTCCCCTGTAAGTCCCCCTCAGTCCCCGGCTCGAGTCCCCGATGAGTCCCCGAGTCCCCCCGAGTCCCCGGTTAGTCCCCAAGTCCCCGAGTCCCCGAGTCCCCTGAAGTCCCCGAGTCCCCTCGAGTCCCCAGTCCCCGCTAGTCCCCCTTAGTCCCCAGTCCCCGAGTCCCCAGTCCCCAGTCCCCAAGTCCCCCGTGGAGAAGTCCCCGCAGTCCCCAGTCCCCTCGATTAGTCCCCATGCGATAGTCCCCCAGTCCCCTGAGTCCCCAGTCCCCAAGTCCCCGTTAGTCCCCGAGTCCCCAAAATTAGTCCCCGAAGTCCCCCCGTAGTCCCCTGTGAGTCCCCGAGTCCCCAGTCCCCTTACGAGTCCCCGTCCAGTCCCCTGATTATATGAGAGTCCCCTTGGAGTCCCCTAGTCCCCTAAGTCCCCAGAGTGATTCTTAGTCCCCAAGTCCCCAGTCCCCGCTAGTCCCCATAGTCCCCAGTCCCCCGCAGTCCCCCTACCTCAGTCCCCAAGTCCCCCAGTCCCCCAGTCCCCGGTATTAGTCCCCGAAGTCCCCGAGTCCCCATACTCAAGTCCCCCAGTCCCCGGATGGTAGAGTCCCCAGTCCCCTAGTCCCCCCGAGTCCCCAGTCCCCCAGTCCCCACGGCGGCTAAAGTCCCCTAGTCCCCAGTCCCCGATGCAGTCCCCAAGTCCCCAGTCCCC"
+```
+:::
+
+::: {.cell}
+
+```{.r .cell-code}
+nt_patterns(rosalind_string, "AGTCCCCAG")
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] 25
+```
+:::
+:::
+
+
+-   The code suggests this pattern appeared 25 times, which was the correct answer, meaning the function worked as intended!
+
+------------------------------------------------------------------------
+
+# Chapter 3: Bioinformatic Tools pt. 3
