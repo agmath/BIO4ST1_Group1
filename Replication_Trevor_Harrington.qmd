@@ -506,7 +506,7 @@ generate_k_mer(rnd_genome(9))
 
 -   This function can
 
-### Using functions to generate genome, extract strings of length k, and find the frequency of nucleotides 
+### Using functions to generate genome, extract strings of length k, and find the frequency of nucleotides
 
 ```{r}
 generate_k_mer(rnd_genome(1000),6)
