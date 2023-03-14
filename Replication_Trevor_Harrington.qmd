@@ -546,3 +546,81 @@ nt_patterns(rosalind_string, "AGTCCCCAG")
 ------------------------------------------------------------------------
 
 # Chapter 3: Bioinformatic Tools pt. 3
+
+### combine `generate_k_mer` and `nt_pattern` to build a function `generate_frequent_k_mer`
+
+-   This step will require putting together the concepts building up to and including generating strings of a specific length, and recognizing patterns of a specific length
+
+    -   The goal of this step is to generate a function that will take a `genome string` and find repeats of a function that are a specific length `k`, outputting a list using the `unique()` function to remove repeats
+
+**What**
+
+```{r}
+nt_patterns <- function(genome, pattern) {
+  nt_matches <- 0
+  
+  for (i in seq(1,nchar(genome))){
+    if(str_sub(genome, i, i + str_length(pattern)-1) == pattern){
+      nt_matches = nt_matches + 1
+  }
+  }
+  return(nt_matches)
+}
+
+nt_patterns(rnd_genome(20000), "GACCTT")
+```
+
+```{r}
+generate_k_mer <- function(genome, k = 3) {
+  list_codon <- c()
+
+  for (i in seq(1, nchar(genome) - k + 1, by = k)) {
+    list_codon <- list_codon %>%
+      append(str_sub(genome, start = i, end = i + k - 1))
+  }
+  
+  return(list_codon)
+}
+
+generate_k_mer(rnd_genome(25),5)
+```
+
+```{r}
+generate_frequent_k_mer <- function(genome, k=9) {
+  nt_strings <- generate_k_mer(genome, k)
+  nt_string_freq <- c()
+  
+  for (i in seq(1, nt_strings)) {
+    nt_string_freq <- nt_string_freq %>%
+      append(nt_strings, nt_patterns(nt_strings))
+    
+  return(nt_string_freq)
+  }
+}
+
+  generate_frequent_k_mer("ACACAGACATCCCACCCC")
+```
+
+```{r}
+generate_frequent_k_mer <- function(genome, k=9) {
+  # generate all k-mers from the genome by the length k using `generate_k_mer` function previously created
+  strings <- generate_k_mer(genome, k)
+  
+  # count the frequency of each k-mer using the `nt_patterns` function previously created
+  k_mer_counts <- numeric(length(strings))
+  for (i in seq_along(strings)) {
+    k_mer_counts[i] <- nt_patterns(genome, strings[i])
+  }
+   
+  # order the k-mers by frequency and return the top k-mers and their counts as a list
+  max_count <- max(k_mer_counts)
+  ordered_k_mers <- strings[k_mer_counts == max_count]
+  return(list(frequent_k_mers = noquote(unique(ordered_k_mers))))
+}
+
+ generate_frequent_k_mer("ACACAGACATCCCACCCC",3)
+```
+
+```{r}
+generate_frequent_k_mer("ACAGGGGGCACAGGGGGCCCTGGGTACAGGGGGCCTTTTGTTACAGGGGGCCCTGGGTGAAATATACTTTTGTTGAAATATACTTTTGTTACAGGGGGCCCTGGGTGGAGGAGACAGGGGGCGGAGGAGGAAATATAGGAGGAGCCTGGGTACAGGGGGCCCTGGGTCTTTTGTTCCTGGGTGGAGGAGGAAATATACCTGGGTACAGGGGGCGGAGGAGACAGGGGGCGAAATATACCTGGGTCTTTTGTTCTTTTGTTCCTGGGTGGAGGAGCTTTTGTTCTTTTGTTCCTGGGTACAGGGGGCACAGGGGGCGGAGGAGGGAGGAGGAAATATAGAAATATAGAAATATAGGAGGAGGGAGGAGGAAATATACCTGGGTACAGGGGGCACAGGGGGCCTTTTGTTCCTGGGTGAAATATAACAGGGGGCGAAATATACCTGGGTGGAGGAGACAGGGGGCACAGGGGGCGGAGGAGCTTTTGTTGAAATATAACAGGGGGCGGAGGAGCCTGGGTGAAATATACTTTTGTTGAAATATAGAAATATACCTGGGTCCTGGGTCCTGGGTACAGGGGGCCTTTTGTTCTTTTGTTCCTGGGTCCTGGGTACAGGGGGCCCTGGGTGAAATATACTTTTGTTACAGGGGGCGAAATATACTTTTGTTACAGGGGGCGGAGGAGGGAGGAGACAGGGGGCGAAATATACCTGGGTGGAGGAGGAAATATAGAAATATAGGAGGAGGGAGGAGGAAATATAGGAGGAGGAAATATACCTGGGTGGAGGAGCTTTTGTTACAGGGGGCGGAGGAGGAAATATACTTTTGTTCCTGGGTGAAATATACCTGGGTCCTGGGTGAAATATACCTGGGTGAAATATAGGAGGAGCTTTTGTT",13)
+```
