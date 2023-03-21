@@ -6,7 +6,9 @@ execute:
   keep-md: true
 ---
 
+
 # Challenge 1: listing the 4 nucleotides
+
 
 ```{r}
 nucleotides <- c("Adenine", "Cytosine", "Guanine", "Thymine")
@@ -15,9 +17,11 @@ nucleotides
 
 ```
 
+
 The four nucleotides are Adenine, Guanine, Thymine and Cytosine.
 
 # Challenge 2: Generating random string of 15 nucleotides
+
 
 ```{r}
 # create a new dataframe with two columns
@@ -29,7 +33,9 @@ paste(nt_sample, collapse = "")
 
 ```
 
+
 # Challenge 3: Generating random 1500 nucleotide string
+
 
 ```{r}
 # create a new dataframe with two columns
@@ -43,7 +49,9 @@ nt_sample <- sample(nt_abr, size = nt_num, replace = TRUE)
 paste(nt_sample, collapse = "")
 ```
 
+
 Comparison Code
+
 
 ```{r}
 set.seed(215)
@@ -62,7 +70,9 @@ library(tidyverse)
 
 ```
 
+
 # Challenge 4: Generating random genome & counting A
+
 
 ```{r}
 # create a new dataframe with two columns
@@ -73,7 +83,9 @@ rnd_genome <- sample(nt_sample, size = 100, replace = TRUE)
 table(rnd_genome)
 ```
 
+
 # Looping with "for" loops
+
 
 ```{r}
 mySum <- 0
@@ -84,7 +96,9 @@ for(i in 1:10){
 }
 ```
 
+
 # Challenge 5: Using "myproduct" & creating loop
+
 
 ```{r}
 myProduct <- 1
@@ -94,7 +108,9 @@ for(j in 1:15) {
 }
 ```
 
+
 # Challenge 6: Generate random genome of 10 nucleotides & using loop
+
 
 ```{r}
 nt <- c("A", "C", "G", "T")
@@ -107,9 +123,11 @@ rnd_genome <- paste(
 print(rnd_genome)
 ```
 
+
 # Challenge 7: Using Loop to Adapt \# of Occurences of Adenine
 
 Adding one to old value
+
 
 ```{r}
 randGenome
@@ -130,9 +148,11 @@ print(Adenine_count)
                    
 ```
 
+
 Here the loop detected 1 Adenine and we can see there is only 1 Adenine in the sequence so we know this is correct.
 
 # Challenge 8: Using loop to count other nucleotides
+
 
 ```{r}
 randGenome
@@ -146,7 +166,9 @@ for(i in 1:nchar(randGenome)){
 print(Thymine_count)
 ```
 
+
 The loop worked for Thymine as well, we can tell there is 1 Thymine in the nucleotide sequence.
+
 
 ```{r}
 randGenome
@@ -160,7 +182,9 @@ for(i in 1:nchar(randGenome)){
 print(Cytosine_count)
 ```
 
+
 There are 9 Cytosine found in the loop which correlates to the 9 cytosine shown in the sequence.
+
 
 ```{r}
 randGenome
@@ -174,9 +198,11 @@ for(i in 1:nchar(randGenome)){
 print(Guanine_count)
 ```
 
+
 There are 4 Guanine found in the loop which correlates to the 4 Guanine shown in the sequence.
 
 # Challenge 9: Vibrio *Cholerae Chromosome*
+
 
 ```{r}
 vib_c <- scan("/Users/jennessabrunette/Documents/VirbrioCholerae.txt", what = "character", sep = NULL)
@@ -199,7 +225,9 @@ result <- c("Adenine:" = sum_A, "Cytosine:" = sum_C, "Guanine:" = sum_G, "Thymin
 print(result)
 ```
 
+
 # Challenge 10: Rosalind
+
 
 ```{r}
 rosalind_string <- "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC"
@@ -221,7 +249,9 @@ for(i in 1:nchar(rosalind_string)) {
 paste(sum_A,sum_C,sum_G,sum_T)
 ```
 
+
 # Origin of Replication: Getting Started
+
 
 ```{r}
 nucleotide_frequency <- function(genomeString, nucleotide = "A"){
@@ -237,9 +267,11 @@ nucleotide_frequency <- function(genomeString, nucleotide = "A"){
 nucleotide_frequency("ACTTGCGGGTATCGAG", "G")
 ```
 
+
 Here we defined a function
 
 # Challenge 1: Random genome of 2000 nucleotides
+
 
 ```{r}
 nt_sample <- sample(nt, size = 2000, replace = TRUE)
@@ -248,9 +280,11 @@ nt_sample <- paste(nt_sample, collapse = "")
 nucleotide_frequency(nt_sample, "C")
 ```
 
+
 Here this function counted the number of cytosines, we can see there were 518 cytosines counted out of the random nucleotide sequence of 2000.
 
 # Challenge 2: Using rand_genome function to generate single string
+
 
 ```{r}
 k <- 2000
@@ -267,13 +301,17 @@ rand_genome <- function(k){
 rand_genome(10)
 ```
 
+
 Generating random genome of 57 nucleotides to use
+
 
 ```{r}
 rand_genome(57)
 ```
 
+
 Generating single string to use for k
+
 
 ```{r}
 myString <- c()
@@ -282,7 +320,9 @@ string_sample <- string_sample %>%
 str_sub(nt_sample, start = -1000, end = -995)
 ```
 
+
 Appending new list containing a substring of nucleotides
+
 
 ```{r}
 string_sample <- c()
@@ -292,7 +332,9 @@ string_sample <- string_sample %>%
 string_sample
 ```
 
+
 # Using negative integers to indicate start/ end.
+
 
 ```{r}
 #Initialize an empty vector
@@ -308,3 +350,4 @@ myList <- myList %>%
 #Print out the contents of myList
 myList
 ```
+
