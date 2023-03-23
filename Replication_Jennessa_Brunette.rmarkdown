@@ -337,6 +337,7 @@ string_sample
 
 
 ```{r}
+myString <- "Jennessa"
 #Initialize an empty vector
 myList <- c()
 
@@ -349,5 +350,78 @@ myList <- myList %>%
 
 #Print out the contents of myList
 myList
+```
+
+
+# Challenge 3: Generating 3-mers
+
+
+```{r}
+myString <-rand_genome(15)
+generate_3_mers <- function(myString) {
+  list_3_mers <- c()
+
+  for(i in 1:(nchar(myString) - 2)){
+  list_3_mers <- list_3_mers %>%
+  append(str_sub(myString, start = i, end = i + 2))
+    }
+  return(list_3_mers)
+}
+myString
+generate_3_mers(myString)
+
+
+```
+
+
+This function collected a list of 3mers. It produced a string of 15 nucleotides and twelve pairs of 3mers.
+
+# Challenge 4: 
+
+
+```{r}
+generate_k_mer <- function(string, k = 3) {
+  list_codon <- c()
+
+  for (i in seq(1, nchar(string) - k + 1, by = k)) {
+    list_codon <- list_codon %>%
+      append(str_sub(string, start = i, end = i + k - 1))
+  }
+  
+  return(list_codon)
+}
+
+generate_k_mer(rand_genome(9))
+```
+
+
+This function returned a list of all k-mers in the genome string. Some noticeable repeats were G and C in the first two pairs of 3-mers.
+
+
+```{r}
+count_pattern <- function(myString, pattern){
+  count<- 0
+  k <- nchar(pattern)
+  for(i in 1:nchar(myString)){
+    if(str_sub(myString, start = i, end = i+k-1) == pattern){
+      count = count + 1
+    }
+  }
+  return(count)
+}
+ myGenome <- rand_genome(15)
+ myGenome
+ 
+count_pattern(myGenome, "GCATCC")
+```
+
+
+This function allowed me to see that there are 1 "GCATCC" nucleotides in my generated genome string. This function can be changed to see whatever letter combination of nucleotides of your choosing.
+
+# Challenge 5:
+
+
+```{r}
+
 ```
 
