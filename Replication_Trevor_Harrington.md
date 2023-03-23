@@ -771,7 +771,7 @@ generate_k_mer(rnd_genome(9))
 
 -   This function can
 
-### Using functions to generate genome, extract strings of length k, and find the frequency of nucleotides 
+### Using functions to generate genome, extract strings of length k, and find the frequency of nucleotides
 
 
 ::: {.cell}
@@ -820,13 +820,13 @@ nucleotide_frequency(rnd_genome(1000),"G")
 
 -   putting together everything completed in this chapter, the written code can now perform genomic analysis with pre-written functions that are proven to function as intended, and can be utilized for any genome.
 
-### Generating a function to find a specific set of nucleotides
+### Generating a function to find the frequency of a specific nucleotide string
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
-nt_patterns <- function(string, pattern) {
+nt_pattern <- function(string, pattern) {
   nt_matches <- 0
   
   for (i in seq(1,nchar(string))){
@@ -837,7 +837,7 @@ nt_patterns <- function(string, pattern) {
   return(nt_matches)
 }
 
-nt_patterns(rnd_genome(20000), "GACCTT")
+nt_pattern(rnd_genome(20000), "GACCTT")
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -857,7 +857,7 @@ rosalind_string <- "TTAGTCCCCAGTCCCCAGTCCCCTCCAGTCCCCGCAGTCCCCCAGTCCCCAGTCCCCCAG
 ::: {.cell}
 
 ```{.r .cell-code}
-nt_patterns(rosalind_string, "AGTCCCCAG")
+nt_pattern(rosalind_string, "AGTCCCCAG")
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -873,3 +873,64 @@ nt_patterns(rosalind_string, "AGTCCCCAG")
 ------------------------------------------------------------------------
 
 # Chapter 3: Bioinformatic Tools pt. 3
+
+### combine `generate_k_mer` and `nt_pattern` to build a function `generate_frequent_k_mer`
+
+-   This step will require putting together the concepts building up to and including generating strings of a specific length, and recognizing patterns of a specific length
+
+    -   The goal of this step is to generate a function that will take a `genome string` and find repeats of a function that are a specific length `k`, outputting a list using the `unique()` function to remove repeats
+
+**What**
+
+
+::: {.cell}
+
+```{.r .cell-code}
+generate_frequent_k_mer <- function(genome, k=9) {
+  # generate all k-mers from the genome by the length k using `generate_k_mer` function previously created
+  strings <- generate_k_mer(genome, k)
+  
+  # Run strings through the unique function to generate a set where each unique string length `k` is not repeated. This allows us to compile a string 
+  strings <- unique(strings)
+  
+  # count the frequency of each k-mer using the `nt_patterns` function previously created
+  k_mer_count <- rep(0,length(strings))
+  for (i in 1:length(strings)) {
+    for (j in 1:nchar(genome)-(k+1)) {
+    if (strings[i]== str_sub(genome,j,j+(k-1))){
+      k_mer_count[i]<-k_mer_count[i] +1
+    }
+    }
+  }
+  # order the k-mers by frequency and return the top k-mers and their counts as a list
+  max_count <- max(k_mer_count)
+  ordered_k_mers <- strings[k_mer_count == max_count]
+  return(noquote(ordered_k_mers))
+}
+
+ generate_frequent_k_mer("ACGTTGCATGTCGCATGATGCATGAGAGCT
+",4)
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] GCAT CATG
+```
+:::
+:::
+
+::: {.cell}
+
+```{.r .cell-code}
+generate_frequent_k_mer("GGGCCGGGTACATCGTAAGCCGTATGGGCCGGGTACATCGTAAGGACGATCGGACGATCGGGCCGGGTACATCGTAAGGGCCGGGTGGGCCGGGTGGACGATCACATCGTAAGGGCCGGGTACATCGTAAGCCGTATACATCGTAAGCCGTATGGACGATCGGGCCGGGTTCCTAGGGGGCCGGGTGGACGATCGCCGTATGGACGATCACATCGTAAACATCGTAAGGACGATCGGGCCGGGTGGGCCGGGTTCCTAGGTCCTAGGACATCGTAAGCCGTATACATCGTAAGGACGATCGGACGATCACATCGTAAGGGCCGGGTTCCTAGGGGGCCGGGTGCCGTATGGGCCGGGTGGACGATCGCCGTATGGGCCGGGTACATCGTAAGCCGTATGGACGATCGCCGTATGCCGTATGGGCCGGGTGGACGATCGGGCCGGGTGGACGATCGGACGATCGGGCCGGGTGGACGATCGCCGTATTCCTAGGGGACGATCACATCGTAATCCTAGGGGACGATCACATCGTAATCCTAGGGGGCCGGGTTCCTAGGGCCGTATTCCTAGGGGACGATCGGGCCGGGTGGGCCGGGTACATCGTAAGGACGATCACATCGTAAGGACGATCGGGCCGGGTGGGCCGGGTGGACGATCGCCGTATGCCGTATGGACGATCGGGCCGGGTTCCTAGGGGACGATCGCCGTATGGGCCGGGTTCCTAGGGGACGATCGGGCCGGGTACATCGTAAGGGCCGGGTACATCGTAATCCTAGGTCCTAGGGGACGATCGGACGATCACATCGTAAACATCGTAAGGACGATC",11)
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+[1] GGGCCGGGTGG
+```
+:::
+:::
+
+
+## Using

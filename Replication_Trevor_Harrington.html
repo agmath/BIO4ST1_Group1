@@ -730,10 +730,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>putting together everything completed in this chapter, the written code can now perform genomic analysis with pre-written functions that are proven to function as intended, and can be utilized for any genome.</li>
 </ul>
 </section>
-<section id="generating-a-function-to-find-a-specific-set-of-nucleotides" class="level3">
-<h3 class="anchored" data-anchor-id="generating-a-function-to-find-a-specific-set-of-nucleotides">Generating a function to find a specific set of nucleotides</h3>
+<section id="generating-a-function-to-find-the-frequency-of-a-specific-nucleotide-string" class="level3">
+<h3 class="anchored" data-anchor-id="generating-a-function-to-find-the-frequency-of-a-specific-nucleotide-string">Generating a function to find the frequency of a specific nucleotide string</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>nt_patterns <span class="ot">&lt;-</span> <span class="cf">function</span>(string, pattern) {</span>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>nt_pattern <span class="ot">&lt;-</span> <span class="cf">function</span>(string, pattern) {</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  nt_matches <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="fu">nchar</span>(string))){</span>
@@ -744,7 +744,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(nt_matches)</span>
 <span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="fu">nt_patterns</span>(<span class="fu">rnd_genome</span>(<span class="dv">20000</span>), <span class="st">"GACCTT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="fu">nt_pattern</span>(<span class="fu">rnd_genome</span>(<span class="dv">20000</span>), <span class="st">"GACCTT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9</code></pre>
 </div>
@@ -753,7 +753,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>rosalind_string <span class="ot">&lt;-</span> <span class="st">"TTAGTCCCCAGTCCCCAGTCCCCTCCAGTCCCCGCAGTCCCCCAGTCCCCAGTCCCCCAGTCCCCAGTCCCCAGTCCCCAGCCAGTCCCCACCGGTGTGGTAGTCCCCCAAGTCCCCAAGTCCCCAGTGATAACAGTCCCCTTCTCTAAGTCCCCAGTCCCCGAGTCCCCAGTTGAGTCCCCCTAGTCCCCGCCTATAGTCCCCCCACGAGTCCCCTGAAGTCCCCTGAAAGTCCCCCTGACGCAAGTCCCCTAGTCCCCCAGTCCCCAGAAGTCCCCCAGTCCCCTAAGTCCCCTAGAGTCCCCAGTCCCCGAGAGTCCCCTGTAAGTCCCCCTCAGTCCCCGGCTCGAGTCCCCGATGAGTCCCCGAGTCCCCCCGAGTCCCCGGTTAGTCCCCAAGTCCCCGAGTCCCCGAGTCCCCTGAAGTCCCCGAGTCCCCTCGAGTCCCCAGTCCCCGCTAGTCCCCCTTAGTCCCCAGTCCCCGAGTCCCCAGTCCCCAGTCCCCAAGTCCCCCGTGGAGAAGTCCCCGCAGTCCCCAGTCCCCTCGATTAGTCCCCATGCGATAGTCCCCCAGTCCCCTGAGTCCCCAGTCCCCAAGTCCCCGTTAGTCCCCGAGTCCCCAAAATTAGTCCCCGAAGTCCCCCCGTAGTCCCCTGTGAGTCCCCGAGTCCCCAGTCCCCTTACGAGTCCCCGTCCAGTCCCCTGATTATATGAGAGTCCCCTTGGAGTCCCCTAGTCCCCTAAGTCCCCAGAGTGATTCTTAGTCCCCAAGTCCCCAGTCCCCGCTAGTCCCCATAGTCCCCAGTCCCCCGCAGTCCCCCTACCTCAGTCCCCAAGTCCCCCAGTCCCCCAGTCCCCGGTATTAGTCCCCGAAGTCCCCGAGTCCCCATACTCAAGTCCCCCAGTCCCCGGATGGTAGAGTCCCCAGTCCCCTAGTCCCCCCGAGTCCCCAGTCCCCCAGTCCCCACGGCGGCTAAAGTCCCCTAGTCCCCAGTCCCCGATGCAGTCCCCAAGTCCCCAGTCCCC"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nt_patterns</span>(rosalind_string, <span class="st">"AGTCCCCAG"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nt_pattern</span>(rosalind_string, <span class="st">"AGTCCCCAG"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 25</code></pre>
 </div>
@@ -767,6 +767,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="chapter-3-bioinformatic-tools-pt.-3" class="level1">
 <h1>Chapter 3: Bioinformatic Tools pt.&nbsp;3</h1>
+<section id="combine-generate_k_mer-and-nt_pattern-to-build-a-function-generate_frequent_k_mer" class="level3">
+<h3 class="anchored" data-anchor-id="combine-generate_k_mer-and-nt_pattern-to-build-a-function-generate_frequent_k_mer">combine <code>generate_k_mer</code> and <code>nt_pattern</code> to build a function <code>generate_frequent_k_mer</code></h3>
+<ul>
+<li><p>This step will require putting together the concepts building up to and including generating strings of a specific length, and recognizing patterns of a specific length</p>
+<ul>
+<li>The goal of this step is to generate a function that will take a <code>genome string</code> and find repeats of a function that are a specific length <code>k</code>, outputting a list using the <code>unique()</code> function to remove repeats</li>
+</ul></li>
+</ul>
+<p><strong>What</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>generate_frequent_k_mer <span class="ot">&lt;-</span> <span class="cf">function</span>(genome, <span class="at">k=</span><span class="dv">9</span>) {</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate all k-mers from the genome by the length k using `generate_k_mer` function previously created</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  strings <span class="ot">&lt;-</span> <span class="fu">generate_k_mer</span>(genome, k)</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Run strings through the unique function to generate a set where each unique string length `k` is not repeated. This allows us to compile a string </span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>  strings <span class="ot">&lt;-</span> <span class="fu">unique</span>(strings)</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># count the frequency of each k-mer using the `nt_patterns` function previously created</span></span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>  k_mer_count <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="fu">length</span>(strings))</span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(strings)) {</span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nchar</span>(genome)<span class="sc">-</span>(k<span class="sc">+</span><span class="dv">1</span>)) {</span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (strings[i]<span class="sc">==</span> <span class="fu">str_sub</span>(genome,j,j<span class="sc">+</span>(k<span class="dv">-1</span>))){</span>
+<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a>      k_mer_count[i]<span class="ot">&lt;-</span>k_mer_count[i] <span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># order the k-mers by frequency and return the top k-mers and their counts as a list</span></span>
+<span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a>  max_count <span class="ot">&lt;-</span> <span class="fu">max</span>(k_mer_count)</span>
+<span id="cb57-19"><a href="#cb57-19" aria-hidden="true" tabindex="-1"></a>  ordered_k_mers <span class="ot">&lt;-</span> strings[k_mer_count <span class="sc">==</span> max_count]</span>
+<span id="cb57-20"><a href="#cb57-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">noquote</span>(ordered_k_mers))</span>
+<span id="cb57-21"><a href="#cb57-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb57-22"><a href="#cb57-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-23"><a href="#cb57-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">generate_frequent_k_mer</span>(<span class="st">"ACGTTGCATGTCGCATGATGCATGAGAGCT</span></span>
+<span id="cb57-24"><a href="#cb57-24" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>,<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] GCAT CATG</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_frequent_k_mer</span>(<span class="st">"GGGCCGGGTACATCGTAAGCCGTATGGGCCGGGTACATCGTAAGGACGATCGGACGATCGGGCCGGGTACATCGTAAGGGCCGGGTGGGCCGGGTGGACGATCACATCGTAAGGGCCGGGTACATCGTAAGCCGTATACATCGTAAGCCGTATGGACGATCGGGCCGGGTTCCTAGGGGGCCGGGTGGACGATCGCCGTATGGACGATCACATCGTAAACATCGTAAGGACGATCGGGCCGGGTGGGCCGGGTTCCTAGGTCCTAGGACATCGTAAGCCGTATACATCGTAAGGACGATCGGACGATCACATCGTAAGGGCCGGGTTCCTAGGGGGCCGGGTGCCGTATGGGCCGGGTGGACGATCGCCGTATGGGCCGGGTACATCGTAAGCCGTATGGACGATCGCCGTATGCCGTATGGGCCGGGTGGACGATCGGGCCGGGTGGACGATCGGACGATCGGGCCGGGTGGACGATCGCCGTATTCCTAGGGGACGATCACATCGTAATCCTAGGGGACGATCACATCGTAATCCTAGGGGGCCGGGTTCCTAGGGCCGTATTCCTAGGGGACGATCGGGCCGGGTGGGCCGGGTACATCGTAAGGACGATCACATCGTAAGGACGATCGGGCCGGGTGGGCCGGGTGGACGATCGCCGTATGCCGTATGGACGATCGGGCCGGGTTCCTAGGGGACGATCGCCGTATGGGCCGGGTTCCTAGGGGACGATCGGGCCGGGTACATCGTAAGGGCCGGGTACATCGTAATCCTAGGTCCTAGGGGACGATCGGACGATCACATCGTAAACATCGTAAGGACGATC"</span>,<span class="dv">11</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] GGGCCGGGTGG</code></pre>
+</div>
+</div>
+</section>
+<section id="using" class="level2">
+<h2 class="anchored" data-anchor-id="using">Using</h2>
+</section>
 </section>
 
 </main>
