@@ -56,7 +56,7 @@ table(randGenome)
 
 ```
 
-### Challenge 5: Writing my own loop 
+### Challenge 5: Writing my own loop
 
 ```{r}
 mySum <- 0
@@ -69,7 +69,7 @@ for(i in 1:10){
 
 ```
 
-### Challenge 6 : 
+### Challenge 6 :
 
 ### Generating a random genome substring consisting of 10 nucleotides using sample(),paste() and loop
 
@@ -97,7 +97,7 @@ for(i in 1:nchar(randGenome)){
 
 ```
 
-### Challenge 7 :  Counting the number of occurrences of Adenine (A) in randGenome.
+### Challenge 7 : Counting the number of occurrences of Adenine (A) in randGenome.
 
 ```{r}
 sum_A <- 0
@@ -106,23 +106,69 @@ for(i in 1:nchar(randGenome)){
   if(str_sub(randGenome, start = i, end = i) == "A")
     sum_A <- sum_A + 1
     {
-    print(sum_A)
   }
 }
+print(sum_A)
 
 ```
 
 ### Challenge 8 : Counting the frequencies of each of the four individual nucleotides.
 
 ```{r}
+sum_A <- 0
+sum_C <- 0
+sum_G <- 0
+sum_T <- 0
 
+for(i in 1:nchar(randGenome)) {
+if(str_sub(randGenome, start = i, end = i) == "A"){ 
+    sum_A <- sum_A + 1
+}
+  if(str_sub(randGenome, start = i, end = i) == "C"){
+    sum_C <- sum_C + 1
+  }
+  if(str_sub(randGenome, start = i, end = i) == "G"){
+    sum_G <- sum_G + 1
+  }
+  if(str_sub(randGenome, start = i, end = i) == "T"){ 
+    sum_T <- sum_T + 1
+  }
+}
 
-
-
-
+print(c(sum_A,sum_C,sum_G,sum_T))
 
 
 
 
 
 ```
+
+### Challenge 9 : Counting the frequencies of each nucleotide in Vibrio Cholerae chromosome
+
+```{r}
+vib_c <- scan("~/Desktop/vib_c.txt", what = "character", sep = NULL)
+sum_A <- 0
+sum_C <- 0
+sum_G <- 0
+sum_T <- 0
+
+for(i in 1:nchar(vib_c)) {
+if(str_sub(vib_c, start = i, end = i) == "A"){ 
+    sum_A <- sum_A + 1
+}
+  if(str_sub(vib_c, start = i, end = i) == "C"){
+    sum_C <- sum_C + 1
+  }
+  if(str_sub(vib_c, start = i, end = i) == "G"){
+    sum_G <- sum_G + 1
+  }
+  if(str_sub(vib_c, start = i, end = i) == "T"){ 
+    sum_T <- sum_T + 1
+  }
+}
+
+print(c(sum_A,sum_C,sum_G,sum_T))
+
+```
+
+### Challenge 10 : Counting the frequencies of each nucleotide in Vibrio Cholerae chromosome
