@@ -418,28 +418,28 @@ count_pattern(myGenome, "GCATCC")
 
 This function allowed me to see that there are 1 "GCATCC" nucleotides in my generated genome string. This function can be changed to see whatever letter combination of nucleotides of your choosing.
 
-# Challenge 5:
+# Challenge 5: Count Pattern & Rosalind string
 
 
 ```{r}
-nt_patterns <- function(string, pattern) {
-  nt_matches <- 0
+count_patterns <- function(string, pattern) {
+  count_matches <- 0
   
   for (i in seq(1,nchar(string))){
     if(str_sub(string, i, i + str_length(pattern)-1) == pattern){
-      nt_matches = nt_matches + 1
+      count_matches = count_matches + 1
   }
   }
-  return(nt_matches)
+  return(count_matches)
 }
 
  myGenome <- rand_genome
-nt_patterns(rand_genome(20000), "CTG")
+count_patterns(rand_genome(20000), "CTG")
 ```
 
 ```{r}
 rosalind_string <- "TTAGTCCCCAGTCCCCAGTCCCCTCCAGTCCCCGCAGTCCCCCAGTCCCCAGTCCCCCAGTCCCCAGTCCCCAGTCCCCAGCCAGTCCCCACCGGTGTGGTAGTCCCCCAAGTCCCCAAGTCCCCAGTGATAACAGTCCCCTTCTCTAAGTCCCCAGTCCCCGAGTCCCCAGTTGAGTCCCCCTAGTCCCCGCCTATAGTCCCCCCACGAGTCCCCTGAAGTCCCCTGAAAGTCCCCCTGACGCAAGTCCCCTAGTCCCCCAGTCCCCAGAAGTCCCCCAGTCCCCTAAGTCCCCTAGAGTCCCCAGTCCCCGAGAGTCCCCTGTAAGTCCCCCTCAGTCCCCGGCTCGAGTCCCCGATGAGTCCCCGAGTCCCCCCGAGTCCCCGGTTAGTCCCCAAGTCCCCGAGTCCCCGAGTCCCCTGAAGTCCCCGAGTCCCCTCGAGTCCCCAGTCCCCGCTAGTCCCCCTTAGTCCCCAGTCCCCGAGTCCCCAGTCCCCAGTCCCCAAGTCCCCCGTGGAGAAGTCCCCGCAGTCCCCAGTCCCCTCGATTAGTCCCCATGCGATAGTCCCCCAGTCCCCTGAGTCCCCAGTCCCCAAGTCCCCGTTAGTCCCCGAGTCCCCAAAATTAGTCCCCGAAGTCCCCCCGTAGTCCCCTGTGAGTCCCCGAGTCCCCAGTCCCCTTACGAGTCCCCGTCCAGTCCCCTGATTATATGAGAGTCCCCTTGGAGTCCCCTAGTCCCCTAAGTCCCCAGAGTGATTCTTAGTCCCCAAGTCCCCAGTCCCCGCTAGTCCCCATAGTCCCCAGTCCCCCGCAGTCCCCCTACCTCAGTCCCCAAGTCCCCCAGTCCCCCAGTCCCCGGTATTAGTCCCCGAAGTCCCCGAGTCCCCATACTCAAGTCCCCCAGTCCCCGGATGGTAGAGTCCCCAGTCCCCTAGTCCCCCCGAGTCCCCAGTCCCCCAGTCCCCACGGCGGCTAAAGTCCCCTAGTCCCCAGTCCCCGATGCAGTCCCCAAGTCCCCAGTCCCC"
-nt_patterns(rosalind_string, "AGTCCCCAG")
+count_patterns(rosalind_string, "AGTCCCCAG")
 ```
 
 
@@ -447,20 +447,45 @@ Here we can see the code detected the pattern 25 times and the function works.
 
 # Origin Part II
 
-# challenge 1
+# challenge 1: Most frequent kmers in string
 
 
 ```{r}
-find_frequent <- function(genome,k){
+find_frequent_kmers <- function(genome, k){
   #Get the k mers
-  kmers <-generate_kmers(genome,k)
+  kmers <-generate_k_mer(genome, k)
   kmers <- unique(kmers)
   #count occurences
-  kmers_counts <- rep(0, length(kmers))
-  for(i in 1:length(kmers)){
-    kmers_counts[i] <- count_pattern(genome, kmers[i])
+  kmer_counts <- rep(0, length(kmers))
+  for(i in 1: length(kmers)){
+    kmer_counts[i]<- count_pattern(genome, kmers[i])
   }
-  unique() max(k)
+  #largest count
+  max_freq <- max(kmer_counts)
+  print(max_freq)
+  freq_kmers <- kmers[kmer_counts==max_freq]
+  return(freq_kmers)
+}
+
+```
+
+```{r}
+myGenome <- rand_genome(10)
+find_frequent_kmers(myGenome, 2)
+find_frequent_kmers("AAATAAAG", 3)
+```
+
+
+Here my function returned a list of 3 kmers from the sequence AAATAAAG.
+
+# Challenge 2: Reverse- Complement
+
+
+```{r}
+reverse_complement <- function(genomeSubString){
+  complement = c('A' = 'T', 'C' = 'G', 'G' = 'C', 'T' = 'A')
+  reverse_complement <- ''
+  for (nucleotide in rev(strsplit(genomeSubString, "")))
 }
 ```
 
