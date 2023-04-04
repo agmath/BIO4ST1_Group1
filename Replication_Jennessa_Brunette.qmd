@@ -431,6 +431,32 @@ Here my function returned a list of 3 kmers from the sequence AAATAAAG.
 reverse_complement <- function(genomeSubString){
   complement = c('A' = 'T', 'C' = 'G', 'G' = 'C', 'T' = 'A')
   reverse_complement <- ''
-  for (nucleotide in rev(strsplit(genomeSubString, "")))
+  for (nucleotide in rev(strsplit(genomeSubString, "")[[1]])){
+    reverse_complement <- paste(reverse_complement,complement[nucleotide], sep="")
+  }
+  return(reverse_complement)
 }
+reverse_complement("ATTG")
+                         
+```
+
+```{r}
+reverse_complement <- function(genomeSubString){
+  genome_list <- str_split(genomeSubString,"")[[1]]
+    rev_genome_list <- rev(genome_list)
+    rev_complement <- c()
+    for( i in 1:length(rev_genome_list)){
+      if(rev_genome_list[i] == "A"){
+        rev_complement <- append(rev_comp,"T")
+      }
+      
+    }
+    return(reverse_complement)
+  
+  
+```
+
+```{r}
+reverse_complement <- function(genomeSubString){
+  complement = c('')
 ```
