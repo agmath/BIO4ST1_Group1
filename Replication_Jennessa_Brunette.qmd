@@ -6,6 +6,10 @@ execute:
   keep-md: true
 ---
 
+# Intro:
+
+In this notebook we will be searching for the replication origin by encapsulating code in functions and expanding on single-use code to apply to different genomes. During DNA replication, the proteins involved in replication must locate specific patterns when replication begins, so we will be looking at writing a program that can do just this.
+
 # Challenge 1: listing the 4 nucleotides
 
 ```{r}
@@ -15,7 +19,7 @@ nucleotides
 
 ```
 
-The four nucleotides are Adenine, Guanine, Thymine and Cytosine.
+The four nucleotides involved in DNA replication are Adenine, Guanine, Thymine and Cytosine.
 
 # Challenge 2: Generating random string of 15 nucleotides
 
@@ -28,6 +32,8 @@ nt_sample <- sample(nt_abr, size = nt_num, replace = TRUE)
 paste(nt_sample, collapse = "")
 
 ```
+
+This is a string of 15 nucleotides that was generated randomly using code.
 
 # Challenge 3: Generating random 1500 nucleotide string
 
@@ -43,7 +49,7 @@ nt_sample <- sample(nt_abr, size = nt_num, replace = TRUE)
 paste(nt_sample, collapse = "")
 ```
 
-Comparison Code
+Here we generated a much longer randomized string of 1500 nucleotides using code.
 
 ```{r}
 set.seed(215)
@@ -62,7 +68,7 @@ library(tidyverse)
 
 ```
 
-# Challenge 4: Generating random genome & counting A
+# Challenge 4: Generating random genome using "set.seed"
 
 ```{r}
 # create a new dataframe with two columns
@@ -72,6 +78,8 @@ set.seed(777) # for reproducibility
 rnd_genome <- sample(nt_sample, size = 100, replace = TRUE)
 table(rnd_genome)
 ```
+
+This function show us how many of each nucleotide we have in our random genome string.
 
 # Looping with "for" loops
 
@@ -84,6 +92,8 @@ for(i in 1:10){
 }
 ```
 
+A for loop allows us to run a set of instructions over and over. We set an interator for the for loop to run through which was set through values 1 through 10. Thus, we see 10 values.
+
 # Challenge 5: Using "myproduct" & creating loop
 
 ```{r}
@@ -93,6 +103,8 @@ for(j in 1:15) {
   print(myProduct)            
 }
 ```
+
+The Myproduct was updated by multiplying "myproduct" from "j" and printing the results
 
 # Challenge 6: Generate random genome of 10 nucleotides & using loop
 
@@ -107,9 +119,9 @@ rnd_genome <- paste(
 print(rnd_genome)
 ```
 
-# Challenge 7: Using Loop to Adapt \# of Occurences of Adenine
+Here we used a forloop to print out nucleotides in a random string of 10.
 
-Adding one to old value
+# Challenge 7: Using Loop to Adapt \# of Occurences of Adenine
 
 ```{r}
 randGenome
@@ -442,7 +454,7 @@ reverse_complement("ATTG")
 
 Here we used the reverse complement function to return a nucleotide sequence that was complementary to the original sequence.
 
-# Challenge 3: Implement Clump Finding
+# Challenge 3- Part 1: Implement Clump Finding
 
 ```{r}
 initialize_k_mer_dict <- function(k){
@@ -465,10 +477,19 @@ k_mers_dict <- initialize_k_mer_dict(9)
 initialize_k_mer_dict(3)
 ```
 
-Generating kmers_dict function gives us a table of all possible kmer combinations
+Generating kmers_dict function gives us a table of all possible kmer combinations, L is window length, k is kmer length, t is a frequency threshold
 
 ```{r}
 clump_finding <- function(genome, L, k, t) {
   initial_window <- str_sub(genome, start=1, end=L)
-}
+  my_kmer_dict <-initialize_k_mer_dict(k)
+  for(i in 1: L-k+1){curr_kmer <- str_sub(initial_window, i, i + k-1) 
+  curr_count <- count_pattern(initial_window, curr_kmer)
+  curr_row <-which(my_kmer_dict$k_mer ==curr_kmer)
+  my_kmer_dict$count[curr_row] <-curr_count
+   
+  } candidates <-my_kmer_dict%>%
+    filter(count>=t)%>%
+    pull(k_mer)
+
 ```
