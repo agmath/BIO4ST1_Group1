@@ -172,3 +172,333 @@ print(c(sum_A,sum_C,sum_G,sum_T))
 ```
 
 ### Challenge 10 : Counting the frequencies of each nucleotide in Vibrio Cholerae chromosome
+
+```{r}
+vib_c <- "GGCACCTGATGCAGTTCAAACACGTTGAAGATAGTACTTCCAATCTGCCCTGGAATGCCCCTCTGGTGGTACATATCATGTAGGGCGGAACCCGCTTTAACGCCCCTAGGACAATGAAACAGACGAACCGCTTACAAAAGGGGAATAGATGTGACCCTCTCGTAACTGCTCCTCACATTAGCTGAGTGGGAGGCTGTGTTTGTCGGGCTAAGCTTCGCTTGCCAAAATGAAGGATTCTTTAGGGATCGCACTGAACAAGGGTGAAGATCAGATGCGATCAGCATTTCATTGCCTTCTGAATTATAGATGACCCTGCTTGTACTGCTCACGTGGACGCCATTCAAAGCCTTGCGACCAACTCGGTCCAATGTCCCAACCTTTTTCTAACGATCATCATGACTCGGGCAGCGCAAAGCGAGATCGCTAGTTCATTAGTTCCGACCGTCGTAAGACTCACAAGGACGAGGCCAACTCACTCATCTGTACTAACTTTCCCAGAGAGCCTTGATCTGGTGCGACGAGTAGTATAGCGCCGGCTCTGACGTGGTGCACGCGCCACCTATTGGTCGCTCTGATCCACGTACTAGATCATTTAAAAAGACCTGTGACGCTAAAGATATAAGCGCTATATAGTACCTTTCGTGACCCTAGGTTAAGCGACTTGTGACTGATCCTGAAGTACAAAACCTTTGTGCATGGAGTCAGTCATTCCTTTGCTCTGACGTAGTTCTCGTTGCTTAGTAACATCTTGCTCTGATTATCGCGTACGGATACGCTCTCTCGCGCTCAGACGGATGTGAGGTTCGGTGAAGGGTGAGGTCGACTGTGAATTATGCGTGCCGGGGTCGTTTAAGCGTTCGCATCCGGAGCAATGGCGGATAGCTCAAGTGGTTAGGTGGTACACTGAACGCGACGGTCTTTC
+"
+sum_A <- 0
+sum_C <- 0
+sum_G <- 0
+sum_T <- 0
+
+for(i in 1:nchar(vib_c)) {
+if(str_sub(vib_c, start = i, end = i) == "A"){ 
+    sum_A <- sum_A + 1
+}
+  if(str_sub(vib_c, start = i, end = i) == "C"){
+    sum_C <- sum_C + 1
+  }
+  if(str_sub(vib_c, start = i, end = i) == "G"){
+    sum_G <- sum_G + 1
+  }
+  if(str_sub(vib_c, start = i, end = i) == "T"){ 
+    sum_T <- sum_T + 1
+  }
+}
+
+print(c(sum_A,sum_C,sum_G,sum_T))
+
+
+
+
+
+
+
+```
+
+I copied the whole dataset from Challenge 9 and pasted it into challenge 10 by removing the chlolera dataset. I copied and pasted the ACGT sequence generated in Rosalind. I checked the results in the website and they came to be correct. The results were A: 222, C: 227, G: 233, T: 240
+
+# **Finding the Replication Origin, Part I**
+
+### Challenge 0: The search for the Replication Origin
+
+```{r}
+nucleotide_frequency <- function(genomeString, nucleotide = "A"){
+  count <- 0
+  for(i in 1:nchar(genomeString)){
+    if(str_sub(genomeString, start = i, end = i) == nucleotide){
+      count <- count + 1
+    }
+  }
+  return(count)
+}
+
+nucleotide_frequency("ACTTGCGGGTATCGAG", "G")
+
+
+
+
+```
+
+## Challenge 1: Using the sample() function in a randomized genome
+
+```{r}
+nt_names<- c("A","C","G","T")
+nt_sample <- sample(nt_names, size = 2000, replace = TRUE)
+nt_sample <- paste(nt_sample, collapse = "")
+
+nucleotide_frequency(nt_sample, "C")
+
+
+
+
+
+```
+
+## Challenge 2: Building a function to create a randomized genome
+
+```{r}
+
+rand_genome <- function(k){
+  nt_names <- c("A", "C", "G", "T")
+rand_genome <- sample(nt_names, size=k, replace= TRUE)
+  rand_genome<- paste(rand_genome, collapse="")
+
+  return(rand_genome)
+  }
+rand_genome(k=15)
+```
+
+## Challenge 3: Building a function called to generate all of the substrings of 3 nucleotides
+
+```{r}
+generate_3_mers <- function(myString) {
+  list_3_mers <- c()
+
+  for(i in 1:(nchar(myString) - 2)){
+  list_3_mers <- list_3_mers %>%
+  append(str_sub(myString, start = i, end = i + 2))
+    }
+  return(list_3_mers)
+}
+
+myGenome <- rand_genome(10)
+myGenome
+generate_3_mers(myGenome)
+```
+
+## Challenge 4: Generate k-mers of any length we want
+
+```{r}
+generate_k_mers <- function(myString, k = 4) {
+  list_3_mers <- c()
+
+  for(i in 1:(nchar(myString) - (k-1))){
+  list_3_mers <- list_3_mers %>%
+  append(str_sub(myString, start = i, end = i + k-1))
+    }
+  return(list_3_mers)
+}
+
+myGenome <- rand_genome(10)
+myGenome
+generate_k_mers(myGenome,6)
+```
+
+## Challenge 5: Write a new function that will count occurrences of a particular pattern within a larger genomestring.
+
+```{r}
+count_pattern <- function(myString, pattern){
+  count <- 0
+  for(i in 1:nchar(myString)){
+    if(str_sub(myString, start = i, end = i+1) == pattern){
+      count = count + 1
+    }
+  }
+  return(count)
+}
+  
+count_pattern(myGenome, "AT")
+
+
+
+
+
+```
+
+```{r}
+rosalind_string <- "TTTATGAACTATGAACTTATGAACGTATTATGAACTATGAACTACACATATGAACTATGAACTTATGAACTTATGAACTATGAACTATGAACCTATGAACTATGAACCCTTATATGAACTACATATGAACTATGAACTCTATGAACGCACTGGTATGAACCTATGAACAGTATGAACATGCGATATGAACAGTCACTATGAACTAGGCTGTATGAACTATGAACCTATGAACTATGAACAACGTAAGTATATGAACAACGGTATGAACGTATGAACTATGAACCAACGTATGAACATATGAACTAGTATGAACGGGATATGAACACGGGTGTATGAACCTCTCTATGAACTATGAACTATGAACACTATGAACAGTATGAACTTATGAACTATGAACGATCAGTCTATGAACTATGAACCTTTATGAACTATGAACTGAATATGAACACACTCCTATGAACCTTATGAACCTAGGTTATGAACGGAAACCGGTTATGAACACTTATGAACTATGAACTATGAACCCTTCTTATGAACGTTATGAACATGAGGTTATGAACTTTATGAACGTTATGAACCTTTATGAACTCCTATGAACTTATGAACTATGAACGTCATATGAACGAGGACGATATGAACGCTATGAACTATGAACTCGTATGAACCTTATGAACGTCGTGCTATGAACGTATGAACAGATGTATGAACTATGAACCGTTCGCTATGAACTCTGTTATATGAACTATGAACGGGTATGAACGTATGAACAGATATGAACTATGAACGAATATGAACGGTTGTATGAACCTATGAACTATGAACTATGAACACTTATGAACGTATGAACATTTATGAACCGGGAATATGAACCAGAACTTATGAACATATGAACTATGAACATCAGTATGAACATATGAACATCATAAGTTTATGAACTATGAACGTTTATGAACGCTATGAACTATCCGATTTATGAACGTTTATATGAACTATGAAC"
+count_pattern <- function(myString, pattern){
+  count <- 0
+  k <- nchar(pattern)
+  for(i in 1:nchar(myString)){
+    if(str_sub(myString, start = i, end = i+k-1) == pattern){
+      count = count + 1
+    }
+  }
+  return(count)
+}
+count_pattern(rosalind_string, "TATGAACTA")
+```
+
+# **Finding the Replication Origin, Part II**
+
+Challenge 1: Finding frequent
+
+```{r}
+find_frequent_kmers <- function(genome,k){
+  #Get the K mers
+  kmers <- generate_k_mers(genome,k)
+  kmers <- unique(kmers)
+  #Count occurences
+  kmer_counts <- rep(0,length(kmers))
+  for(i in 1:length(kmers)){
+    kmer_counts[i] <- count_pattern(genome,kmers[i])
+  }
+  max_freq <-  max(kmer_counts)
+  #Get most frequent kmers
+  freq_kmers <- kmers[kmer_counts==max_freq]
+  #the two equal signs ask whether the left hand side is equal to the right hand side
+  return(freq_kmers)
+  
+}
+
+
+find_frequent_kmers("ATCCATTAT",2)
+```
+
+```{r}
+rosalind_string <- "ACGTTGCATGTCGCATGATGCATGAGAGCT"
+find_frequent_kmers <- function(genome,k){
+  #Get the K mers
+  kmers <- generate_k_mers(genome,k)
+  kmers <- unique(kmers)
+  #Count occurences
+  kmer_counts <- rep(0,length(kmers))
+  for(i in 1:length(kmers)){
+    kmer_counts[i] <- count_pattern(genome,kmers[i])
+  }
+  #print(kmer_counts)
+  max_freq <-  max(kmer_counts)
+  #print(max_freq)
+  freq_kmers <- kmers[kmer_counts==max_freq]
+  return(freq_kmers)
+  
+}
+find_frequent_kmers(rosalind_string,4)
+
+
+```
+
+## Challenge 2: Using Reverse complement function on a genome string
+
+```{r}
+reverse_complement<- function(substring){
+  #reverse the substring
+  substring_list<- str_split(substring,"")[[1]]
+  #separates the character strings into individual variables
+  rev_substring<- rev(substring_list)
+  #Reverses the base pairs 
+rev_complement <-c()
+  for(i in 1:length(rev_substring)){
+    if(rev_substring[i]=="A"){
+     rev_complement <- append(rev_complement, "T")
+    }
+    if(rev_substring[i]=="T"){
+      rev_complement <- append(rev_complement, "A")
+    } 
+  if(rev_substring[i]=="C"){
+     rev_complement <- append(rev_complement, "G")
+  }
+  if(rev_substring[i]=="G"){
+      rev_complement <- append(rev_complement, "C")
+    }
+  }
+  
+  rev_complement <- paste(rev_complement,collapse="")
+  return(rev_complement)
+}
+
+
+reverse_complement("TAGGTC")
+
+```
+
+using the rev_substring, we can flip the nucleotide from 5' to 3' or 3' to 5'
+
+### Rosalind String 
+
+```{r}
+reverse_complement<- function(substring){
+  #reverse the substring
+  substring_list<- str_split(substring,"")[[1]]
+  #separates the character strings into individual variables
+  rev_substring<- rev(substring_list)
+  #Reverses the base pairs 
+rev_complement <-c()
+  for(i in 1:length(rev_substring)){
+    if(rev_substring[i]=="A"){
+     rev_complement <- append(rev_complement, "T")
+    }
+    if(rev_substring[i]=="T"){
+      rev_complement <- append(rev_complement, "A")
+    } 
+  if(rev_substring[i]=="C"){
+     rev_complement <- append(rev_complement, "G")
+  }
+  if(rev_substring[i]=="G"){
+      rev_complement <- append(rev_complement, "C")
+    }
+  }
+  
+  rev_complement <- paste(rev_complement,collapse="")
+  return(rev_complement)
+
+}
+genome<-scan("/Users/darvinojha/Desktop/rosalind.txt")
+
+reverse_complement("genome")
+
+```
+
+# **Finding the Replication Origin, Part III**
+
+Goals:
+
+1\) Work through an initial window to find frequent k-mers meeting our threshold(t).
+
+2\) Slide the window through the genome, update counts, and add frequent k-mers to candidate list.
+
+3\) Slide window, update counts, and test using threshold again.
+
+```{r}
+initialize_k_mer_dict <- function(k){
+  nucleotides <- c("A", "C", "G", "T")
+clump_finding<-function(genome,L,K,t){
+  
+  initial_window<- str_sub(genome,start=1,end=L)
+}
+  k_mers_dict <- expand.grid(rep(list(nucleotides), k)) %>%
+    unite("k_mers", everything(), remove = TRUE, sep = "") %>%
+    unique() %>%
+    mutate(count = 0)
+  
+  return(k_mers_dict)
+}
+
+clump_finding <- function(genome,L,K,t){
+  #k = list of kmer
+  initial_window<- str_sub(genome,i,L)
+  my_kmer_dict<- initialize_kmer_dict(K)
+  for(i in 1:L-K+1){
+    curr_kmer<- str_sub(initial_window,i,i+k-1)
+    curr_count<- count_pattern(initial_window,curr_kmer)
+    curr_row <- which(my_kmer_dict$kmer==curr_kmer)
+    my_kmer_dict$count[curr_row] <- curr_count
+  }
+  candidates <- my_kmer_dict %%
+    filter(count>=t)%%
+    pull(k_mer)
+  #goal:slide windows, update counts, and test using threshold again. 
+  #currently have : my-dict contains Kmers+ counts through initial window. We also have our first set of candidates. 
+  for(j in 2: .......????)
+    remove_kmer <-str_sub(genome,j-1,j-1+K-1)
+  add_kmer <- str_sub(genome,L+j-1-(K-1),L+j-1)
+} 
+
+
+
+
+
+
+```

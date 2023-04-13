@@ -146,7 +146,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>randGenome <span class="ot">&lt;-</span> <span class="fu">sample</span>(nucl_names, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(randGenome, <span class="at">collapse =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "GTATGTGCCAATCCC"</code></pre>
+<pre><code>[1] "TCCGCTAGGGTGATG"</code></pre>
 </div>
 </div>
 <section id="challenge-3-generate-a-random-genome-which-is-1500-nucleotides-long-dataset" class="level3">
@@ -246,29 +246,375 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(randGenome, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"A"</span>)</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    sum_A <span class="ot">&lt;-</span> sum_A <span class="sc">+</span> <span class="dv">1</span></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(sum_A)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum_A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 1
-[1] 1
-[1] 2
-[1] 2</code></pre>
+<pre><code>[1] 2</code></pre>
 </div>
 </div>
 </section>
 <section id="challenge-8-counting-the-frequencies-of-each-of-the-four-individual-nucleotides." class="level3">
 <h3 class="anchored" data-anchor-id="challenge-8-counting-the-frequencies-of-each-of-the-four-individual-nucleotides.">Challenge 8 : Counting the frequencies of each of the four individual nucleotides.</h3>
 <div class="cell">
-
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sum_A <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>sum_C <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>sum_G <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>sum_T <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nchar</span>(randGenome)) {</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">str_sub</span>(randGenome, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"A"</span>){ </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    sum_A <span class="ot">&lt;-</span> sum_A <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(randGenome, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"C"</span>){</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    sum_C <span class="ot">&lt;-</span> sum_C <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(randGenome, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"G"</span>){</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    sum_G <span class="ot">&lt;-</span> sum_G <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(randGenome, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"T"</span>){ </span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    sum_T <span class="ot">&lt;-</span> sum_T <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(sum_A,sum_C,sum_G,sum_T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 2 4 2</code></pre>
+</div>
 </div>
 </section>
+<section id="challenge-9-counting-the-frequencies-of-each-nucleotide-in-vibrio-cholerae-chromosome" class="level3">
+<h3 class="anchored" data-anchor-id="challenge-9-counting-the-frequencies-of-each-nucleotide-in-vibrio-cholerae-chromosome">Challenge 9 : Counting the frequencies of each nucleotide in Vibrio Cholerae chromosome</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>vib_c <span class="ot">&lt;-</span> <span class="fu">scan</span>(<span class="st">"~/Desktop/vib_c.txt"</span>, <span class="at">what =</span> <span class="st">"character"</span>, <span class="at">sep =</span> <span class="cn">NULL</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>sum_A <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>sum_C <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>sum_G <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>sum_T <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nchar</span>(vib_c)) {</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">str_sub</span>(vib_c, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"A"</span>){ </span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    sum_A <span class="ot">&lt;-</span> sum_A <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(vib_c, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"C"</span>){</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    sum_C <span class="ot">&lt;-</span> sum_C <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(vib_c, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"G"</span>){</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    sum_G <span class="ot">&lt;-</span> sum_G <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(vib_c, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"T"</span>){ </span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    sum_T <span class="ot">&lt;-</span> sum_T <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(sum_A,sum_C,sum_G,sum_T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 293942 263573 256024 294711</code></pre>
+</div>
+</div>
+</section>
+<section id="challenge-10-counting-the-frequencies-of-each-nucleotide-in-vibrio-cholerae-chromosome" class="level3">
+<h3 class="anchored" data-anchor-id="challenge-10-counting-the-frequencies-of-each-nucleotide-in-vibrio-cholerae-chromosome">Challenge 10 : Counting the frequencies of each nucleotide in Vibrio Cholerae chromosome</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>vib_c <span class="ot">&lt;-</span> <span class="st">"GGCACCTGATGCAGTTCAAACACGTTGAAGATAGTACTTCCAATCTGCCCTGGAATGCCCCTCTGGTGGTACATATCATGTAGGGCGGAACCCGCTTTAACGCCCCTAGGACAATGAAACAGACGAACCGCTTACAAAAGGGGAATAGATGTGACCCTCTCGTAACTGCTCCTCACATTAGCTGAGTGGGAGGCTGTGTTTGTCGGGCTAAGCTTCGCTTGCCAAAATGAAGGATTCTTTAGGGATCGCACTGAACAAGGGTGAAGATCAGATGCGATCAGCATTTCATTGCCTTCTGAATTATAGATGACCCTGCTTGTACTGCTCACGTGGACGCCATTCAAAGCCTTGCGACCAACTCGGTCCAATGTCCCAACCTTTTTCTAACGATCATCATGACTCGGGCAGCGCAAAGCGAGATCGCTAGTTCATTAGTTCCGACCGTCGTAAGACTCACAAGGACGAGGCCAACTCACTCATCTGTACTAACTTTCCCAGAGAGCCTTGATCTGGTGCGACGAGTAGTATAGCGCCGGCTCTGACGTGGTGCACGCGCCACCTATTGGTCGCTCTGATCCACGTACTAGATCATTTAAAAAGACCTGTGACGCTAAAGATATAAGCGCTATATAGTACCTTTCGTGACCCTAGGTTAAGCGACTTGTGACTGATCCTGAAGTACAAAACCTTTGTGCATGGAGTCAGTCATTCCTTTGCTCTGACGTAGTTCTCGTTGCTTAGTAACATCTTGCTCTGATTATCGCGTACGGATACGCTCTCTCGCGCTCAGACGGATGTGAGGTTCGGTGAAGGGTGAGGTCGACTGTGAATTATGCGTGCCGGGGTCGTTTAAGCGTTCGCATCCGGAGCAATGGCGGATAGCTCAAGTGGTTAGGTGGTACACTGAACGCGACGGTCTTTC</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>sum_A <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>sum_C <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>sum_G <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>sum_T <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nchar</span>(vib_c)) {</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">str_sub</span>(vib_c, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"A"</span>){ </span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    sum_A <span class="ot">&lt;-</span> sum_A <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(vib_c, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"C"</span>){</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    sum_C <span class="ot">&lt;-</span> sum_C <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(vib_c, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"G"</span>){</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    sum_G <span class="ot">&lt;-</span> sum_G <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_sub</span>(vib_c, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> <span class="st">"T"</span>){ </span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    sum_T <span class="ot">&lt;-</span> sum_T <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(sum_A,sum_C,sum_G,sum_T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 222 227 233 240</code></pre>
+</div>
+</div>
+<p>I copied the whole dataset from Challenge 9 and pasted it into challenge 10 by removing the chlolera dataset. I copied and pasted the ACGT sequence generated in Rosalind. I checked the results in the website and they came to be correct. The results were A: 222, C: 227, G: 233, T: 240</p>
+</section>
+</section>
+<section id="finding-the-replication-origin-part-i" class="level1">
+<h1><strong>Finding the Replication Origin, Part I</strong></h1>
+<section id="challenge-0-the-search-for-the-replication-origin" class="level3">
+<h3 class="anchored" data-anchor-id="challenge-0-the-search-for-the-replication-origin">Challenge 0: The search for the Replication Origin</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>nucleotide_frequency <span class="ot">&lt;-</span> <span class="cf">function</span>(genomeString, <span class="at">nucleotide =</span> <span class="st">"A"</span>){</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  count <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nchar</span>(genomeString)){</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">str_sub</span>(genomeString, <span class="at">start =</span> i, <span class="at">end =</span> i) <span class="sc">==</span> nucleotide){</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>      count <span class="ot">&lt;-</span> count <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(count)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">nucleotide_frequency</span>(<span class="st">"ACTTGCGGGTATCGAG"</span>, <span class="st">"G"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+</section>
+<section id="challenge-1-using-the-sample-function-in-a-randomized-genome" class="level2">
+<h2 class="anchored" data-anchor-id="challenge-1-using-the-sample-function-in-a-randomized-genome">Challenge 1: Using the sample() function in a randomized genome</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>nt_names<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"C"</span>,<span class="st">"G"</span>,<span class="st">"T"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>nt_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(nt_names, <span class="at">size =</span> <span class="dv">2000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>nt_sample <span class="ot">&lt;-</span> <span class="fu">paste</span>(nt_sample, <span class="at">collapse =</span> <span class="st">""</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">nucleotide_frequency</span>(nt_sample, <span class="st">"C"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 487</code></pre>
+</div>
+</div>
+</section>
+<section id="challenge-2-building-a-function-to-create-a-randomized-genome" class="level2">
+<h2 class="anchored" data-anchor-id="challenge-2-building-a-function-to-create-a-randomized-genome">Challenge 2: Building a function to create a randomized genome</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>rand_genome <span class="ot">&lt;-</span> <span class="cf">function</span>(k){</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  nt_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>rand_genome <span class="ot">&lt;-</span> <span class="fu">sample</span>(nt_names, <span class="at">size=</span>k, <span class="at">replace=</span> <span class="cn">TRUE</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  rand_genome<span class="ot">&lt;-</span> <span class="fu">paste</span>(rand_genome, <span class="at">collapse=</span><span class="st">""</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(rand_genome)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rand_genome</span>(<span class="at">k=</span><span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "AACAGTAAATGACAT"</code></pre>
+</div>
+</div>
+</section>
+<section id="challenge-3-building-a-function-called-to-generate-all-of-the-substrings-of-3-nucleotides" class="level2">
+<h2 class="anchored" data-anchor-id="challenge-3-building-a-function-called-to-generate-all-of-the-substrings-of-3-nucleotides">Challenge 3: Building a function called to generate all of the substrings of 3 nucleotides</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>generate_3_mers <span class="ot">&lt;-</span> <span class="cf">function</span>(myString) {</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  list_3_mers <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">nchar</span>(myString) <span class="sc">-</span> <span class="dv">2</span>)){</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  list_3_mers <span class="ot">&lt;-</span> list_3_mers <span class="sc">%&gt;%</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">append</span>(<span class="fu">str_sub</span>(myString, <span class="at">start =</span> i, <span class="at">end =</span> i <span class="sc">+</span> <span class="dv">2</span>))</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(list_3_mers)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>myGenome <span class="ot">&lt;-</span> <span class="fu">rand_genome</span>(<span class="dv">10</span>)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>myGenome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "TAGAAGACAA"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_3_mers</span>(myGenome)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "TAG" "AGA" "GAA" "AAG" "AGA" "GAC" "ACA" "CAA"</code></pre>
+</div>
+</div>
+</section>
+<section id="challenge-4-generate-k-mers-of-any-length-we-want" class="level2">
+<h2 class="anchored" data-anchor-id="challenge-4-generate-k-mers-of-any-length-we-want">Challenge 4: Generate k-mers of any length we want</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>generate_k_mers <span class="ot">&lt;-</span> <span class="cf">function</span>(myString, <span class="at">k =</span> <span class="dv">4</span>) {</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  list_3_mers <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">nchar</span>(myString) <span class="sc">-</span> (k<span class="dv">-1</span>))){</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  list_3_mers <span class="ot">&lt;-</span> list_3_mers <span class="sc">%&gt;%</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">append</span>(<span class="fu">str_sub</span>(myString, <span class="at">start =</span> i, <span class="at">end =</span> i <span class="sc">+</span> k<span class="dv">-1</span>))</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(list_3_mers)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>myGenome <span class="ot">&lt;-</span> <span class="fu">rand_genome</span>(<span class="dv">10</span>)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>myGenome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "GATGCAACGA"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_k_mers</span>(myGenome,<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "GATGCA" "ATGCAA" "TGCAAC" "GCAACG" "CAACGA"</code></pre>
+</div>
+</div>
+</section>
+<section id="challenge-5-write-a-new-function-that-will-count-occurrences-of-a-particular-pattern-within-a-larger-genomestring." class="level2">
+<h2 class="anchored" data-anchor-id="challenge-5-write-a-new-function-that-will-count-occurrences-of-a-particular-pattern-within-a-larger-genomestring.">Challenge 5: Write a new function that will count occurrences of a particular pattern within a larger genomestring.</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>count_pattern <span class="ot">&lt;-</span> <span class="cf">function</span>(myString, pattern){</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  count <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nchar</span>(myString)){</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">str_sub</span>(myString, <span class="at">start =</span> i, <span class="at">end =</span> i<span class="sc">+</span><span class="dv">1</span>) <span class="sc">==</span> pattern){</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>      count <span class="ot">=</span> count <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(count)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="fu">count_pattern</span>(myGenome, <span class="st">"AT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>rosalind_string <span class="ot">&lt;-</span> <span class="st">"TTTATGAACTATGAACTTATGAACGTATTATGAACTATGAACTACACATATGAACTATGAACTTATGAACTTATGAACTATGAACTATGAACCTATGAACTATGAACCCTTATATGAACTACATATGAACTATGAACTCTATGAACGCACTGGTATGAACCTATGAACAGTATGAACATGCGATATGAACAGTCACTATGAACTAGGCTGTATGAACTATGAACCTATGAACTATGAACAACGTAAGTATATGAACAACGGTATGAACGTATGAACTATGAACCAACGTATGAACATATGAACTAGTATGAACGGGATATGAACACGGGTGTATGAACCTCTCTATGAACTATGAACTATGAACACTATGAACAGTATGAACTTATGAACTATGAACGATCAGTCTATGAACTATGAACCTTTATGAACTATGAACTGAATATGAACACACTCCTATGAACCTTATGAACCTAGGTTATGAACGGAAACCGGTTATGAACACTTATGAACTATGAACTATGAACCCTTCTTATGAACGTTATGAACATGAGGTTATGAACTTTATGAACGTTATGAACCTTTATGAACTCCTATGAACTTATGAACTATGAACGTCATATGAACGAGGACGATATGAACGCTATGAACTATGAACTCGTATGAACCTTATGAACGTCGTGCTATGAACGTATGAACAGATGTATGAACTATGAACCGTTCGCTATGAACTCTGTTATATGAACTATGAACGGGTATGAACGTATGAACAGATATGAACTATGAACGAATATGAACGGTTGTATGAACCTATGAACTATGAACTATGAACACTTATGAACGTATGAACATTTATGAACCGGGAATATGAACCAGAACTTATGAACATATGAACTATGAACATCAGTATGAACATATGAACATCATAAGTTTATGAACTATGAACGTTTATGAACGCTATGAACTATCCGATTTATGAACGTTTATATGAACTATGAAC"</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>count_pattern <span class="ot">&lt;-</span> <span class="cf">function</span>(myString, pattern){</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  count <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="fu">nchar</span>(pattern)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nchar</span>(myString)){</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">str_sub</span>(myString, <span class="at">start =</span> i, <span class="at">end =</span> i<span class="sc">+</span>k<span class="dv">-1</span>) <span class="sc">==</span> pattern){</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>      count <span class="ot">=</span> count <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(count)</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="fu">count_pattern</span>(rosalind_string, <span class="st">"TATGAACTA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 32</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="finding-the-replication-origin-part-ii" class="level1">
+<h1><strong>Finding the Replication Origin, Part II</strong></h1>
+<p>Challenge 1: Finding frequent</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>find_frequent_kmers <span class="ot">&lt;-</span> <span class="cf">function</span>(genome,k){</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Get the K mers</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  kmers <span class="ot">&lt;-</span> <span class="fu">generate_k_mers</span>(genome,k)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  kmers <span class="ot">&lt;-</span> <span class="fu">unique</span>(kmers)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Count occurences</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  kmer_counts <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="fu">length</span>(kmers))</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(kmers)){</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    kmer_counts[i] <span class="ot">&lt;-</span> <span class="fu">count_pattern</span>(genome,kmers[i])</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>  max_freq <span class="ot">&lt;-</span>  <span class="fu">max</span>(kmer_counts)</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Get most frequent kmers</span></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>  freq_kmers <span class="ot">&lt;-</span> kmers[kmer_counts<span class="sc">==</span>max_freq]</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#the two equal signs ask whether the left hand side is equal to the right hand side</span></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(freq_kmers)</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a><span class="fu">find_frequent_kmers</span>(<span class="st">"ATCCATTAT"</span>,<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "AT"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>rosalind_string <span class="ot">&lt;-</span> <span class="st">"ACGTTGCATGTCGCATGATGCATGAGAGCT"</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>find_frequent_kmers <span class="ot">&lt;-</span> <span class="cf">function</span>(genome,k){</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Get the K mers</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  kmers <span class="ot">&lt;-</span> <span class="fu">generate_k_mers</span>(genome,k)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  kmers <span class="ot">&lt;-</span> <span class="fu">unique</span>(kmers)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Count occurences</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  kmer_counts <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="fu">length</span>(kmers))</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(kmers)){</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>    kmer_counts[i] <span class="ot">&lt;-</span> <span class="fu">count_pattern</span>(genome,kmers[i])</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#print(kmer_counts)</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>  max_freq <span class="ot">&lt;-</span>  <span class="fu">max</span>(kmer_counts)</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#print(max_freq)</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>  freq_kmers <span class="ot">&lt;-</span> kmers[kmer_counts<span class="sc">==</span>max_freq]</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(freq_kmers)</span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a><span class="fu">find_frequent_kmers</span>(rosalind_string,<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "GCAT" "CATG"</code></pre>
+</div>
+</div>
+<section id="challenge-2-using-reverse-complement-function-on-a-genome-string" class="level2">
+<h2 class="anchored" data-anchor-id="challenge-2-using-reverse-complement-function-on-a-genome-string">Challenge 2: Using Reverse complement function on a genome string</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>reverse_complement<span class="ot">&lt;-</span> <span class="cf">function</span>(substring){</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#reverse the substring</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  substring_list<span class="ot">&lt;-</span> <span class="fu">str_split</span>(substring,<span class="st">""</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#separates the character strings into individual variables</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  rev_substring<span class="ot">&lt;-</span> <span class="fu">rev</span>(substring_list)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Reverses the base pairs </span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(rev_substring)){</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(rev_substring[i]<span class="sc">==</span><span class="st">"A"</span>){</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>      rev_substring[i]<span class="sc">==</span><span class="st">"T"</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(rev_substring[i]<span class="sc">==</span><span class="st">"T"</span>){</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>      rev_substring[i]<span class="sc">==</span><span class="st">"A"</span></span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>    } </span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(rev_substring[i]<span class="sc">==</span><span class="st">"C"</span>){</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>      rev_substring[i]<span class="sc">==</span><span class="st">"G"</span></span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(rev_substring[i]<span class="sc">==</span><span class="st">"G"</span>){</span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>      rev_substring[i]<span class="sc">==</span><span class="st">"C"</span></span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste</span>(<span class="fu">c</span>(rev_substring),<span class="at">collapse=</span><span class="st">""</span>)</span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a><span class="fu">reverse_complement</span>(<span class="st">"TAGGTC"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "CTGGAT"</code></pre>
+</div>
+</div>
+<p>using the rev_substring, we can flip the nucleotide from 5’ to 3’ or 3’ to 5’</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>reverse_complement<span class="ot">&lt;-</span> <span class="cf">function</span>(substring){</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#reverse the substring</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  substring_list<span class="ot">&lt;-</span> <span class="fu">str_split</span>(substring,<span class="st">""</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#separates the character strings into individual variables</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  rev_substring<span class="ot">&lt;-</span> <span class="fu">rev</span>(substring_list)</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Reverses the base pairs </span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(rev_substring)){</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(rev_substring[i]<span class="sc">==</span><span class="st">"A"</span>){</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>      rev_substring[i]<span class="sc">==</span><span class="st">"T"</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(rev_substring[i]<span class="sc">==</span><span class="st">"T"</span>){</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>      rev_substring[i]<span class="sc">==</span><span class="st">"A"</span></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>    } </span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(rev_substring[i]<span class="sc">==</span><span class="st">"C"</span>){</span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>      rev_substring[i]<span class="sc">==</span><span class="st">"G"</span></span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(rev_substring[i]<span class="sc">==</span><span class="st">"G"</span>){</span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>      rev_substring[i]<span class="sc">==</span><span class="st">"C"</span></span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste</span>(<span class="fu">c</span>(rev_substring),<span class="at">collapse=</span><span class="st">""</span>)</span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-26"><a href="#cb47-26" aria-hidden="true" tabindex="-1"></a><span class="fu">reverse_complement</span>(<span class="st">"TCCAATTGGCTTAGACGACTCACGATTTCCCTTGTACATGATGGAAAGAACACGGCCGTCCACTAAGCCTCACGGGAGCGTGAAAGATGGTTCCCCAAGGCCGTGGCGCCTTGCGTCCTGTTATCAATCAGCTAACTCACTTCATCTAGACCCAAACCTATCACTATTACGGGGCCGGCATCCAGTCCGCGACAGAACTCCTAAAAAGAGGCGAATTCGACATCTGCTCCATAGGGTGAGGATTGGAGCACGTTCTGACAGGACCCCCTCCAATCTTGAAGTCCTGCTCTTCAACGGTCCTATCTCCAATATTCCAAATTTCATTCCGGACGTGTCATTCCCGATAGGAGATATGACAGTGGATAACCTCCCCTGAACGGATGTTCCCCTCAGGATAGATTTAGAGAAACCCATGTCTTTAGTGGCAGACCTGTGTCGGCGTAGCTACTATTCTCGGCCGGTGTATCCTCATTACCAGTTACGGAGCAGGAGTGGTGCAAAGCTTTATACGGGTGAGGTCCGATCCGAAACAGTAAACCCCCCAACTAATCTTTTCACCACCTTGCCCACTGGGTCATTTTACTGTGAAAGGCTCCCCGCTAAGCAGCAAAACGTCAGGTAATCCTGTGAGCCTCACTGCAAGGACTTGAAACCCACTTGTCTCAATGATCCTGTGCTATGATTAAGCCATCGCGAGAAACCGTATTCAATGTAAATCACGAAAAATTACTATACGGTCCTGTGACCGCTTGCTTGGTAATTGGTACTTCCAAAAGGGAGCCGACCTCGGCGGCCACATCGCTCACGATAGTGGGTCGTTCTTCAGTATGACCAGAGTGAAACCCTCGTATGGTAGATGCTATGTGCCTACATATCGGGGTTCCGAGGTAACGTCTTGCCATTTAACATCGCGGGTCCGTGAGGAGCTGGGAGATATAAATGATCTGAATTTTACGCTCCAACATCTATATGTGTACCGAAAATTCATGTATTCCGTTGGCTGAGGTCGATGCCCTATGAGTTCGGAACGGTTGTACGCCCGAGTAACGCTTTGTACATACCCAGGCGAGACCACATACAGCATGGAAGTAAACTCGCTTGCCAGCTTTACCTTGAGTTGTAGCCATTGAACTTGCAAGTAGTACCCCCCAGTTACGAGTGCCTGCAAAGAGCATCGGAGACTCTCGCGGCGTCGACTAACGGTCCCACATTCTGAATTACCTGAGTGACGGGTCACGTGTGTGCGTGATGGGGCTGGGTCCTGTCCGGGTCTTAGGAACGCCGAACATAACCCCAGGACAGTGTCAGACGATGTCTTACTATTCGATTATGCGCCCCAGACACAATAAGTCGGCTCCTCATCAAAGAATTATGTACTCACGCACGCAAGCGGGTAAACCTAGGCAATAAGCAGAATGCCTGTTTTAGTGGTGGGGTTGGGTTTGTTATGATCAGCAGTAGGACATTAGAAGATATTTTCGCTAGTGCGGCGGGATAGGTCGCTGCGGTTAGCTTGAAGATATTGGTTGTGCGGCCGGTGGATCAGTATATCTTTGCAGTGATGCGTAAACGGACGTCGATAACTCCAGGCAATACAGTAACCATGGTCTGTCACGCTTGCGCACATGCGTCCCCTGCCGTCACGACAGTTATTGTGAAGGCGACCGGGGTGAATGTCCGCAACAGGCCGAGGGCCGCTGTGGGGGTCGTTGTAAAGACTCAGATCAAATAAGGGGTGGCCACAAGATCGGAGTACTTAAAGTCTGGATAGGCCGATCTTACAGAACGGAAGTAATTTAACCTTCACGTTGGTGACTGCGCAACATGGTGAAGGACGCACGAAGTTGAGCCGAGCTGTCGAAGATGATATAGTGTTTACGAACCATCTTATTCGACATAGACAGATATTACGACCTACATAAGCTTCATGCTAACGGAGAGGATCATTTTAGACGGACTTTGGCAGCACAAATGCGTATATTCGGCTTCACACAATATTCGAGTGGGATTCTTATCTATTCTTAGTTACAATGTTTGGCACCGTTCAGGCACTTGCTGGTCTTAGAGGCGCAGCTGGACTACCTATTAGTCCGGATAAAAACGTCGAAGATCAGGGCATGAACCCCATGCACCAAAACTAGCTCGTAACGTGGACGCGATATCTGTTTCGTTCCTGGTCCCATCTACCCATCAGTTTGCTGGTGTTGCACCGTGTAGTATGGTTTTATTGCGGTGGCCCTCTTCAGGAGTGATGAGACCGCATCCATAGACAATGGGCTCTTAGGTGCTCGTATGCCGTTGATCGCCGTACGCAGACGTTCTTCGTTCAACTTTGGCTCAGGTGCTACTACGTATGCGTATGTACAGAAAGAGTGTGGAACCTTCGCATACTTCGTGGAGGGATGGATCTTGACTCCAACTGCAATCGAACAAAGTGCAAAAGTCAGAATCGAAAAACATTTCAAGTACTAGACTCTAATGCGAGACCCGCGCTTAAGCAGCGAATCAGCGTCTATTACGAGAGGAGGCCTATGGCGACAAAAATACTACTTGCGACAATACGCGAAGGGCACGGGACTTTTGGAGAAGGACAGGCTGACTAGCCCCTGCCCCGTCAATCCCCCGGTGGACTACCATTCAAGAATATATTACTCGCTACCGCAAGACCATCAGGTCGTCAAAGACTTGATCGGACCACGATGCTCATCGATTGTATTCTTCAAGCACTAACGGGACACTGACGAAAATCATTCTGCGTATATAAAGGGTATCTTCTCAGTGGCTTTCTCGGGTTGTCACCTGAAACCCCCTTTGCCCCTATTTGAGGTTCCGTCAATCCGACGGCATTCAAGTACCTAGGATGTAATTAAATTGTATAATTGCTACATCCAGTTGGGAAATTATAGCCGGACGGCCCAACTAGCCTCCTCCAACTACTCTACGCAAAGCCCCCCGAAGGTACGGGGCAAGTGGCACGTGAAGCACTATGCCTCGCTGCCCGCTCAACTGCTGGCAGACAGACTATCAAATTTGCGCTCACGCTGTGGGTGCCTCTCCGTGAGGGTAGTGCTAACCCGCCGCACAGCCTGCGATGCTTCTCACAGCGTGATCAACGCGGATCCCGACATAAGGCTGACACCCCTTGCTTGCGTTCTAGATACCCTGCACTCTTCTTTTAACGTATCGACCCACACCCAGGACAAGATGCAGCCGTCTCGTACCTAGGCGTAAGTTATATGCTAACTTACGTAGTGGAGTAGAAAAACTGCCACGTGTCACTTATGATCAGACGTTTTGTTAGGACTGAATAACTAATGTGATTTTGGCCGGATGGACGTCCAAAAACGAACCCTAAATTGTTGAAAACAAAACGTCGTGATGTTTAAGGGAAGCATGCGGCATCGTTTCAGGGGTCTGATTTTCCTATTCGGAGCGCCGCAAAGGACACGTCGGATCTAAAAGGCGTGGAAGACCCGTGCATCCCGCGGCCGAACTTTGTCTCAATGTGTAGGCTCCTATGCATGATCACCGGATTAACCGCCTGTCGCTCTGGGCTAGGTATGTGCGAAATAGATGTCCACTCGCTTATACGCTAAGGGTACTCCCCGGAAGTGTCACTTGGATATCCGCACCATACAACTCTTACAGCGGCATCCTTCGCCATTGGCGGGGACCATTAGGATCGTGATCCTGACCAACTCTCGGTCGAGACTGGTCTTTCCTTCGGCGCCAGACACTACCCGCAATACTCGAAATGTGTCATACTCCCCGTCGAGCCAAGCGCAAACCAGGCCCTATCCTACGAATGTGATTCCGGTCGACACTAATCCGGGGCACTGTAAGGACAAACAGACTCGAGGTCCCACGTGTCCCACGCATTATTAAGACTCCTAGCCAAGCCATCTCGCTCAGACTTGGGAGTTGAAGATAGCCGTAAAACGCAGGGGGTGTTAACACTCGGCCAGAATACCTCGTTGTGTGCAACAAACTTTCTGTCCCCAACTTACTTCGGAATCCCTAGACCCATACCTTTCGTCGGCGCATGGTATTCCTATAGGGCTTCTTGCGCGCAAGGGTCCATAATCATTTGTGCTCCGTTTGATCGCCGTGTAACGATACCAATGGACGGGCCTGGACCGACAGACCTTTTAGCGTACGTGAGTTAGATGGTAAAAAGGTAGGTCCTATTTACGGTTTGTAGGCTGCAGACTTTGGAGATCGCTGAAGCGTCTATGTTGATTCTGCCAAGGGTACAGTGGGATTCGCTGCCATTCACGCTCCCACTCACCAGAGAACACGTACACAAACGCACCTCGTCGAACGGCTTACCCGGGAAGATTCTAGGAAAAGATTACGCAGGAAGAAGGCGTCGAAGCGCCTGTTGTACATGACGTAACCGAATCGGTCGTTTTGGTAACCACTATCTGAAGTTCTACTCCAACGCGTCATTAATACTCGATGTCACCTATCGCTTCCGTTTGACGAGGATTGCAACGATCACATGACGTCAGCTCAGCTGTTCCGGTCCAACGCGCTAGTCCTTTCAGGAAACATTAAGTTGCTAATCGGTATGTTTCAGCACGCTGAACGAGTCCACCCAAGGTGCGGTGGCTTCGAGACTAAAATGAATCCTCTACGGCGACAGCGCTTAGCCTATACAGTTGATACCGATGTAACCTCCAAACAGGCGTCTCATACTCGGAACGCGAGTAAGGGCCTAGAAGCCTAACGCCTCCTCTGAGCCTCCTTATGGGACGTTAATTCCGGCTAACGATAGATCGACGATAAACCTTATACGGCCCTTCGCATCGAACCCATCGAGCGTCAACTGACCGACAGGAACATGGGTTCCATAATCGTCGGCAAGTGGGGACGCGCCTAGGATCCCTGAGGGGAGTACTACGTCATTTAAGGCTATACCAACAAGACGATACTACCTTCAGTCTCAGTGGTTTACTGCCTCCCCCCTAGCTACCCGACCAGGTGGATCAGGAGAGATATCTTGCCGTTCGTCGCCCGGCTTAAGGCTAATTTACTAATCCGTCGTCAGCAAGGGAGGGCGTCCTCATATCATCAGTACGAACGCGTCAGAGTGCTAAGCCGGTTTTCTTCGGTGTTGCTGCGGTCACGCAATCTCACTGATTATCGATTGAGATCCTTTATTTCTGACGGCGTCCGACTATCTCATGAATCCTTCGACCGGGAAGCCGCAGAAATCTGGGCTCAATTATGAACAACAGTCCTCAAGAGCTAGGTTATCATCCTATTCCTACTTATTGCGACTTAGAGATGGAGTGTTGTTCCGTCTAGTCAGTCGCGAAGTGGATCCTATTCGGTGGTCGTCACACTGGCCTCTTCTCATCCCATCTTACCCTTCAAGGTGCTTATGGTTGCGACGAGACATTAGCTGTGCGACCCATTTAATCTAGACGAGGTTTCCCGCAGCTTCCGGACCCAGGGGTTCCGTATTATGAACGGCGATTTTGTCATCTACTATCTTCCCGTATTGGACGTGATTGAGGGCTCCTCGTAGTGATGAGTTTGCGTGACTATATGGATATTGGTTTTGGCCAAATCGGAGAGTGCTCAAAAACCCCAGGTACGACCGTAGGCTTGAGAATCCATCGCCGTGTTCTATTGGGCTAATGCCTCTAGATAAAGATAATTAGCGCCTAACCCCAGAACAACGTTCGGCGGTCCTGGGAGTCGCTTACGTACAAGCTTCCGGTAGACTACCATAGTTTTAGAGGGGCTCGAGCTGTGACTGAAATCAAACATAGACTTAATGCTTCGCTCAACATTAAAACTACTGCCAGTCGGGCGCCAGTACCTGGTCGCAACAATGTAGATTATATCAACACGGGGAAAATCGATCTGCCATTTCACTGATGGAAGCGAGTAGGACGCTCACCAACTAGGAAGGATACCTATATCTCCTGCATCCTCCCCGCTGCGCATGCATGAAATAGGTGCGGATTGACGCTAGCGTTCTATCATATCTCAATAGTAGGACGCTAGCTGGATCACCCCCCCTTTAGTGCTAAGATGATGCAATTGGATAACAATGATTAGGTGCAGCACAGAGCGCACCCGAACCCACTATGGTCTAAGACTCCTGTAATGGGCATAGTAAAGATGGACAGCAGAACAGTGCACTATAACGCTGTCCTCCAAGGAGATTAGATCTTCGGCGTCAAGGGTATCTTATACTCGGAGTAATATATAATACCGCACTGGAGTCGGCCCATCCATAGCCAGTTCTGAGTGGCCGTAGGCGACAACGTTTTAGCTGTACTTCCACAGAACTGCGTGCTCCTGGCAGCCGAGAGTGATCGGTAGGAGAGTCGACCGACATAGCGCATGGTGGGTCAGCCGGTACAGATAAAGGTTAGTACTCCGGCTTAAACTGGGATGTTCTAACCCCTTGTTTGATTTTATTAGCTATAGTAAAAGCGCCAAGGGACAGCCATGGTTAGGACCTCGTGGGGAACCCCGTGTGACCGCCCACAAGGCCCGAATTGAAGTACGCCGGTCCGCACAAAGAGCCCATAGCTTTGTCGCTATTCCGGATGGCAGCAACTCTATGCATCTGCTGCGAGTACGTAAATAACTCTCATGTACCATGCTACCAACACAGTGCTGATTCGAAGCGATTTCTGTCCTGTGTAATATGGCGCAAGGCATAACGCCCCCTATTCAAGGGCCTATCTAGATGCACACCGCATTTCCCACCGTCAGAGTTTGGAAGTGAGAGTGTGATGGGTCTAAAAGGTGCTCTATAACGCCTGAACCCCTATCCACGGAGCAGGGCCATTCTTGAAGCGTGGTGAACGCGGTACCGAGTCCTAAGTTTAATGAGAATACCCCAAATTCTTAGAGCACTTGGCGACTCTCGGACCACAGTTTAGCACGGGGATGCGCATACACGATGCACAGTGAGACGCTGATCAGGAAGCAGAGTCGTATCCGAGGGCCGAGCAAGCACGTCCATGAGTCCCGCTACAATATGCCGCGGACGAGCCCCTGATGGAAGGACGACCATTATGACCCCTTAAATCGGCGACTCATATGGTAAGATTTAACTGGTTCCACGCACTATATGTCTCGCATTACGCAGGCACCTGGTCCATGATTTTCGCCTGTACTCCCACTAAATGATGCACGCTTAGCATCCGTAATGATTCACCTTACGTATCGACAGGGAACTGGCGTACCACTCGTCGCTCTAGTACAAAGTGGGCCCCAGTGTAAATTATGGAAGGATTAGGAGCGTCTATACTGTAATGTCTAAGTGTAGCCACGCGGAGCCTCAACGGCACATAAAAGCCGACAGAATGTGCCCATAGTCAAGAGGTAGAGACACTCTCCGATGCGAATTTTCCATGCACAGCCGTACTTATTGGGGGTAGAGTTCATGCAAACACCACACCTGGGCGAGCTCTACAGATCACGTCTGAAGATAAATTCCCTCAGGCAAGAGTCTCTAGTCAATTAACGAAGCTAAAATCACCTCTTAAACAGCGCTTTGGAGTCTTATAGTCTCGCTGGATGAATGGCAGCCTCGGGATCTAGCTAATTGCAAACATCAACTTCACGCTATAACAATACTTGGAATCCGATCAGAAGAATCCAGTAAGTGTCCATTTATCCTAAGTCACCACAAAGACCAAACGTGATCCGACACCGACCGTAAAGGGGAACCGAGCGGCATCATTAGGTTACAGCATCGCTACCTGAAGGCGTTTACTCTTTGTCAAACATCTGTGTTAAATCAATATTTGAGCTGACCCTTTGGCAACTCGATGGGCATAAGACCAGCTAGCCAGGTTAGAGTTCAAATTTAAAAAGGAAATAGAAGGCCCCCCGCGAGAGTCTCTCTCTTCTCTGCAGCAGTAGTGAATATTCACTAGGACGCCCTTGAGAATCGGGAGATACAACCAATTAGTCAAGGTGGAGCAGGATTGTGGGAGAATAACGAATCAATGTCTCCTACTCATTGAGCTAGATCGGTGCCTTCCACGCCGTACGGACGAACCACCTTCTACGCGATCAAAAGAGCAAAAATTTGACGTCTGAGTTTTTTACTCGTAAAGGCCTATGATTGATCCATAGCTTAGAAGAAGCTGTCCGTAGTGATCCTTGAATAAGGGACTCACGACGTTATTATTGCCCCTCTATTCTACTCGGTATC"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "CTATGGCTCATCTTATCTCCCCGTTATTATTGCAGCACTCAGGGAATAAGTTCCTAGTGATGCCTGTCGAAGAAGATTCGATACCTAGTTAGTATCCGGAAATGCTCATTTTTTGAGTCTGCAGTTTAAAAACGAGAAAACTAGCGCATCTTCCACCAAGCAGGCATGCCGCACCTTCCGTGGCTAGATCGAGTTACTCATCCTCTGTAACTAAGCAATAAGAGGGTGTTAGGACGAGGTGGAACTGATTAACCAACATAGAGGGCTAAGAGTTCCCGCAGGATCACTTATAAGTGATGACGACGTCTCTTCTCTCTCTGAGAGCGCCCCCCGGAAGATAAAGGAAAAATTTAAACTTGAGATTGGACCGATCGACCAGAATACGGGTAGCTCAACGGTTTCCCAGTCGAGTTTATAACTAAATTGTGTCTACAAACTGTTTCTCATTTGCGGAAGTCCATCGCTACGACATTGGATTACTACGGCGAGCCAAGGGGAAATGCCAGCCACAGCCTAGTGCAAACCAGAAACACCACTGAATCCTATTTACCTGTGAATGACCTAAGAAGACTAGCCTAAGGTTCATAACAATATCGCACTTCAACTACAAACGTTAATCGATCTAGGGCTCCGACGGTAAGTAGGTCGCTCTGATATTCTGAGGTTTCGCGACAAATTCTCCACTAAAATCGAAGCAATTAACTGATCTCTGAGAACGGACTCCCTTAAATAGAAGTCTGCACTAGACATCTCGAGCGGGTCCACACCACAAACGTACTTGAGATGGGGGTTATTCATGCCGACACGTACCTTTTAAGCGTAGCCTCTCACAGAGATGGAGAACTGATACCCGTGTAAGACAGCCGAAAATACACGGCAACTCCGAGGCGCACCGATGTGAATCTGTAATGTCATATCTGCGAGGATTAGGAAGGTATTAAATGTGACCCCGGGTGAAACATGATCTCGCTGCTCACCATGCGGTCAAGGGACAGCTATGCATTCCACTTAGTAATGCCTACGATTCGCACGTAGTAAATCACCCTCATGTCCGCTTTTAGTACCTGGTCCACGGACGCATTACGCTCTGTATATCACGCACCTTGGTCAATTTAGAATGGTATACTCAGCGGCTAAATTCCCCAGTATTACCAGCAGGAAGGTAGTCCCCGAGCAGGCGCCGTATAACATCGCCCTGAGTACCTGCACGAACGAGCCGGGAGCCTATGCTGAGACGAAGGACTAGTCGCAGAGTGACACGTAGCACATACGCGTAGGGGCACGATTTGACACCAGGCTCTCAGCGGTTCACGAGATTCTTAAACCCCATAAGAGTAATTTGAATCCTGAGCCATGGCGCAAGTGGTGCGAAGTTCTTACCGGGACGAGGCACCTATCCCCAAGTCCGCAATATCTCGTGGAAAATCTGGGTAGTGTGAGAGTGAAGGTTTGAGACTGCCACCCTTTACGCCACACGTAGATCTATCCGGGAACTTATCCCCCGCAATACGGAACGCGGTATAATGTGTCCTGTCTTTAGCGAAGCTTAGTCGTGACACAACCATCGTACCATGTACTCTCAATAAATGCATGAGCGTCGTCTACGTATCTCAACGACGGTAGGCCTTATCGCTGTTTCGATACCCGAGAAACACGCCTGGCCGCATGAAGTTAAGCCCGGAACACCCGCCAGTGTGCCCCAAGGGGTGCTCCAGGATTGGTACCGACAGGGAACCGCGAAAATGATATCGATTATTTTAGTTTGTTCCCCAATCTTGTAGGGTCAAATTCGGCCTCATGATTGGAAATAGACATGGCCGACTGGGTGGTACGCGATACAGCCAGCTGAGAGGATGGCTAGTGAGAGCCGACGGTCCTCGTGCGTCAAGACACCTTCATGTCGATTTTGCAACAGCGGATGCCGGTGAGTCTTGACCGATACCTACCCGGCTGAGGTCACGCCATAATATATAATGAGGCTCATATTCTATGGGAACTGCGGCTTCTAGATTAGAGGAACCTCCTGTCGCAATATCACGTGACAAGACGACAGGTAGAAATGATACGGGTAATGTCCTCAGAATCTGGTATCACCCAAGCCCACGCGAGACACGACGTGGATTAGTAACAATAGGTTAACGTAGTAGAATCGTGATTTCCCCCCCACTAGGTCGATCGCAGGATGATAACTCTATACTATCTTGCGATCGCAGTTAGGCGTGGATAAAGTACGTACGCGTCGCCCCTCCTACGTCCTCTATATCCATAGGAAGGATCAACCACTCGCAGGATGAGCGAAGGTAGTCACTTTACCGTCTAGCTAAAAGGGGCACAACTATATTAGATGTAACAACGCTGGTCCATGACCGCGGGCTGACCGTCATCAAAATTACAACTCGCTTCGTAATTCAGATACAAACTAAAGTCAGTGTCGAGCTCGGGGAGATTTTGATACCATCAGATGGCCTTCGAACATGCATTCGCTGAGGGTCCTGGCGGCTTGCAACAAGACCCCAATCCGCGATTAATAGAAATAGATCTCCGTAATCGGGTTATCTTGTGCCGCTACCTAAGAGTTCGGATGCCAGCATGGACCCCAAAAACTCGTGAGAGGCTAAACCGGTTTTGGTTATAGGTATATCAGTGCGTTTGAGTAGTGATGCTCCTCGGGAGTTAGTGCAGGTTATGCCCTTCTATCATCTACTGTTTTAGCGGCAAGTATTATGCCTTGGGGACCCAGGCCTTCGACGCCCTTTGGAGCAGATCTAATTTACCCAGCGTGTCGATTACAGAGCAGCGTTGGTATTCGTGGAACTTCCCATTCTACCCTACTCTTCTCCGGTCACACTGCTGGTGGCTTATCCTAGGTGAAGCGCTGACTGATCTGCCTTGTTGTGAGGTAGAGATTCAGCGTTATTCATCCTTATCCTACTATTGGATCGAGAACTCCTGACAACAAGTATTAACTCGGGTCTAAAGACGCCGAAGGGCCAGCTTCCTAAGTACTCTATCAGCCTGCGGCAGTCTTTATTTCCTAGAGTTAGCTATTAGTCACTCTAACGCACTGGCGTCGTTGTGGCTTCTTTTGGCCGAATCGTGAGACTGCGCAAGCATGACTACTATACTCCTGCGGGAGGGAACGACTGCTGCCTAATCATTTAATCGGAATTCGGCCCGCTGCTTGCCGTTCTATAGAGAGGACTAGGTGGACCAGCCCATCGATCCCCCCTCCGTCATTTGGTGACTCTGACTTCCATCATAGCAGAACAACCATATCGGAATTTACTGCATCATGAGGGGAGTCCCTAGGATCCGCGCAGGGGTGAACGGCTGCTAATACCTTGGGTACAAGGACAGCCAGTCAACTGCGAGCTACCCAAGCTACGCTTCCCGGCATATTCCAAATAGCAGCTAGATAGCAATCGGCCTTAATTGCAGGGTATTCCTCCGAGTCTCCTCCGCAATCCGAAGATCCGGGAATGAGCGCAAGGCTCATACTCTGCGGACAAACCTCCAATGTAGCCATAGTTGACATATCCGATTCGCGACAGCGGCATCTCCTAAGTAAAATCAGAGCTTCGGTGGCGTGGAACCCACCTGAGCAAGTCGCACGACTTTGTATGGCTAATCGTTGAATTACAAAGGACTTTCCTGATCGCGCAACCTGGCCTTGTCGACTCGACTGCAGTACACTAGCAACGTTAGGAGCAGTTTGCCTTCGCTATCCACTGTAGCTCATAATTACTGCGCAACCTCATCTTGAAGTCTATCACCAATGGTTTTGCTGGCTAAGCCAATGCAGTACATGTTGTCCGCGAAGCTGCGGAAGAAGGACGCATTAGAAAAGGATCTTAGAAGGGCCCATTCGGCAAGCTGCTCCACGCAAACACATGCACAAGAGACCACTCACCCTCGCACTTACCGTCGCTTAGGGTGACATGGGAACCGTCTTAGTTGTATCTGCGAAGTCGCTAGAGGTTTCAGACGTCGGATGTTTGGCATTTATCCTGGATGGAAAAATGGTAGATTGAGTGCATGCGATTTTCCAGACAGCCAGGTCCGGGCAGGTAACCATAGCAATGTGCCGCTAGTTTGCCTCGTGTTTACTAATACCTGGGAACGCGCGTTCTTCGGGATATCCTTATGGTACGCGGCTGCTTTCCATACCCAGATCCCTAAGGCTTCATTCAACCCCTGTCTTTCAAACAACGTGTGTTGCTCCATAAGACCGGCTCACAATTGTGGGGGACGCAAAATGCCGATAGAAGTTGAGGGTTCAGACTCGCTCTACCGAACCGATCCTCAGAATTATTACGCACCCTGTGCACCCTGGAGCTCAGACAAACAGGAATGTCACGGGGCCTAATCACAGCTGGCCTTAGTGTAAGCATCCTATCCCGGACCAAACGCGAACCGAGCTGCCCCTCATACTGTGTAAAGCTCATAACGCCCATCACAGACCGCGGCTTCCTTTCTGGTCAGAGCTGGCTCTCAACCAGTCCTAGTGCTAGGATTACCAGGGGCGGTTACCGCTTCCTACGGCGACATTCTCAACATACCACGCCTATAGGTTCACTGTGAAGGCCCCTCATGGGAATCGCATATTCGCTCACCTGTAGATAAAGCGTGTATGGATCGGGTCTCGCTGTCCGCCAATTAGGCCACTAGTACGTATCCTCGGATGTGTAACTCTGTTTCAAGCCGGCGCCCTACGTGCCCAGAAGGTGCGGAAAATCTAGGCTGCACAGGAAACGCCGCGAGGCTTATCCTTTTAGTCTGGGGACTTTGCTACGGCGTACGAAGGGAATTTGTAGTGCTGCAAAACAAAAGTTGTTAAATCCCAAGCAAAAACCTGCAGGTAGGCCGGTTTTAGTGTAATCAATAAGTCAGGATTGTTTTGCAGACTAGTATTCACTGTGCACCGTCAAAAAGATGAGGTGATGCATTCAATCGTATATTGAATGCGGATCCATGCTCTGCCGACGTAGAACAGGACCCACACCCAGCTATGCAATTTTCTTCTCACGTCCCATAGATCTTGCGTTCGTTCCCCACAGTCGGAATACAGCCCTAGGCGCAACTAGTGCGACACTCTTCGTAGCGTCCGACACGCCGCCCAATCGTGATGGGAGTGCCTCTCCGTGGGTGTCGCACTCGCGTTTAAACTATCAGACAGACGGTCGTCAACTCGCCCGTCGCTCCGTATCACGAAGTGCACGGTGAACGGGGCATGGAAGCCCCCCGAAACGCATCTCATCAACCTCCTCCGATCAACCCGGCAGGCCGATATTAAAGGGTTGACCTACATCGTTAATATGTTAAATTAATGTAGGATCCATGAACTTACGGCAGCCTAACTGCCTTGGAGTTTATCCCCGTTTCCCCCAAAGTCCACTGTTGGGCTCTTTCGGTGACTCTTCTATGGGAAATATATGCGTCTTACTAAAAGCAGTCACAGGGCAATCACGAACTTCTTATGTTAGCTACTCGTAGCACCAGGCTAGTTCAGAAACTGCTGGACTACCAGAACGCCATCGCTCATTATATAAGAACTTACCATCAGGTGGCCCCCTAACTGCCCCGTCCCCGATCAGTCGGACAGGAAGAGGTTTTCAGGGCACGGGAAGCGCATAACAGCGTTCATCATAAAAACAGCGGTATCCGGAGGAGAGCATTATCTGCGACTAAGCGACGAATTCGCGCCCAGAGCGTAATCTCAGATCATGAACTTTACAAAAAGCTAAGACTGAAAACGTGAAACAAGCTAACGTCAACCTCAGTTCTAGGTAGGGAGGTGCTTCATACGCTTCCAAGGTGTGAGAAAGACATGTATGCGTATGCATCATCGTGGACTCGGTTTCAACTTGCTTCTTGCAGACGCATGCCGCTAGTTGCCGTATGCTCGTGGATTCTCGGGTAACAGATACCTACGCCAGAGTAGTGAGGACTTCTCCCGGTGGCGTTATTTTGGTATGATGTGCCACGTTGTGGTCGTTTGACTACCCATCTACCCTGGTCCTTGCTTTGTCTATAGCGCAGGTGCAATGCTCGATCAAAACCACGTACCCCAAGTACGGGACTAGAAGCTGCAAAAATAGGCCTGATTATCCATCAGGTCGACGCGGAGATTCTGGTCGTTCACGGACTTGCCACGGTTTGTAACATTGATTCTTATCTATTCTTAGGGTGAGCTTATAACACACTTCGGCTTATATGCGTAAACACGACGGTTTCAGGCAGATTTTACTAGGAGAGGCAATCGTACTTCGAATACATCCAGCATTATAGACAGATACAGCTTATTCTACCAAGCATTTGTGATATAGTAGAAGCTGTCGAGCCGAGTTGAAGCACGCAGGAAGTGGTACAACGCGTCAGTGGTTGCACTTCCAATTTAATGAAGGCAAGACATTCTAGCCGGATAGGTCTGAAATTCATGAGGCTAGAACACCGGTGGGGAATAAACTAGACTCAGAAATGTTGCTGGGGGTGTCGCCGGGAGCCGGACAACGCCTGTAAGTGGGGCCAGCGGAAGTGTTATTGACAGCACTGCCGTCCCCTGCGTACACGCGTTCGCACTGTCTGGTACCAATGACATAACGGACCTCAATAGCTGCAGGCAAATGCGTAGTGACGTTTCTATATGACTAGGTGGCCGGCGTGTTGGTTATAGAAGTTCGATTGGCGTCGCTGGATAGGGCGGCGTGATCGCTTTTATAGAAGATTACAGGATGACGACTAGTATTGTTTGGGTTGGGGTGGTGATTTTGTCCGTAAGACGAATAACGGATCCAAATGGGCGAACGCACGCACTCATGTATTAAGAAACTACTCCTCGGCTGAATAACACAGACCCCGCGTATTAGCTTATCATTCTGTAGCAGACTGTGACAGGACCCCAATACAAGCCGCAAGGATTCTGGGCCTGTCCTGGGTCGGGGTAGTGCGTGTGTGCACTGGGCAGTGAGTCCATTAAGTCTTACACCCTGGCAATCAGCTGCGGCGCTCTCAGAGGCTACGAGAAACGTCCGTGAGCATTGACCCCCCATGATGAACGTTCAAGTTACCGATGTTGAGTTCCATTTCGACCGTTCGCTCAAATGAAGGTACGACATACACCAGAGCGGACCCATACATGTTTCGCAATGAGCCCGCATGTTGGCAAGGCTTGAGTATCCCGTAGCTGGAGTCGGTTGCCTTATGTACTTAAAAGCCATGTGTATATCTACAACCTCGCATTTTAAGTCTAGTAAATATAGAGGGTCGAGGAGTGCCTGGGCGCTACAATTTACCGTTCTGCAATGGAGCCTTGGGGCTATACATCCGTGTATCGTAGATGGTATGCTCCCAAAGTGAGACCAGTATGACTTCTTGCTGGGTGATAGCACTCGCTACACCGGCGGCTCCAGCCGAGGGAAAACCTTCATGGTTAATGGTTCGTTCGCCAGTGTCCTGGCATATCATTAAAAAGCACTAAATGTAACTTATGCCAAAGAGCGCTACCGAATTAGTATCGTGTCCTAGTAACTCTGTTCACCCAAAGTTCAGGAACGTCACTCCGAGTGTCCTAATGGACTGCAAAACGACGAATCGCCCCTCGGAAAGTGTCATTTTACTGGGTCACCCGTTCCACCACTTTTCTAATCAACCCCCCAAATGACAAAGCCTAGCCTGGAGTGGGCATATTTCGAAACGTGGTGAGGACGAGGCATTGACCATTACTCCTATGTGGCCGGCTCTTATCATCGATGCGGCTGTGTCCAGACGGTGATTTCTGTACCCAAAGAGATTTAGATAGGACTCCCCTTGTAGGCAAGTCCCCTCCAATAGGTGACAGTATAGAGGATAGCCCTTACTGTGCAGGCCTTACTTTAAACCTTATAACCTCTATCCTGGCAACTTCTCGTCCTGAAGTTCTAACCTCCCCCAGGACAGTCTTGCACGAGGTTAGGAGTGGGATACCTCGTCTACAGCTTAAGCGGAGAAAAATCCTCAAGACAGCGCCTGACCTACGGCCGGGGCATTATCACTATCCAAACCCAGATCTACTTCACTCAATCGACTAACTATTGTCCTGCGTTCCGCGGTGCCGGAACCCCTTGGTAGAAAGTGCGAGGGCACTCCGAATCACCTGCCGGCACAAGAAAGGTAGTACATGTTCCCTTTAGCACTCAGCAGATTCGGTTAACCT"</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="finding-the-replication-origin-part-iii" class="level1">
+<h1><strong>Finding the Replication Origin, Part III</strong></h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>initialize_k_mer_dict <span class="ot">&lt;-</span> <span class="cf">function</span>(k){</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  nucleotides <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>clump_finding<span class="ot">&lt;-</span><span class="cf">function</span>(genome,L,K,t){</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  initial_window<span class="ot">&lt;-</span> <span class="fu">str_sub</span>(genome,<span class="at">start=</span><span class="dv">1</span>,<span class="at">end=</span>L)</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  k_mers_dict <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="fu">rep</span>(<span class="fu">list</span>(nucleotides), k)) <span class="sc">%&gt;%</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unite</span>(<span class="st">"k_mers"</span>, <span class="fu">everything</span>(), <span class="at">remove =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">""</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unique</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">count =</span> <span class="dv">0</span>)</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(k_mers_dict)</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>k_mers_dict <span class="ot">&lt;-</span> <span class="fu">initialize_k_mer_dict</span>(<span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 
 </main>
