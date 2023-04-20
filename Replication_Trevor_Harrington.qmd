@@ -3,9 +3,8 @@ title: "Replication_Trevor_Harrington"
 author: "Trevor Harrington"
 format: html
 editor: visual
-execute: 
-  keep-md: TRUE
-  code-fold: TRUE
+keep-md: TRUE
+code-fold: TRUE
 ---
 
 ```{r setup, include = FALSE}
@@ -49,7 +48,7 @@ The goal of this notebook is to complete a series of challenges that will lay th
 
 ------------------------------------------------------------------------
 
-### Generating a New Variable Containing each Nucleotide
+### 1.1 Generating a New Variable Containing each Nucleotide
 
 -   **Vectors** are a one-dimensional array of values [of the same data type]{.underline}.
 
@@ -68,7 +67,7 @@ nt_names # simply displays the vectors without organizing
 
 ------------------------------------------------------------------------
 
-### Generating a Randomized String of 15 Nucleotides variables
+### 1.2 Generating a Randomized String of 15 Nucleotides variables
 
 Using the vector array created in the previous
 
@@ -86,7 +85,7 @@ paste(rnd_genome, collapse = "")
 
 ```
 
-#### Expanding Randomized String to 1500 Nucleotides
+### 1.3 Expanding Randomized String to 1500 Nucleotides
 
 ```{r}
 # create a new variable containing a vector of four characters for the four nucleotide abbreviations (Adenine, Cytosine, Guanine, Thymine) 
@@ -112,7 +111,7 @@ paste(nt_sample, collapse = "")
 
 ------------------------------------------------------------------------
 
-### Counting each DNA Nucleotide in a Randomized Dataset and using Loop()
+### 1.4 Counting each DNA Nucleotide in a Randomized Dataset and using Loop()
 
 #### Generating a 100-nucleotide strand and counting each frequency
 
@@ -147,7 +146,7 @@ for(i in 1:10){
 
 ------------------------------------------------------------------------
 
-### Challenge 5: Using loop() functions
+### 1.5 Using loop() functions
 
 ```{r}
 #initialize a new dataframe with a value of 1
@@ -163,7 +162,7 @@ for(j in 1:15) {
 
 ------------------------------------------------------------------------
 
-### Challenge 6: Combining sample(), paste() and loop() functions to produce a set of individual nucleotides
+### 1.6: Combining sample(), paste() and loop() functions to produce a set of individual nucleotides
 
 #### Generating Random Genomic Data in a collapsed string
 
@@ -189,7 +188,7 @@ for(i in 1:nchar(rnd_genome))
 
 ```
 
-### Challenge 7: Modifying Output to sum the For Loop() Results Output
+### 1.7: Modifying Output to sum the For Loop() Results Output
 
 ```{r}
 # Set a variable called `sum_A` equal to 0
@@ -227,7 +226,7 @@ cat("Total number of Adenisine Nucleotides: ", sum_A)  # Print the final value o
 
 ```
 
-### Challenge 8: Adding the remaining nucleotides to the count
+### 1.8: Adding the remaining nucleotides to the count
 
 ```{r}
 # Initialize count variables for each nucleotide to 0
@@ -367,7 +366,7 @@ paste(sum_A,sum_C,sum_G,sum_T)
 
 ------------------------------------------------------------------------
 
-### Challenge 0: Generating Functions for Functions
+### 2.0: Generating Functions for Functions
 
 ```{r}
 # Functions allow code to be ran without having to enter or copy and paste the code into a new block
@@ -391,7 +390,7 @@ nucleotide_frequency("ACTTGCGGGTATCGAG", "G")
 
 ------------------------------------------------------------------------
 
-### Challenge 1: Using the Function Function on a Randomized Genome
+### 2.1: Using the Function Function on a Randomized Genome
 
 ```{r}
 nt_sample <- sample(nt_names, size = 2000, replace = TRUE)
@@ -407,7 +406,7 @@ nucleotide_frequency(nt_sample, "C")
 
     -   code is random, but this character
 
-### Generating a function to create randomized genome
+### 2.2 Generating a function to create randomized genome
 
 ```{r}
 nt_names <- c("A", "C", "G", "T")
@@ -476,7 +475,7 @@ generate_2_mer <- function(string_sample) {
 generate_2_mer(string_sample)
 ```
 
-### Using multiple-vector substrings to generate codons in a dataset
+### 2.3 Using multiple-vector substrings to generate codons in a dataset
 
 ```{r}
 generate_codons <- function(string_sample){
@@ -516,7 +515,7 @@ generate_k_mer(rnd_genome(9))
 
 -   This function can
 
-### Using functions to generate genome, extract strings of length k, and find the frequency of nucleotides
+### 2.4 Using functions to generate genome, extract strings of length k, and find the frequency of nucleotides
 
 ```{r}
 generate_k_mer(rnd_genome(1000),6)
@@ -526,21 +525,22 @@ nucleotide_frequency(rnd_genome(1000),"G")
 
 -   putting together everything completed in this chapter, the written code can now perform genomic analysis with pre-written functions that are proven to function as intended, and can be utilized for any genome.
 
-### Generating a function to find the frequency of a specific nucleotide string
+### 2.5 Generating a function to find the frequency of a specific nucleotide string
 
 ```{r}
 nt_pattern <- function(string, pattern) {
   nt_matches <- 0
+  len_string <- nchar(string)
+  len_pattern <- str_length(pattern)
   
-  for (i in seq(1,nchar(string))){
-    if(str_sub(string, i, i + str_length(pattern)-1) == pattern){
+  for (i in 1:(len_string - len_pattern + 1)){
+    if (str_sub(string, i, i + len_pattern - 1) == pattern){
       nt_matches = nt_matches + 1
-  }
+    }
   }
   return(nt_matches)
 }
-
-nt_pattern(rnd_genome(20000), "GACCTT")
+nt_pattern(rnd_genome(2000), "GACCTT")
 ```
 
 ```{r}
@@ -557,13 +557,15 @@ nt_pattern(rosalind_string, "AGTCCCCAG")
 
 # Chapter 3: Bioinformatic Tools pt. 3
 
-### combine `generate_k_mer` and `nt_pattern` to build a function `generate_frequent_k_mer`
+## Using Functions to analyze patterns in a genome sequence
+
+-   The previous steps have been building the tools to start making more complex functions capable of inputting a genome and looking for repeating code, in specific places.
+
+### 3.1 Combining `generate_k_mer` and `nt_pattern` to build a function `generate_frequent_k_mer`
 
 -   This step will require putting together the concepts building up to and including generating strings of a specific length, and recognizing patterns of a specific length
 
     -   The goal of this step is to generate a function that will take a `genome string` and find repeats of a function that are a specific length `k`, outputting a list using the `unique()` function to remove repeats
-
-**What**
 
 ```{r}
 generate_frequent_k_mer <- function(genome, k=9) {
@@ -593,10 +595,10 @@ generate_frequent_k_mer <- function(genome, k=9) {
 ```
 
 ```{r}
-generate_frequent_k_mer("GGGCCGGGTACATCGTAAGCCGTATGGGCCGGGTACATCGTAAGGACGATCGGACGATCGGGCCGGGTACATCGTAAGGGCCGGGTGGGCCGGGTGGACGATCACATCGTAAGGGCCGGGTACATCGTAAGCCGTATACATCGTAAGCCGTATGGACGATCGGGCCGGGTTCCTAGGGGGCCGGGTGGACGATCGCCGTATGGACGATCACATCGTAAACATCGTAAGGACGATCGGGCCGGGTGGGCCGGGTTCCTAGGTCCTAGGACATCGTAAGCCGTATACATCGTAAGGACGATCGGACGATCACATCGTAAGGGCCGGGTTCCTAGGGGGCCGGGTGCCGTATGGGCCGGGTGGACGATCGCCGTATGGGCCGGGTACATCGTAAGCCGTATGGACGATCGCCGTATGCCGTATGGGCCGGGTGGACGATCGGGCCGGGTGGACGATCGGACGATCGGGCCGGGTGGACGATCGCCGTATTCCTAGGGGACGATCACATCGTAATCCTAGGGGACGATCACATCGTAATCCTAGGGGGCCGGGTTCCTAGGGCCGTATTCCTAGGGGACGATCGGGCCGGGTGGGCCGGGTACATCGTAAGGACGATCACATCGTAAGGACGATCGGGCCGGGTGGGCCGGGTGGACGATCGCCGTATGCCGTATGGACGATCGGGCCGGGTTCCTAGGGGACGATCGCCGTATGGGCCGGGTTCCTAGGGGACGATCGGGCCGGGTACATCGTAAGGGCCGGGTACATCGTAATCCTAGGTCCTAGGGGACGATCGGACGATCACATCGTAAACATCGTAAGGACGATC",11)
+#generate_frequent_k_mer("GGGCCGGGTACATCGTAAGCCGTATGGGCCGGGTACATCGTAAGGACGATCGGACGATCGGGCCGGGTACATCGTAAGGGCCGGGTGGGCCGGGTGGACGATCACATCGTAAGGGCCGGGTACATCGTAAGCCGTATACATCGTAAGCCGTATGGACGATCGGGCCGGGTTCCTAGGGGGCCGGGTGGACGATCGCCGTATGGACGATCACATCGTAAACATCGTAAGGACGATCGGGCCGGGTGGGCCGGGTTCCTAGGTCCTAGGACATCGTAAGCCGTATACATCGTAAGGACGATCGGACGATCACATCGTAAGGGCCGGGTTCCTAGGGGGCCGGGTGCCGTATGGGCCGGGTGGACGATCGCCGTATGGGCCGGGTACATCGTAAGCCGTATGGACGATCGCCGTATGCCGTATGGGCCGGGTGGACGATCGGGCCGGGTGGACGATCGGACGATCGGGCCGGGTGGACGATCGCCGTATTCCTAGGGGACGATCACATCGTAATCCTAGGGGACGATCACATCGTAATCCTAGGGGGCCGGGTTCCTAGGGCCGTATTCCTAGGGGACGATCGGGCCGGGTGGGCCGGGTACATCGTAAGGACGATCACATCGTAAGGACGATCGGGCCGGGTGGGCCGGGTGGACGATCGCCGTATGCCGTATGGACGATCGGGCCGGGTTCCTAGGGGACGATCGCCGTATGGGCCGGGTTCCTAGGGGACGATCGGGCCGGGTACATCGTAAGGGCCGGGTACATCGTAATCCTAGGTCCTAGGGGACGATCGGACGATCACATCGTAAACATCGTAAGGACGATC",11)
 ```
 
-## Generating the complementary DNA Strand
+### 3.2 Generating the complementary DNA Strand
 
 -   as of now this code only generates the genome of one strand, The complementary stand of DNA reads in the **reverse direction**.
 
@@ -604,9 +606,9 @@ generate_frequent_k_mer("GGGCCGGGTACATCGTAAGCCGTATGGGCCGGGTACATCGTAAGGACGATCGGAC
 
 ### Utilizing `rev()` to generate complement DNA strand
 
--   First step toward generating a complementary genome is to be able to write it in the correction orientation. The complementary strands are **antiparallel**, meaning they run in opposite directions. The 5' end of one strand is paired with the 3' end of the other strand. In contrast, the reading strand runs in the 5' to 3' direction, which is the direction in which DNA is read and transcribed into RNA.
+-   First step toward generating a complementary genome is to be able to write it in the correction orientation. The complementary strands are **antiparallel**, meaning they run in opposite directions. The 5' end of one strand is paired with the 3' end of the other strand. In contrast, the reading strand runs in the 5' to 3' direction, which is the direction in which DNA is read and transcribed into RNA.\
 
-##### 
+    ------------------------------------------------------------------------
 
 ```{r}
 genome <- rnd_genome(10)
@@ -659,27 +661,23 @@ reverse_complement <- function(GenomeSubString) {
   reverse_complement <- paste(rev(strsplit(complement, "")[[1]]), collapse = "")
   return(reverse_complement)
 }
-
 ```
 
 ```{r}
-rnd_genome(10)
+#data <- scan('C:/School/23SPDAY/Biostatistics/Rever_string_rosalind.txt', 
+             #what = character())
 
-reverse_complement(rnd_genome(10))
+
+#genomeString <- data[1]
+
+#reverse_complement(genomeString)
 ```
 
-```{r}
-data <- scan('C:/School/23SPDAY/Biostatistics/Rever_string_rosalind.txt', 
-             what = character())
+# Chapter 4: From Groups to Sequences -- Finding patterns in the genome
 
-genomeString <- data[1]
+-   Up to this point the goal has been to build small functions that can parse through the genome and pull out relevant information. This chapter goes a step further toward using these functions to uncover the location of dnaA boxes in a bacterial genome.
 
-reverse_complement(genomeString)
-```
-
-# Chapter 4: From Groups to Sequences -- Finding the complement base pairs
-
--   The complementary
+## 4.1 Clump Finding --
 
 ```{r}
 initialize_k_mer_dict <- function(k) {
@@ -694,15 +692,26 @@ initialize_k_mer_dict <- function(k) {
 }
 ```
 
-```{r}
+### Unoptimized version of clump_funding Function
 
-# L is the length of the window we want to slide, looking within a section for the 
+```{r}
+initialize_k_mer_dict <- function(k) {
+  nucleotides <- c("A", "C", "G", "T")
+  
+  k_mers_dict <- expand.grid(rep(list(nucleotides), k)) %>%
+    unite("k_mers", everything(), remove = TRUE, sep = "") %>%
+    unique() %>%
+    mutate(count = 0)
+  
+  return(k_mers_dict)
+}
+
 clump_finding <- function(genomeString, L, t, k) {
   genome_length <- nchar(genomeString)
   frequent_k_mers <- c()
   
-  for (start_pos in 1:(genome_length - L + 1)) {
-    window <- substr(genomeString, start_pos, start_pos + L - 1)
+  for (j in 1:(genome_length - L + 1)) {
+    window <- substr(genomeString, j, j + L - 1)
     k_mers_dict <- initialize_k_mer_dict(k)
     
     for (i in 1:(L - k + 1)) {
@@ -720,8 +729,194 @@ clump_finding <- function(genomeString, L, t, k) {
   
   return(frequent_k_mers)
 }
+```
+
+### Optimized Version 1
+
+```{r}
+# The clump_finding function takes in a genome (a string representing a DNA sequence),
+# L (the length of the region in the genome to consider), t (the threshold of occurrences
+# for a k-mer to be considered frequent), and k (the length of the k-mer to find).
+clump_finding <- function(genome, L, t, k){
+  
+  # Initializes a dictionary of all possible k-mers of length k.
+  kmer_dict <- initialize_k_mer_dict(k)
+  # Retrieves the list of all possible k-mers from the dictionary.
+  kmer_list <- kmer_dict$k_mers
+  # Counts the number of unique k-mers (k-mer variations) in the list.
+  nk <- length(kmer_list)
+  # Initializes a list to store counts of each k-mer's occurrences, setting all counts to 0 initially.
+  counts_list <- rep(0, nk)
+  # Counts the total number of characters in the genome.
+  ng <- nchar(genome)
+  
+  # Extracts the first L characters from the genome.
+  first_L <- str_sub(genome, 1, L)
+  
+  # Counts the occurrences of each k-mer in the first L characters of the genome.
+  for(i in 1:nk){
+    current_pattern <- kmer_list[i]
+    counts_list[i] <- nt_pattern(first_L, current_pattern)
+  }
+  
+  # Finds all k-mers that occur at least t times in the first L characters of the genome.
+  freq_kmers <- kmer_list[counts_list >= t]
+  
+  # Slides a window of length L across the genome, one character at a time.
+  for(j in 2:(ng - (L - 2))){
+    # Identifies the k-mer that will be removed from the window.
+    rem_pattern <- str_sub(genome, j - 1, j - 1 + (k - 1))
+    # Identifies the k-mer that will be added to the window.
+    add_pattern <- str_sub(genome, L + j-1 - (k-1),L + j-1)
+
+    # Decreases the count of the k-mer being removed from the window by 1.
+    counts_list[which(kmer_list == rem_pattern)] <- counts_list[which(kmer_list == rem_pattern)] - 1
+    # Increases the count of the k-mer being added to the window by 1.
+    counts_list[which(kmer_list == add_pattern)] <- counts_list[which(kmer_list == add_pattern)] + 1
+    
+    # If the count of the added k-mer reaches the threshold t, it is added to the list of frequent k-mers.
+  add_pattern_index <- which(kmer_list == add_pattern)
+    if (length(add_pattern_index) > 0 && counts_list[add_pattern_index] >= t) {
+      freq_kmers <- append(freq_kmers, add_pattern)
+    }
+  }
+  
+  return(unique(freq_kmers))
+}
+  
 
 ```
+
+-   Provided by the professor, but still not working correctly...
+
+### Optimized Version 3
+
+```{r}
+clump_finding <- function(genome, L, t, k){
+  kmer_dict <- initialize_k_mer_dict(k)
+  #kmer_list <- kmer_dict$k_mers
+  #nk <- length(kmer_list)
+  #counts_list <- rep(0, nk)
+  ng <- nchar(genome)
+  
+  initial_window <- str_sub(genome, 1, L)
+  
+  for(i in 1:(L - (k - 1))){
+    curr_kmer <- str_sub(initial_window, i, i + (k - 1))
+    curr_count <- nt_pattern(initial_window, curr_kmer)
+    curr_row <- which(kmer_dict$k_mers == curr_kmer)
+    kmer_dict$count[curr_row] <- curr_count
+  }
+  
+  print("I'm done searching the initial Window!")
+  
+  candidates <- kmer_dict %>%
+    filter(count >= t) %>%
+    pull(k_mers)
+  
+  print(paste0("I found initial frequent kmers: ", candidates))
+  print("Now I'm sliding the window through the rest of the genome!")
+  
+  for(j in 2:(ng - (L - 2))){
+    if((j %% 1000) == 0){
+      print(paste0("Hey there! The left edge of my window is currently at nucleotide ", j))
+    }
+    rem_pattern <- str_sub(genome, j - 1, j - 1 + (k - 1))
+    add_pattern <- str_sub(genome, j + (L - 2) - (k - 1), j + (L - 2))
+
+    rem_row <- which(kmer_dict$k_mers == rem_pattern)
+    add_row <- which(kmer_dict$k_mers == add_pattern)
+    
+    kmer_dict$count[rem_row] <- kmer_dict$count[rem_row] - 1
+    kmer_dict$count[add_row] <- kmer_dict$count[add_row] + 1
+    
+    if(kmer_dict$count[add_row] >= t){
+      candidates <- append(candidates, add_pattern)
+    }
+  }
+  return(unique(candidates))
+}
+
+```
+
+### Optimized Version 4
+
+```{r}
+library(tidyr)
+library(stringr)
+library(dplyr)
+
+nt_pattern <- function(text, pattern, nt_table) {
+  pattern_length <- nchar(pattern)
+  text_length <- nchar(text)
+  count <- 0
+  
+  pattern_int <- sapply(strsplit(pattern, ""), function(x) nt_table[x])
+  
+  for (i in 1:(text_length - pattern_length + 1)) {
+    text_sub <- sapply(strsplit(substr(text, i, i + pattern_length - 1), ""), function(x) nt_table[x])
+    if (all(text_sub == pattern_int)) {
+      count <- count + 1
+    }
+  }
+  
+  return(count)
+}
+
+initialize_k_mer_dict <- function(k, nt_table) {
+  nucleotides <- c(1, 2, 3, 4)
+  
+  k_mers_int <- expand.grid(rep(list(nucleotides), k)) %>%
+    apply(1, paste0, collapse = "") %>%
+    unique()
+  
+  k_mers_char <- sapply(strsplit(k_mers_int, ""), function(x) names(nt_table)[as.numeric(x)])
+  
+  k_mers_dict <- tibble(k_mers = k_mers_char, count = 0)
+  
+  return(k_mers_dict)
+}
+
+clump_finding <- function(genome, L, t, k) {
+  
+  nt_table <- c("A" = 1, "C" = 2, "G" = 3, "T" = 4)
+  
+  kmer_dict <- initialize_k_mer_dict(k, nt_table)
+  kmer_list <- kmer_dict$k_mers
+  nk <- length(kmer_list)
+  counts_list <- rep(0, nk)
+  ng <- nchar(genome)
+  
+  first_L <- str_sub(genome, 1, L)
+  
+  for (i in 1:nk) {
+    current_pattern <- kmer_list[i]
+    counts_list[i] <- nt_pattern(first_L, current_pattern, nt_table)
+  }
+  
+  freq_kmers <- kmer_list[counts_list >= t]
+  
+  for (j in 2:(ng - L + 1)) {
+    rem_pattern <- str_sub(genome, j - 1, j - 1 + (k - 1))
+    add_pattern <- str_sub(genome, L + j - 1 - (k - 1), L + j - 1)
+
+    counts_list[which(kmer_list == rem_pattern)] <- counts_list[which(kmer_list == rem_pattern)] - 1
+    counts_list[which(kmer_list == add_pattern)] <- counts_list[which(kmer_list == add_pattern)] + 1
+    
+    add_pattern_index <- which(kmer_list == add_pattern)
+    if (length(add_pattern_index) > 0 && counts_list[add_pattern_index] >= t) {
+      freq_kmers <- append(freq_kmers, add_pattern)
+    }
+  }
+  
+  freq_kmers <- unique(freq_kmers)
+  
+  return(freq_kmers)
+}
+
+```
+
+### 4.4 Code to test this function
 
 ```{r}
 
@@ -730,11 +925,331 @@ genomeString <- "AAAACCCCCCAAAA"
 clump_finding(genomeString, 5, 3, 3)
 ```
 
+#### rosalind string
+
 ```{r}
-#genome <- rnd_genome(700)
-#clump_finding(genome,500,2,9)
+#clump_finding("CGGACTCGACAGATGTGAAGAAATGTGAAGACTGAGTGAAGAGAAGAGGAAACACGACACGACATTGCGACATAATGTACGAATGTAATGTGCCTATGGC", 75, 4, 5)
 ```
 
--   this clump-finding code never completes -- run time is too long!
+#### rosalind test
 
-    -   
+```{r}
+#data <- scan(C:/School/23SPDAY/Biostatistics/clump_string.txt, what = character(), sep = "")
+
+
+#clump_finding(genomeString,511,12,19)"
+```
+
+```{r}
+#genome <- rnd_genome(2500)
+#clump_finding(genome,500,3,9)
+```
+
+#### ecoli genome
+
+```{r}
+ecoli <- scan("C:/School/23SPDAY/Biostatistics/Group_Project/Genomes/E_coli.txt", what = "character", sep = NULL)
+
+#clump_finding(ecoli,500,5,9)
+```
+
+## Using **`stringi`** and **`hash`** environments to improve the efficiency of this code.
+
+-   To optimize this code, the `stringi` package is used for string manipulation. Specifically, the `stri_sub` and `stri_count_fixed` functions are used to extract all substrings of length **`k`** from the initial window of length **`L`**, and to count how many times each of these substrings appears in the window.
+
+    -   `stringr` is a layer above `stringi` that provides a [simpler and more intuitive syntax]{.underline} for many common string operations. However, it is less memory-efficient than `stringi` when dealing with large datasets. `fixed patterns` are matched exactly, character by character. This makes `stri_count_fixed` faster
+
+    -   In this example, the code is not complex enough to need the improved syntax and relies on only two functions:
+
+        -   `stri_count_fixed` is a function that counts the number of occurrences of a fixed pattern in a given string.
+
+        -   `stri_sub` is used to extract all substrings of length **`k`** from a given string, which is a crucial step in the calculation of the initial counts of all possible k-mers in the initial window of length `L`.
+
+            -   `stri_sub` is implemented in C and uses **vectorized operations** to optimize performance
+
+-   The `clump_finding` function uses a hash table to keep track of the counts of all possible k-mers in the initial window of length `L`. This allows for a constant-time lookup of the count of any given k-mer, instead of having to iterate over the entire window to count its occurrences.
+
+```{r}
+library(stringi)
+
+clump_finding <- function(genome, L, t, k) {
+  kmer_counts <- new.env(hash = TRUE, size = 2^k)
+  
+  ng <- nchar(genome)
+  
+  initial_window <- stri_sub(genome, 1, L)
+  
+  print("I'm done searching the initial Window!")
+  
+  for (i in 1:(L - (k - 1))) {
+    curr_kmer <- stri_sub(initial_window, i, i + (k - 1))
+    curr_count <- stri_count_fixed(initial_window, curr_kmer)
+    kmer_counts[[curr_kmer]] <- curr_count
+  }
+  
+  candidates <- names(kmer_counts)[unlist(eapply(kmer_counts, function(x) x)) >= t]
+  
+    print(paste0("I found initial frequent kmers: ", candidates))
+  print("Now I'm sliding the window through the rest of the genome!")
+  
+  for (j in 2:(ng - (L - 2))) {
+    if((j %% 15000) == 0){
+      print(paste0("Hey there! The left edge of my window is currently at nucleotide ", j))
+    }
+    rem_pattern <- stri_sub(genome, j - 1, j - 1 + (k - 1))
+    add_pattern <- stri_sub(genome, j + (L - 2) - (k - 1), j + (L - 2))
+
+    if (exists(rem_pattern, envir = kmer_counts)) {
+      kmer_counts[[rem_pattern]] <- kmer_counts[[rem_pattern]] - 1
+    }
+    
+    if (exists(add_pattern, envir = kmer_counts)) {
+      kmer_counts[[add_pattern]] <- kmer_counts[[add_pattern]] + 1
+    } else {
+      kmer_counts[[add_pattern]] <- 1
+    }
+    
+    if (kmer_counts[[add_pattern]] >= t) {
+      candidates <- c(candidates, add_pattern)
+    }
+  }
+  return(unique(candidates))
+}
+
+```
+
+------------------------------------------------------------------------
+
+# Chapter 5: Understanding Errors in DNA Replication
+
+-   As outline in chapter 3 of this notebook, the mechanisms for DNA transcription required to manipulate the building blocks of genes operates in ways that must be considered when
+
+The objective is to improve the approach to discovering the replication origin by incorporating biological knowledge. This involves considering the asymmetry of DNA replication and the vulnerability of the lagging strand to mutations, such as deamination, which can lead to a decrease in the frequency of G in a section of the genome. By analyzing the difference in observed frequencies of guanine and cytosine along the genome, a function called SKEW can be used to identify the location to begin searching for the replication origin.
+
+```{r}
+skew <- function(genome) {
+  skew_list <- list()
+  skew <- 0
+  
+  for(i in 1:nchar(genome)){
+    if (str_sub(genome, start = i, end = i) == "C"){
+      skew <- skew - 1
+    }
+    if (str_sub(genome, start = i, end = i) == "G"){
+      skew <- skew + 1
+    }
+    skew_list[[i]] <- skew
+  }
+  
+  return(skew_list)
+}
+
+```
+
+### Testing `ggplot` with `skew` using `rnd_genome.`
+
+```{r}
+#rnd_skew <- skew(rnd_genome(3000))
+
+#ggplot(data = rnd_skew) +
+  geom_line(mapping = aes(x = position, y = skew))
+
+
+```
+
+### Revising `skew` to use a dataframe instead of a list
+
+-   `ggplot2` was not a fan of the list, so a `df` can be generated which will also be beneficial for providing a neater version of the output then the alternative.
+
+```{r}
+skew <- function(genome) {
+  # Initialize an emptu list to store the value for skew in each iteration of the loop
+  skew_list <- list()
+  
+  #initialize a counter to track how skewed the result becomes
+  skew <- 0
+  
+  # if C then -1, if G then +1, update result of skew in skew_list for each iteration
+  for(i in 1:nchar(genome)){
+    if (str_sub(genome, start = i, end = i) == "C"){
+      skew <- skew - 1
+    }
+    if (str_sub(genome, start = i, end = i) == "G"){
+      skew <- skew + 1
+    }
+    skew_list[[i]] <- skew
+  }
+  
+  #generate a dataframe instead of a list (for ggplot and aesthetics)
+  skew_df <- data.frame(position = 1:nchar(genome), skew = unlist(skew_list))
+  return(skew_df)
+}
+
+```
+
+### Generating `min_skew`, `skew` for the e_coli genome
+
+-   The `min` of the skew is where the difference between Cytosine and Guanine is most significant. This is where the most replication is occurring in the genome.
+
+```{r}
+#gemome "should" be loaded in from the previous chapter
+e_coli_skew <- skew(ecoli)
+min_skew <- min(e_coli_skew$skew)
+```
+
+```{r}
+ggplot(data = e_coli_skew) +
+  geom_line(mapping = aes(x = position, y = skew)) +
+  geom_hline(yintercept = min_skew, linetype = "dashed") +
+  annotate("text", x = 10^6, y = min_skew+5000, label = paste("Min =", min_skew))
+
+```
+
+### Creating a separate `min_skew` function
+
+```{r}
+min_skew <- function(genome){
+  # Initialize an emptu list to store the value for skew in each iteration of the loop
+  skew_list <- list()
+  #initialize a counter to track how skewed the result becomes
+  skew <- 0
+  
+  for(i in 1:nchar(genome)){
+    if (str_sub(genome, start = i, end = i) == "C"){
+      skew <- skew - 1
+    }
+    if (str_sub(genome, start = i, end = i) == "G"){
+      skew <- skew + 1
+    }
+    skew_list[[i]] <- skew
+  }
+  
+  # Convert the list into a dataframe, position = genome length, skew is seperated into individual variables that is the same length as genome position
+  skew_df <- data.frame(position = 1:nchar(genome), skew = unlist(skew_list))
+  # Find the min skew value found in the dataframe
+  min_skew_value <- min(skew_df$skew)
+  # Use the known min value to extract the position of the min skew
+  min_skew_positions <- which(skew_df$skew == min_skew_value)
+  # group the min values (if < 1) to paste them with the nice formatting
+  min_skew_positions_str <- paste(min_skew_positions, collapse = ", ")
+  # Nice formatting
+  return(noquote(paste("Min SKEW position(s): ", min_skew_positions_str)))
+}
+```
+
+```{r}
+min_skew("CCTATCGGTGGATTAGCATGTCCCTGTACGTTTCGCCGCGAACTAGTTCACACGGCTTGATGGCAAATGGTTTTTCCGGCGACCGTAATCGTCCACCGAG")
+```
+
+```{r}
+ros_string <- scan("C:/School/23SPDAY/Biostatistics/skew_ros_string.txt", what = "character", sep = NULL)
+
+min_skew(ros_string)
+```
+
+------------------------------------------------------------------------
+
+# Chapter 6: Hamming Distances for Genome Analysis
+
+## 6.1 Generating `hamming_distance` function
+
+```{r}
+hamming_distance <- function(seq1, seq2) {
+  if (nchar(seq1) != nchar(seq2)) {
+    stop("Both sequences must be of equal length")
+  }
+  
+# Use an inequality operator to add the numeric value if inequalities found in the indexed value matches in both sequences (as long as they are equal). 
+## inequality operator can be used in TRUE/FALSE, Logical, or numerical operator.
+  distance <- sum(strsplit(seq1, "")[[1]] != strsplit(seq2, "")[[1]])
+  return(distance)
+}
+hamming_distance("GGGCCGTTGGT","GGACCGTTGAC")
+```
+
+## 6.2 Combining `hamming_distance` and `nt_pattern` to find near matches with difference "d"
+
+```{r}
+
+hamming_distance <- function(seq1, seq2) {
+  if (nchar(seq1) != nchar(seq2)) {
+    stop("Both sequences must be of equal length")
+  }
+  
+# Use an inequality operator to add the numeric value if inequalities found in the indexed value matches in both sequences (as long as they are equal). 
+## inequality operator can be used in TRUE/FALSE, Logical, or numerical operator.
+  distance <- sum(strsplit(seq1, "")[[1]] != strsplit(seq2, "")[[1]])
+  return(distance)
+}
+
+nt_pattern <- function(string, pattern) {
+  nt_matches <- 0
+  len_string <- nchar(string)
+  len_pattern <- str_length(pattern)
+  
+  for (i in 1:(len_string - len_pattern + 1)){
+    if (str_sub(string, i, i + len_pattern - 1) == pattern){
+      nt_matches = nt_matches + 1
+    }
+  }
+  return(nt_matches)
+}
+  
+  
+```
+
+```{r}
+hamming_distance('GGGCCGTTGGT','GGACCGTTGAC')
+```
+
+```{r}
+ros1 <- "CAGTTAGTCAGGCAAGCGCTAACGATACAAAGTGCCTTGAACAAACACAATAGTACTTGCCGGATCGTTGGTCAGACCATATGAACCTCCGGGTTGAAACCTACAATTGTTGGCGTCCGTGATCCACGGTCTTGAAGTATTTTAGTTCATATGTCTCGTCACGTTTAACTGAGTAATGAAATACATGATGCATTCGCCTCGATGTCTCGGATATTTGGGTGCTCTTAACTGTAATCCTTGCGGTTGTTCTCGCTACCGAAATAAAGCGTAAGCGCAGGGCTGCGCTTAGCTGGGACTAAGTGCCTGTACGTTCGTCTGTGGGTGCGAGAAGCTTCATTTACGAAACTGCGTAGAAGACGGCCTAGCGACACATGAGTGTGCGTGCGAGATAGATGCATTGTAGGGCCGTCTCATGTATCGTAAGTGAGACGATCAGGTTAAGGCGCCCCTCTTTTGGATTGCTGCAAGACTGCTAGCACGATGTCATAACGCTGTGATAGCTATCGGACTAACCGTCGTCCGATTTCTTAACCCTTTGCTGGGAGTGGTGTCGTCCTGCTTTCGCAGGGATTTGAGCGGTCTTGGAGCCGTCCACGGTGTCTACACGTTGGGTTCATTACCCCACAGTTACCAGACGAGGCCACCAAACAGAATGATGACTTCGGAGTTGTAAATCTCGGCCGAGTGGTGCGGTCTCTGGACATTTCATAAAGCGGGATCGACCCATCAGCGCTATGACTAGAGGAGGTCTCTGGTAATTAAGGTATCGCCTCAAATCTAAAAGAATGCGGTTTCTGACACTCGTGTTCGAGAGCTTTATTATTCAAGAATACTTCGTTAACGGCGCGCTGCAAAGTATAGTAGGGGCAGTCGAGTGACGGCTCGTAGAATCGAATTAGACGAGACTATGCTCGGTTTGATACCCCGTACCACGGGTATCTTTTCAGCGATAATTGAGCTTAGTCGTACCGGACCACAACCGAACCCTAAGAGGCGGCGACCGTTTGGTGCCGTCATGCTGTTCTTCCCCCAGGCACGGGCCCTCTACTGTCTCCCC"
+ros2 <- "GAGACGTCTACCCTTTCGTTTGTTCTGGTTACGCTACGCTTGCACTGTTCACTGGCCGGGTTGCAGTGCCCGAGCACGCACATCTTAGAGGGTCCGGAAAACCATTAAATTTAGTGCCCATCGATCCGTAGTGTGTTCCATTTATAGTTCCAAACGTATCGGAAGTCTCCACTCAGCTGGGTGGCCCCATGAAAATCAAAATTGATGTGAAACGGCAAGCATGGCAGCAATGGAGTACGGGAGGCTTCGCATGCCCACGTCGGGAGAGAGCGAAGCTCGGTGAGACGGAGGCTTGGGGGGGGTTTTTTATACAGGGCCGCTATAACGAAAAGCTACCTACCAACAATTTACTGTCCAAGCATACCACGGCAACTCATTTCAATCAAGATCTGTAGTCGTCCAGGCACAGCTGAAATAGGTGATCGTGAAGCAGTAAAACTCTCGGGTAAGCTCAGTAGTTACAAGAAATCAGACTGGACTTCTACCGCTGCGATCCAACTAGGGGTTACGGTTGCGAAACTTCGTATGCCCTTCGTACATACGAGGTCATCATATTCCCGAGTCGTTGAGAACTTGATGAGCATCCCCCCACTTGACTAGACATGAGAGTGAACGTCGTGCGGCCGTCACACCGCTAAAGTCGATCCTTCCGAGAACCCACTTTACCGCGGCAAGGAATAGTGCATCTCGACAGGACAGGTGATATTCTGATCCATGAGTCTAACCCGATTTTGCAAAGCCTGGAGCGAAGCGCTACAGGACGCCGGCCCCTTGCCCGTGACGGCCATAGATAGCGGGGCGAGACGTCTATATGAGAGGAAAAGTCAGATAATCCATTATACACTGTGACACAATGAGAACCCTAGAGTAAAAAATCGATGATAAGGGTCTTATTTGGCATGACTACATATGCCCCAGTAGATCCTCGAATGTGCGTTCTATCGGCTCCAAGAACGCTAGGCCAGACAACTCTTCGCTTGACAGGTAAGGATCGGACTAGAACCAAAAGTTGAGGCAGACGAAAAGGGTGAGCGTTAATCTGCCCTGATTGGGGACC"
+
+
+hamming_distance(ros1,ros2)
+```
+
+### Improving `nt_pattern` to include patterns with an acceptable error rate
+
+-   This code will look through the genome to find strings that match out patterns, but with a given allowed hamming distance between the two patterns.
+
+-   The benefit of this tiil will be to improve the
+
+```{r}
+
+
+hamming_distance <- function(seq1, seq2) {
+# Use an inequality operator to add the numeric value if inequalities found in the indexed value matches in both sequences (as long as they are equal). 
+## inequality operator can be used in TRUE/FALSE, Logical, or numerical operator.
+  distance <- sum(strsplit(seq1, "")[[1]] != strsplit(seq2, "")[[1]])
+  return(distance)
+}
+
+find_near_pattern <- function(pattern, genome, d){
+  # Create learned vector "k" containing the numerical length of the genome
+  k <- nchar(pattern)
+  # Create empty vector "pattern_locs" to store the locations where the near_matched are found
+  pattern_locs <- c()
+  # Print the pattern being looked for
+  print(pattern)
+  # Loop through the genome length and compare hamming distances to see how much 
+  for(i in 1:(nchar(genome) - k + 1)){
+  # 
+    if(hamming_distance(str_sub(genome, i, i + k - 1), pattern) <= d){
+  # Append pattern locations with the 
+      pattern_locs <- append(pattern_locs,i-1)
+    }
+  }
+  
+  return(pattern_locs)
+}
+
+  
+  
+```
+
+```{r}
+find_near_pattern('ATTCTGGA',
+'CGCCCGAATCCAGAACGCATTCCCATATTTCGGGACCACTGGCCTCCACGGTACGGACGTCAATCAAATGCCTAGCGGCTTGTGGTTTCTCCTACGCTCC',3)
+```
