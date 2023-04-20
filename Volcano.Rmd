@@ -6,7 +6,7 @@ output: html_notebook
 
 # Volcano Analysis
 
-This is an analysis of the Volcano data set. This data comes form the Smithsonian Institution as early as 1883.
+This is an analysis of the Volcano data set. This data comes from the Smithsonian Institution and was taken as early as 1883.
 
 # About Our Data
 
@@ -18,7 +18,7 @@ This data provides information on 958 volcanoes. It includes variables such as v
 
 -   Which region has the most eruptions?
 
--   Do
+-   What year had the most eruptions?
 
 ```{r}
 #Load the tidyverse
@@ -90,16 +90,6 @@ From this table we can view last eruption years for the volcanoes in the data se
 
 ```{r}
 exploratory_data %>%
-  count(last_eruption_year)
-
-ggplot() +
-  geom_bar(mapping = aes(x = region)), color = pink", fill = "black") +
-  labs(title = "Last Eruption"),x= "region", y= "Count"))
-
-```
-
-```{r}
-exploratory_data %>%
   ggplot() +
   geom_bar(mapping = aes(x = region), color = "pink", fill = "black") +
   labs(title = "Eruptions by Region",x= "region", y= "Count") + 
@@ -109,3 +99,13 @@ exploratory_data %>%
 ```
 
 Here we can see a bar plot of the regions and how many eruptions they have had. South America has had the most eruptions with around 65, meanwhile the Atlantic Ocean has had the least amount of eruptions with about 5.
+
+# What year had the most eruptions?
+
+```{r}
+exploratory_data %>%
+  summarize(volcano_name)
+exploratory_data%>%
+  group_by(last_eruption_year) %>%
+  count(eruptions)
+```
