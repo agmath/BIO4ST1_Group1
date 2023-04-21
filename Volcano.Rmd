@@ -18,7 +18,9 @@ This data provides information on 958 volcanoes. It includes variables such as v
 
 -   Which region has the most eruptions?
 
--   What year had the most eruptions?
+# Hypothesis
+
+-   I hypothesize the region with the most eruptions will be South America
 
 ```{r}
 #Load the tidyverse
@@ -98,13 +100,10 @@ exploratory_data %>%
   
 ```
 
-Here we can see a bar plot of the regions and how many eruptions they have had. South America has had the most eruptions with around 65, meanwhile the Atlantic Ocean has had the least amount of eruptions with about 5.
+Here we can see a bar plot of the regions and how many eruptions they have had. South America has had the most eruptions with around 65, meanwhile the Atlantic Ocean has had the least amount of eruptions with about 5. This also provided insight into my hypothesis that South America was indeed the region with most eruptions.
 
-# What year had the most eruptions?
+# Conclusion
 
-```{r}
-volcano %>%
-  group_by(volcano_name)
-count(eruptions)
-count(last_eruption_year)
-```
+In conclusion the volcano data provided useful information regarding volcanic eruptions throughout the years. My hypothesis held true in that South America is the region with most eruptions. I knew Chile and peru were countries that were located within the Ring of Fire, so I had some prior knowledge to come to this conclusion.
+
+# 
