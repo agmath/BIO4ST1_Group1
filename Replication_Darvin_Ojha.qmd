@@ -6,6 +6,8 @@ execute:
   keep-md: true
 ---
 
+------------------------------------------------------------------------
+
 ```{r setup, include = FALSE}
 #Load in any packages you need
 library(tidyverse)
@@ -416,7 +418,7 @@ reverse_complement("TAGGTC")
 
 using the rev_substring, we can flip the nucleotide from 5' to 3' or 3' to 5'
 
-### Rosalind String 
+### Rosalind String
 
 ```{r}
 reverse_complement<- function(substring){
@@ -445,9 +447,9 @@ rev_complement <-c()
   return(rev_complement)
 
 }
-genome<-scan("/Users/darvinojha/Desktop/rosalind.txt")
+genome<-scan("/Users/darvinojha/Desktop/rosalind.txt",what = "character", sep = NULL)
 
-reverse_complement("genome")
+reverse_complement(genome)
 
 ```
 
@@ -464,41 +466,62 @@ Goals:
 ```{r}
 initialize_k_mer_dict <- function(k){
   nucleotides <- c("A", "C", "G", "T")
-clump_finding<-function(genome,L,K,t){
-  
-  initial_window<- str_sub(genome,start=1,end=L)
-}
+
   k_mers_dict <- expand.grid(rep(list(nucleotides), k)) %>%
     unite("k_mers", everything(), remove = TRUE, sep = "") %>%
     unique() %>%
-    mutate(count = 0)
+    mutate(Count = 0)
   
   return(k_mers_dict)
 }
 
-clump_finding <- function(genome,L,K,t){
+clump_finding <- function(genome,L,k,t){
   #k = list of kmer
-  initial_window<- str_sub(genome,i,L)
-  my_kmer_dict<- initialize_kmer_dict(K)
-  for(i in 1:L-K+1){
-    curr_kmer<- str_sub(initial_window,i,i+k-1)
+  initial_window<- str_sub(genome,1,L)
+  kmer_dict <- initialize_k_mer_dict(k)
+  ng <- nchar(genome)
+  for(i in 1:(L-(k-1))){
+    curr_kmer<- str_sub(initial_window,i,i+(k-1))
     curr_count<- count_pattern(initial_window,curr_kmer)
-    curr_row <- which(my_kmer_dict$kmer==curr_kmer)
-    my_kmer_dict$count[curr_row] <- curr_count
+    curr_row <- which(kmer_dict$k_mers==curr_kmer)
+    kmer_dict$Count[curr_row] <- curr_count
   }
-  candidates <- my_kmer_dict %%
-    filter(count>=t)%%
-    pull(k_mer)
+  print("done")
+  candidates <- kmer_dict %>%
+    filter(Count >= t)%>%
+    pull(k_mers)
+  print("done")
   #goal:slide windows, update counts, and test using threshold again. 
   #currently have : my-dict contains Kmers+ counts through initial window. We also have our first set of candidates. 
-  for(j in 2: .......????)
-    remove_kmer <-str_sub(genome,j-1,j-1+K-1)
-  add_kmer <- str_sub(genome,L+j-1-(K-1),L+j-1)
-} 
+  for(j in 2:(ng-(L-2))){
+    rem_pattern <- str_sub(genome, j - 1, j - 1 + (k - 1))
+    add_pattern <- str_sub(genome, j + (L - 2) - (k - 1), j + (L - 2))
+
+    rem_row <- which(kmer_dict$k_mers == rem_pattern)
+    add_row <- which(kmer_dict$k_mers == add_pattern)
+    
+    kmer_dict$Count[rem_row] <- kmer_dict$Count[rem_row] - 1
+    kmer_dict$Count[add_row] <- kmer_dict$Count[add_row] + 1
+    
+    if(kmer_dict$Count[add_row] >= t){
+      candidates <- append(candidates, add_pattern)
+      candidates <- unique(candidates)
+    }
+  }
+  return(candidates)
+}
 
 
 
 
 
+```
 
+```{r}
+
+Ecoli<-scan("/Users/darvinojha/Desktop/E_coli.txt",what = "character", sep = NULL)
+```
+
+```{r}
+clump_finding(Ecoli,500,3,9)
 ```
