@@ -6,7 +6,9 @@ execute:
   keep-md: true
 ---
 
+
 ------------------------------------------------------------------------
+
 
 ```{r setup, include = FALSE}
 #Load in any packages you need
@@ -15,6 +17,7 @@ library(tidyverse)
 #Read in any data
 
 ```
+
 
 # Chapter 1 \-- From Statistical Analysis to Bioinformatics
 
@@ -46,17 +49,20 @@ This notebook is designed to equip us with the necessary skills to effectively a
 
 ## Challenge 1 : Listing four nucleotides
 
+
 ```{r}
 nucl_names <- c("A", "T", "G", "C")
 nucl_names #nucl_names represents the names of the nucleotides. 
 
 ```
 
+
 The goal is to create a vector of the names of the four nucleotides that make up DNA: adenine (A), thymine (T), guanine (G), and cytosine (C). The **`c()`** function is used to combine these four nucleotide names into a single vector, which is assigned to the variable **`nucl_names`**. The **`#`** symbol indicates a comment in the code and is used to provide context or explanation to the reader. In this case, the comment clarifies that **`nucl_names`** represents the names of the nucleotides.
 
 By executing this code, we will create a vector that can be used throughout the rest of the analysis to refer to the four nucleotides in a clear and consistent manner.
 
 ## Challenge 2 : Creating a random string of 15 nucleotides
+
 
 ```{r}
 randGenome <- sample(nucl_names, size = 15, replace = TRUE)
@@ -66,11 +72,13 @@ paste(randGenome, collapse = "")
 
 ```
 
+
 This R code chunk creates a random string of 15 nucleotides using the **`sample()`** function. The **`sample()`** function is used to randomly sample a specified number of items from a vector (in this case, the **`nucl_names`** vector created in Challenge 1) with or without replacement. Here, the **`size`** argument is set to 15, indicating that we want to randomly sample 15 nucleotides. The **`replace`** argument is set to **`TRUE`**, which means that each nucleotide in the original vector can be sampled more than once in the output.
 
 The resulting random sample of nucleotides is stored in the variable **`randGenome`**. To create a single string of nucleotides, the **`paste()`** function is used to concatenate the elements of **`randGenome`** together. The **`collapse`** argument is set to **`""`**, which means that there will be no spaces or separators between the nucleotides in the final string. By executing this code, we will create a randomized DNA sequence that can be used for further analysis or testing.
 
 ### Challenge 3: Generate a random genome which is 1500 nucleotides long dataset
+
 
 ```{r}
 set.seed(215)
@@ -83,9 +91,11 @@ paste(randGenome, collapse = "")
 
 ```
 
+
 This R code chunk generates a simulated random genome of length 1500 nucleotides using the **`sample()`** function and **`set.seed()`** function. The **`set.seed()`** function is used to ensure that the random genome generated is reproducible. The **`sample()`** function is used to randomly sample nucleotides from the **`nucl_names`** vector with replacement, generating a vector of 1500 nucleotides stored in the variable **`randGenome`**.
 
 ### Challenge 4: Generating random genome consisting of 100 nucleotides
+
 
 ```{r}
 set.seed(215)
@@ -96,9 +106,11 @@ table(randGenome)
 
 ```
 
+
 Similar to the earlier code, by executing this code, the user will generate a simulated random genome consisting of 100 nucleotides and obtain a table showing the frequency of each nucleotide in the genome. This information can be used to analyze the genetic content of the genome and draw inferences about its structure and function.
 
 ### Challenge 5: Writing my own loop
+
 
 ```{r}
 mySum <- 0
@@ -111,11 +123,13 @@ for(i in 1:10){
 
 ```
 
+
 This R code chunk demonstrates how to create a simple loop using the **`for()`** function. The loop iterates over the values 1 through 10, and for each value, adds the current value of **`i`** to the previous value of **`mySum`**. The **`print(mySum)`** statement prints the current value of **`mySum`** to the console in each iteration of the loop. By executing this code, we will create a loop that adds the values 1 through 10 to a running sum and prints the updated sum to the console at each iteration.
 
 ### Challenge 6 :
 
 ### Generating a random genome substring consisting of 10 nucleotides using sample(),paste() and loop
+
 
 ```{r}
 nucleotides <- c("A", "C", "G", "T")
@@ -131,9 +145,11 @@ print(randGenome)
 
 ```
 
+
 The **`nucleotides`** vector contains the four nucleotides, "A", "C", "G", and "T". The variable **`genomeLength`** is set to 10, indicating that the random substring should consist of 10 nucleotides. By executing this code, we will generate a random substring consisting of 10 nucleotides and print it to the console. This code can be used as a template for generating random substrings of different lengths or for generating multiple substrings using a loop.
 
 ### Using for loop to print each nucleotides in my random sample
+
 
 ```{r}
 for(i in 1:nchar(randGenome)){
@@ -143,9 +159,11 @@ for(i in 1:nchar(randGenome)){
 
 ```
 
+
 This R code chunk uses a **`for`** loop to print each nucleotide in a random sample generated previously. By executing this code, the user will print each nucleotide in the random sample generated previously.
 
 ### Challenge 7 : Counting the number of occurrences of Adenine (A) in randGenome.
+
 
 ```{r}
 sum_A <- 0
@@ -160,6 +178,7 @@ print(sum_A)
 
 ```
 
+
 The loop iterates over a sequence of numbers from 1 to the length of the **`randGenome`** string using the **`nchar()`** function, which returns the number of characters in a string.
 
 The **`str_sub()`** function is used to extract substrings from the **`randGenome`** string. The **`start`** and **`end`** arguments specify the start and end positions of the substring to be extracted. In this case, the start and end positions are both set to the current iteration index **`i`**, which ensures that only one character is extracted from the string in each iteration of the loop.
@@ -167,6 +186,7 @@ The **`str_sub()`** function is used to extract substrings from the **`randGenom
 Using this code, we get the number of occurrences of Adenine (A) in the random genome string.
 
 ### Challenge 8 : Counting the frequencies of each of the four individual nucleotides.
+
 
 ```{r}
 sum_A <- 0
@@ -197,9 +217,11 @@ print(c(sum_A,sum_C,sum_G,sum_T))
 
 ```
 
+
 The R code chunk shown here uses a for loop to count the frequencies of each of the four nucleotides in the randGenome sequence. The variables sum_A, sum_C, sum_G, and sum_T are initialized to zero. If the nucleotide matches one of the letters, the corresponding sum variable is incremented by one. Finally, the code prints out a vector of the four sum variables, representing the frequencies of each nucleotide in the sequence. This process is an essential first step in analyzing genomic data, as it provides a basic understanding of the composition of the sequence.
 
 ### Challenge 9 : Counting the frequencies of each nucleotide in Vibrio Cholerae chromosome
+
 
 ```{r}
 vib_c <- scan("~/Desktop/vib_c.txt", what = "character", sep = NULL)
@@ -227,9 +249,11 @@ print(c(sum_A,sum_C,sum_G,sum_T))
 
 ```
 
+
 This R code reads in the "vib_c.txt" file and stores it in the "vib_c" variable as a character vector. Then, it initializes variables sum_A, sum_C, sum_G, and sum_T as 0. A for-loop is used to iterate over each character in the "vib_c" sequence. If the character is equal to "A", "C", "G", or "T", the corresponding sum variable is incremented by 1. Finally, a vector is printed that contains the sum of each nucleotide's occurrence in the sequence. This code allows us to count the frequencies of each nucleotide in the Vibrio Cholerae chromosome.
 
 ### Challenge 10 : Counting the frequencies of each nucleotide in Vibrio Cholerae chromosome (Rosalind Challenge)
+
 
 ```{r}
 vib_c <- "GGCACCTGATGCAGTTCAAACACGTTGAAGATAGTACTTCCAATCTGCCCTGGAATGCCCCTCTGGTGGTACATATCATGTAGGGCGGAACCCGCTTTAACGCCCCTAGGACAATGAAACAGACGAACCGCTTACAAAAGGGGAATAGATGTGACCCTCTCGTAACTGCTCCTCACATTAGCTGAGTGGGAGGCTGTGTTTGTCGGGCTAAGCTTCGCTTGCCAAAATGAAGGATTCTTTAGGGATCGCACTGAACAAGGGTGAAGATCAGATGCGATCAGCATTTCATTGCCTTCTGAATTATAGATGACCCTGCTTGTACTGCTCACGTGGACGCCATTCAAAGCCTTGCGACCAACTCGGTCCAATGTCCCAACCTTTTTCTAACGATCATCATGACTCGGGCAGCGCAAAGCGAGATCGCTAGTTCATTAGTTCCGACCGTCGTAAGACTCACAAGGACGAGGCCAACTCACTCATCTGTACTAACTTTCCCAGAGAGCCTTGATCTGGTGCGACGAGTAGTATAGCGCCGGCTCTGACGTGGTGCACGCGCCACCTATTGGTCGCTCTGATCCACGTACTAGATCATTTAAAAAGACCTGTGACGCTAAAGATATAAGCGCTATATAGTACCTTTCGTGACCCTAGGTTAAGCGACTTGTGACTGATCCTGAAGTACAAAACCTTTGTGCATGGAGTCAGTCATTCCTTTGCTCTGACGTAGTTCTCGTTGCTTAGTAACATCTTGCTCTGATTATCGCGTACGGATACGCTCTCTCGCGCTCAGACGGATGTGAGGTTCGGTGAAGGGTGAGGTCGACTGTGAATTATGCGTGCCGGGGTCGTTTAAGCGTTCGCATCCGGAGCAATGGCGGATAGCTCAAGTGGTTAGGTGGTACACTGAACGCGACGGTCTTTC
@@ -264,6 +288,7 @@ print(c(sum_A,sum_C,sum_G,sum_T))
 
 ```
 
+
 The whole code from Challenge 9 was copied and pasted it into challenge 10 by removing the chlolera dataset. The ACGT sequence generated in Rosalind was copied and pasted into the code.The results in the website were checked and they came to be correct. The results were A: 222, C: 227, G: 233, T: 240
 
 # **Finding the Replication Origin, Part I**
@@ -271,6 +296,7 @@ The whole code from Challenge 9 was copied and pasted it into challenge 10 by re
 In biostatistics, the origin of replication (ORI) refers to a specific sequence in the DNA molecule where replication begins. The process of DNA replication is crucial for cell division, and it is essential to accurately replicate the DNA sequence in order to maintain the genetic information of the organism. The ORI plays a critical role in DNA replication as it serves as the starting point for the replication machinery to begin the process of copying the DNA sequence. The identification of the ORI is of great interest in biostatistics as it can provide valuable insights into the genomic architecture and replication dynamics of an organism. Understanding the ORI and its location in the genome can also help in identifying potential drug targets for diseases such as cancer, where uncontrolled cell division is a key characteristic.
 
 ##  Challenge 0: The search for the Replication Origin
+
 
 ```{r}
 nucleotide_frequency <- function(genomeString, nucleotide = "A"){
@@ -290,9 +316,11 @@ nucleotide_frequency("ACTTGCGGGTATCGAG", "G")
 
 ```
 
+
 The R code chunk defines a function **`nucleotide_frequency()`** that calculates the frequency of a specific nucleotide (default "A") in a given genome string. The function takes two arguments: the **`genomeString`** to be searched and the **`nucleotide`** of interest. By using this function to calculate the frequency of a specific nucleotide around the genome, researchers can identify regions that are enriched with the nucleotide and thus likely to contain the origin of replication.
 
 ## Challenge 1: Using the sample() function in a randomized genome
+
 
 ```{r}
 nt_names<- c("A","C","G","T")
@@ -307,9 +335,11 @@ nucleotide_frequency(nt_sample, "C")
 
 ```
 
+
 The **`nucleotide_frequency()`** function is being used to count the number of occurrences of the nucleotide "C" in the generated genome. The function takes two parameters - the genome string (**`nt_sample`**) and the nucleotide to be counted (**`"C"`**). The function uses a for loop to iterate through each character in the genome string and checks if it matches the nucleotide being counted. If there is a match, the count is incremented. Finally, the function returns the count of the nucleotide occurrences.
 
 ## Challenge 2: Building a function to create a randomized genome
+
 
 ```{r}
 
@@ -323,9 +353,11 @@ rand_genome <- sample(nt_names, size=k, replace= TRUE)
 rand_genome(k=15)
 ```
 
+
 The function **`rand_genome()`** takes an integer **`k`** as input, which represents the length of the randomized genome to be generated. It uses the **`sample()`** function to randomly select nucleotides from the four available options (**`A`**, **`C`**, **`G`**, **`T`**) with replacement, according to the **`k`** input value. The resulting output is a string representing the randomized genome of length **`k`**. It generates a randomized genome consisting of 15 nucleotides.
 
 ## Challenge 3: Building a function called to generate all of the substrings of 3 nucleotides
+
 
 ```{r}
 generate_3_mers <- function(myString) {
@@ -343,9 +375,11 @@ myGenome
 generate_3_mers(myGenome)
 ```
 
+
 The **`generate_3_mers`** function is a custom-made function that generates all possible substrings of length 3 (3-mers) from a given string of nucleotides. It does this by iterating through each character in the input string and extracting a substring of length 3 starting from that character. This function can be useful for analyzing DNA sequences and identifying patterns or motifs that are present in the sequence.\
 
 ## Challenge 4: Generate k-mers of any length we want
+
 
 ```{r}
 generate_k_mers <- function(myString, k = 4) {
@@ -363,9 +397,11 @@ myGenome
 generate_k_mers(myGenome,6)
 ```
 
+
 The **`generate_k_mers`** function generates all possible substrings of a given length **`k`** (k-mers) from a string of nucleotides using a for loop and the **`stringr`** and **`magrittr`** packages. The function takes two arguments: **`myString`** is the input string of nucleotides and **`k`** is the desired length of the k-mers. If no value is provided for **`k`**, the default value is set to 4. An example is also included, where the function is applied to a randomly generated genome of length 10, and the k-mers of length 6 are generated using the **`generate_k_mers`** function.
 
 ##  Challenge 5: Write a new function that will count occurrences of a particular pattern within a larger genomestring.
+
 
 ```{r}
 count_pattern <- function(myString, pattern){
@@ -386,11 +422,13 @@ count_pattern(myGenome, "AT")
 
 ```
 
+
 The **`count_pattern`** function is designed to count the number of occurrences of a specific pattern within a string of nucleotides. The function takes two arguments: **`myString`**, which is the input string of nucleotides, and **`pattern`**, which is the pattern to be searched for.
 
 Inside the function, an initial count of 0 is set. The function then iterates through the input string using a for loop, extracting a substring of length 2 starting from each character in the string using the **`str_sub`** function from the **`stringr`** package. If the extracted substring matches the input **`pattern`**, then the count is incremented by 1.The code also includes an example where the function is applied to a randomly generated genome of length 10 and the number of occurrences of the pattern "AT" is counted using the **`count_pattern`** function.
 
 ## Testing the function on a rosalind string
+
 
 ```{r}
 rosalind_string <- "TTTATGAACTATGAACTTATGAACGTATTATGAACTATGAACTACACATATGAACTATGAACTTATGAACTTATGAACTATGAACTATGAACCTATGAACTATGAACCCTTATATGAACTACATATGAACTATGAACTCTATGAACGCACTGGTATGAACCTATGAACAGTATGAACATGCGATATGAACAGTCACTATGAACTAGGCTGTATGAACTATGAACCTATGAACTATGAACAACGTAAGTATATGAACAACGGTATGAACGTATGAACTATGAACCAACGTATGAACATATGAACTAGTATGAACGGGATATGAACACGGGTGTATGAACCTCTCTATGAACTATGAACTATGAACACTATGAACAGTATGAACTTATGAACTATGAACGATCAGTCTATGAACTATGAACCTTTATGAACTATGAACTGAATATGAACACACTCCTATGAACCTTATGAACCTAGGTTATGAACGGAAACCGGTTATGAACACTTATGAACTATGAACTATGAACCCTTCTTATGAACGTTATGAACATGAGGTTATGAACTTTATGAACGTTATGAACCTTTATGAACTCCTATGAACTTATGAACTATGAACGTCATATGAACGAGGACGATATGAACGCTATGAACTATGAACTCGTATGAACCTTATGAACGTCGTGCTATGAACGTATGAACAGATGTATGAACTATGAACCGTTCGCTATGAACTCTGTTATATGAACTATGAACGGGTATGAACGTATGAACAGATATGAACTATGAACGAATATGAACGGTTGTATGAACCTATGAACTATGAACTATGAACACTTATGAACGTATGAACATTTATGAACCGGGAATATGAACCAGAACTTATGAACATATGAACTATGAACATCAGTATGAACATATGAACATCATAAGTTTATGAACTATGAACGTTTATGAACGCTATGAACTATCCGATTTATGAACGTTTATATGAACTATGAAC"
@@ -407,11 +445,13 @@ count_pattern <- function(myString, pattern){
 count_pattern(rosalind_string, "TATGAACTA")
 ```
 
+
 The same set of codes from challenge 5 was applied on this challenge. The input data was originated from rosalind string. The results were checked and they matched the results on the rosalind website.
 
 # **Finding the Replication Origin, Part II**
 
 ## Challenge 1: Finding frequent Kmers
+
 
 ```{r}
 find_frequent_kmers <- function(genome,k){
@@ -435,9 +475,11 @@ find_frequent_kmers <- function(genome,k){
 find_frequent_kmers("ATCCATTAT",2)
 ```
 
+
 The **`find_frequent_kmers`** function searches for the most frequent k-mers in a given genome by generating k-mers of length k using the **`generate_k_mers`** function, counting the number of occurrences of each k-mer using the **`count_pattern`** function, and returning the k-mers with the highest frequency. The function takes two arguments: **`genome`**, which is the input string of nucleotides, and **`k`**, which is the desired length of the k-mers to search for. The function is useful for identifying regions of a genome that may play important roles in DNA replication or other biological processes.
 
 ## Testing the function on a rosalind string
+
 
 ```{r}
 rosalind_string <- "ACGTTGCATGTCGCATGATGCATGAGAGCT"
@@ -462,9 +504,11 @@ find_frequent_kmers(rosalind_string,4)
 
 ```
 
+
 The same set of codes from challenge 1 was applied on this challenge. The input data was originated from rosalind string. The results were checked and they matched the results on the rosalind website.
 
 ## Challenge 2: Using Reverse complement function on a genome string
+
 
 ```{r}
 reverse_complement<- function(substring){
@@ -498,11 +542,13 @@ reverse_complement("TAGGTC")
 
 ```
 
+
 Using the rev_substring, we can flip the nucleotide from 5' to 3' or 3' to 5'. complement. To do this, the function first reverses the input sequence so that the nucleotides are in reverse order. It then uses a loop to iterate over each nucleotide in the reversed sequence, and replaces it with its complementary nucleotide. Specifically, A's are replaced with T's, T's are replaced with A's, C's are replaced with G's, and G's are replaced with C's. This process results in a sequence that is the reverse complement of the original input sequence.
 
 The reverse complement of a DNA sequence can be important in several applications. For example, some DNA binding proteins recognize and bind to specific DNA sequences in a reverse complement manner. By identifying the reverse complement of a known binding site, researchers can predict other potential binding sites for that protein in the genome. Additionally, the reverse complement can be used to search for complementary sequences that might form double-stranded DNA structures, such as hairpins or stem-loops.
 
 ## Testing the function on a rosalind string
+
 
 ```{r}
 reverse_complement<- function(substring){
@@ -537,6 +583,7 @@ reverse_complement(genome)
 
 ```
 
+
 The same set of codes from challenge 2 was applied on this challenge. The input data was originated from rosalind string. The results were checked and they matched the results on the rosalind website.
 
 # **Finding the Replication Origin, Part III**
@@ -548,6 +595,7 @@ Initial Goals:
 2\) Slide the window through the genome, update counts, and add frequent k-mers to candidate list.
 
 3\) Slide window, update counts, and test using threshold again.
+
 
 ```{r}
 initialize_k_mer_dict <- function(k){
@@ -603,18 +651,23 @@ clump_finding <- function(genome,L,k,t){
 
 ```
 
+
 The code defines two functions for clump finding in a genome sequence. The **`initialize_k_mer_dict`** function initializes a dictionary for all possible k-mers (sequences of length k) with their count set to 0. The **`clump_finding`** function takes as input a genome sequence, **`L`** as the length of the window in which to search for k-mers, **`k`** as the length of the k-mers to search for, and **`t`** as the minimum number of times a k-mer must appear within the window for it to be considered a candidate. The function slides a window of length **`L`** over the genome sequence, updates the count of each k-mer in the dictionary for that window, and selects candidates based on the count threshold. It then slides the window one base at a time and updates the count of each k-mer in the dictionary, adding new k-mers to the candidate list as they meet the threshold. Finally, it returns the list of candidate k-mers.
+
 
 ```{r}
 
 Ecoli<-scan("/Users/darvinojha/Desktop/E_coli.txt",what = "character", sep = NULL)
 ```
 
+
 This R code reads in the contents of a text file called "E_coli.txt" and stores it as a character vector called "Ecoli". The **`scan()`** function is used to read in the file, and the arguments **`what = "character"`** and **`sep = NULL`** are provided to ensure that the file is read in as a single character vector rather than being split into separate elements.
+
 
 ```{r}
 clump_finding(Ecoli,500,3,9)
 ```
+
 
 The purpose of this function is to identify regions of a DNA sequence (in this case, the E. coli genome) that contain frequently occurring short DNA sequences of length **`k`** within a window of length **`L`**. The function takes four arguments: the genome sequence (**`genome`**), the window size (**`L`**), the length of the DNA sequence to be searched for (**`k`**), and a threshold number of occurrences (**`t`**).
 
@@ -629,3 +682,4 @@ One common approach is to use k-mer frequency analysis. K-mers are simply substr
 One method for identifying these regions is called clump finding. This involves sliding a window of a fixed length L across the genome and counting the frequency of occurrence of each k-mer within the window. If a k-mer appears at least t times within the window, it is considered a candidate for the origin of replication.
 
 Overall, the identification of the origin of replication is an important problem in molecular biology, and bioinformatics and biostatistics provide powerful tools for analyzing genomic data and identifying candidate regions. The clump finding algorithm is just one example of the many techniques used in this field, and it highlights the power of computational methods for advancing our understanding of the genome.\
+
