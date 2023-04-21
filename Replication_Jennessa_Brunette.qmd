@@ -49,7 +49,7 @@ nt_sample <- sample(nt_abr, size = nt_num, replace = TRUE)
 paste(nt_sample, collapse = "")
 ```
 
-Here we generated a much longer randomized string of 1500 nucleotides using code.
+Here we generated a much longer randomized string of 1500 nucleotides using set.seed to recreate randomness.
 
 ```{r}
 set.seed(215)
@@ -104,7 +104,7 @@ for(j in 1:15) {
 }
 ```
 
-The Myproduct was updated by multiplying "myproduct" from "j" and printing the results
+The Myproduct was updated by multiplying "myproduct" from "j" and printing the results.
 
 # Challenge 6: Generate random genome of 10 nucleotides & using loop
 
@@ -211,6 +211,8 @@ result <- c("Adenine:" = sum_A, "Cytosine:" = sum_C, "Guanine:" = sum_G, "Thymin
 print(result)
 ```
 
+Here we used code from challenge 8 to use on the Vibrio Cholerae DNA.
+
 # Challenge 10: Rosalind
 
 ```{r}
@@ -275,6 +277,8 @@ print(Thymine_count)
 print(Guanine_count)
 ```
 
+In this challenge we downloaded the Rosalind string to use as our genome and used it to count the number of each nucleotide.
+
 # Origin of Replication: Getting Started
 
 ```{r}
@@ -291,7 +295,7 @@ nucleotide_frequency <- function(genomeString, nucleotide = "A"){
 nucleotide_frequency("ACTTGCGGGTATCGAG", "G")
 ```
 
-Here we defined a function
+Here we defined a function and found guanine was frequent 6 times.
 
 # Challenge 1: Random genome of 2000 nucleotides
 
@@ -321,13 +325,13 @@ rand_genome <- function(k){
 rand_genome(10)
 ```
 
-Generating random genome of 57 nucleotides to use
+This function generated a random genome of 57 nucleotides to use.
 
 ```{r}
 rand_genome(57)
 ```
 
-Generating single string to use for k
+Generating single string to use for k.
 
 ```{r}
 myString <- c()
@@ -446,7 +450,7 @@ rosalind_string <- "TTAGTCCCCAGTCCCCAGTCCCCTCCAGTCCCCGCAGTCCCCCAGTCCCCAGTCCCCCAG
 count_patterns(rosalind_string, "AGTCCCCAG")
 ```
 
-Here we can see the code detected the pattern 25 times and the function works.
+Here we can see that the code detected the pattern 25 times and the function works.
 
 # Origin Part II
 
@@ -515,11 +519,13 @@ k_mers_dict <- initialize_k_mer_dict(9)
 
 ```
 
+Here we implemented a clump finding function to run on the E.coli genome
+
 ```{r}
 initialize_k_mer_dict(3)
 ```
 
-Generating kmers_dict function gives us a table of all possible kmer combinations, L is window length, k is kmer length, t is a frequency threshold
+Generating kmers_dict function gives us a table of all possible kmer combinations, L is window length, k is kmer length, t is a frequency threshold.
 
 ```{r}
 clump_finding <- function(genome, L, k, t) { 
@@ -561,10 +567,6 @@ my_genome <- rand_genome(200000)
 clump_finding(my_genome, 300, 3, 5)
 ```
 
-Here we printed 3kmers in a genome of 300 nucleotides.
-
-j is an iterator here, so r knows the difference.
-
-This code is still too slow to run on the E.coli genome but it is functional.
+Here we printed 3 k-mers in a genome of 300 nucleotides. The variable j is an iterator here, so r knows the difference. This function returned how many of each 3mer we have in the genome which is interesting to note. However, this code is still too slow to run on the E.coli genome but it is functional.
 
 # 

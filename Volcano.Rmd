@@ -103,9 +103,8 @@ Here we can see a bar plot of the regions and how many eruptions they have had. 
 # What year had the most eruptions?
 
 ```{r}
-exploratory_data %>%
-  summarize(volcano_name)
-exploratory_data%>%
-  group_by(last_eruption_year) %>%
-  count(eruptions)
+volcano %>%
+  group_by(volcano_name)
+count(eruptions)
+count(last_eruption_year)
 ```
