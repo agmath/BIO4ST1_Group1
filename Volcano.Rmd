@@ -1,0 +1,109 @@
+---
+title: "Volcanoes"
+author: Jennessa Brunette
+output: html_notebook
+---
+
+# Volcano Analysis
+
+This is an analysis of the Volcano data set. This data comes from the Smithsonian Institution and was taken as early as 1883.
+
+# About Our Data
+
+This data provides information on 958 volcanoes. It includes variables such as volcano name, region, country and eruption year.
+
+# Interesting Questions to Ask
+
+-   Which volcano had the most recent eruption?
+
+-   Which region has the most eruptions?
+
+# Hypothesis
+
+-   I hypothesize the region with the most eruptions will be South America
+
+```{r}
+#Load the tidyverse
+library(tidyverse)
+library(kableExtra)
+#install.packages("tidymodels")
+library(tidymodels)
+#install.packages("skimr")
+library(skimr)
+
+library(ggplot2)
+```
+
+Here I found the count of volcanoes observed. There were 958.
+
+```{r}
+count (volcano)
+```
+
+```{r}
+volcano %>% 
+  head() %>%
+  kable() %>%
+  kable_styling(c("striped", "hover"))
+```
+
+```{r}
+# Get the Data
+
+volcano <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv')
+eruptions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/eruptions.csv')
+events <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/events.csv')
+tree_rings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/tree_rings.csv')
+sulfur <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/sulfur.csv')
+
+# Or read in with tidytuesdayR package (https://github.com/thebioengineer/tidytuesdayR)
+# PLEASE NOTE TO USE 2020 DATA YOU NEED TO USE tidytuesdayR version ? from GitHub
+
+# Either ISO-8601 date or year/week works!
+
+volcano %>%
+  head()
+```
+
+```{r}
+#install.packages("tidymodels")
+library(tidymodels)
+
+my_data_splits <- initial_split(volcano, prop = 0.5)
+
+exploratory_data <- training(my_data_splits)
+test_data <- testing(my_data_splits)
+```
+
+# Which volcano had the most recent eruption?
+
+```{r}
+exploratory_data %>%
+  group_by(last_eruption_year) %>%
+  summarize (volcano_name)
+collapse = "unknown"
+
+  
+```
+
+From this table we can view last eruption years for the volcanoes in the data set. I found that the last eruption year was 2020 and 21 volcanoes erupted that year. This can be shown in rows 30 and 31 to see specific names of those that erupted that year.
+
+# Which region has had the most eruptions?
+
+```{r}
+exploratory_data %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = region), color = "pink", fill = "black") +
+  labs(title = "Eruptions by Region",x= "region", y= "Count") + 
+  coord_flip()
+
+  
+```
+
+Here we can see a bar plot of the regions and how many eruptions they have had. South America has had the most eruptions with around 65, meanwhile the Atlantic Ocean has had the least amount of eruptions with about 5. This also provided insight into my hypothesis that South America was indeed the region with most eruptions.
+
+# Conclusion
+
+In conclusion the volcano data provided useful information regarding volcanic eruptions throughout the years. My hypothesis held true in that South America is the region with most eruptions. I knew Chile and peru were countries that were located within the Ring of Fire, so I had some prior knowledge to come to this conclusion.
+
+# 
